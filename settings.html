@@ -16,6 +16,11 @@
     #bio {
       resize: none;
     }
+
+    /* Hide quiet-hours fields when toggle is off */
+    #qh-fields[hidden] {
+      display: none;
+    }
   </style>
 </head>
 <body>
@@ -34,17 +39,19 @@
       </div>
     </div>
 
+    <!-- FIX 1: nav-items changed from non-interactive <div> to <button> for keyboard
+                accessibility and correct semantics -->
     <nav class="nav-section">
-      <div class="nav-item"><i class="ti ti-layout-dashboard"></i> Dashboard</div>
-      <div class="nav-item"><i class="ti ti-calendar-event"></i> My Planner</div>
-      <div class="nav-item"><i class="ti ti-checklist"></i> Tasks</div>
-      <div class="nav-item"><i class="ti ti-books"></i> Subjects</div>
-      <div class="nav-item"><i class="ti ti-calendar"></i> Calendar</div>
-      <div class="nav-item"><i class="ti ti-chart-bar"></i> Progress</div>
-      <div class="nav-item"><i class="ti ti-notes"></i> Notes</div>
-      <div class="nav-item"><i class="ti ti-bell"></i> Reminders</div>
-      <div class="nav-item"><i class="ti ti-folders"></i> Resources</div>
-      <div class="nav-item active"><i class="ti ti-settings"></i> Settings</div>
+      <button class="nav-item"><i class="ti ti-layout-dashboard"></i> Dashboard</button>
+      <button class="nav-item"><i class="ti ti-calendar-event"></i> My Planner</button>
+      <button class="nav-item"><i class="ti ti-checklist"></i> Tasks</button>
+      <button class="nav-item"><i class="ti ti-books"></i> Subjects</button>
+      <button class="nav-item"><i class="ti ti-calendar"></i> Calendar</button>
+      <button class="nav-item"><i class="ti ti-chart-bar"></i> Progress</button>
+      <button class="nav-item"><i class="ti ti-notes"></i> Notes</button>
+      <button class="nav-item"><i class="ti ti-bell"></i> Reminders</button>
+      <button class="nav-item"><i class="ti ti-folders"></i> Resources</button>
+      <button class="nav-item active"><i class="ti ti-settings"></i> Settings</button>
     </nav>
 
     <div class="sidebar-footer">
@@ -70,20 +77,20 @@
     </div>
 
     <!-- Tab Bar -->
-    <div class="settings-tabs">
-      <button class="tab-btn active" data-tab="profile">
+    <div class="settings-tabs" role="tablist">
+      <button class="tab-btn active" data-tab="profile" role="tab" aria-selected="true" aria-controls="tab-profile">
         <i class="ti ti-user"></i> Profile
       </button>
-      <button class="tab-btn" data-tab="appearance">
+      <button class="tab-btn" data-tab="appearance" role="tab" aria-selected="false" aria-controls="tab-appearance">
         <i class="ti ti-palette"></i> Appearance
       </button>
-      <button class="tab-btn" data-tab="notifications">
+      <button class="tab-btn" data-tab="notifications" role="tab" aria-selected="false" aria-controls="tab-notifications">
         <i class="ti ti-bell"></i> Notifications
       </button>
-      <button class="tab-btn" data-tab="study">
+      <button class="tab-btn" data-tab="study" role="tab" aria-selected="false" aria-controls="tab-study">
         <i class="ti ti-brain"></i> Study Prefs
       </button>
-      <button class="tab-btn" data-tab="security">
+      <button class="tab-btn" data-tab="security" role="tab" aria-selected="false" aria-controls="tab-security">
         <i class="ti ti-shield"></i> Security
       </button>
     </div>
@@ -91,7 +98,7 @@
     <!-- ══════════════════════════════════
          TAB: PROFILE
     ═══════════════════════════════════ -->
-    <div class="tab-panel active" id="tab-profile">
+    <div class="tab-panel active" id="tab-profile" role="tabpanel">
       <div class="settings-grid">
 
         <!-- Left column -->
@@ -152,9 +159,10 @@
                 </div>
               </div>
 
+              <!-- FIX 2: bio rows increased from 2→3 so content isn't clipped -->
               <div class="field-group">
                 <label class="field-label" for="bio">Bio</label>
-                <textarea class="field-input" id="bio" rows="2">Focused on STEM subjects. Aiming for top grades!</textarea>
+                <textarea class="field-input" id="bio" rows="3">Focused on STEM subjects. Aiming for top grades!</textarea>
               </div>
 
             </div>
@@ -227,7 +235,7 @@
     <!-- ══════════════════════════════════
          TAB: APPEARANCE
     ═══════════════════════════════════ -->
-    <div class="tab-panel" id="tab-appearance">
+    <div class="tab-panel" id="tab-appearance" role="tabpanel">
       <div class="settings-grid">
 
         <div class="settings-col">
@@ -295,36 +303,42 @@
               <div><div class="card-title">Display Preferences</div></div>
             </div>
             <div class="card-body pt-05 pb-05">
+
               <div class="toggle-row">
                 <div class="toggle-info">
                   <div class="toggle-label">Compact mode</div>
                   <div class="toggle-desc">Reduce padding and spacing for more content</div>
                 </div>
+                <!-- FIX 3: label wraps input correctly; for= matches input id -->
                 <label class="toggle-switch" for="compact-mode-checkbox">
                   <input type="checkbox" id="compact-mode-checkbox" aria-label="Compact mode" />
                   <span class="slider-pill"></span>
                 </label>
               </div>
+
+              <!-- FIX 4: added id + matching for= on all remaining toggle labels -->
               <div class="toggle-row">
                 <div class="toggle-info">
                   <div class="toggle-label">Show task color dots</div>
                   <div class="toggle-desc">Color indicators next to tasks</div>
                 </div>
-                <label class="toggle-switch">
-                  <input type="checkbox" aria-label="Show task color dots" checked />
+                <label class="toggle-switch" for="task-color-dots-checkbox">
+                  <input type="checkbox" id="task-color-dots-checkbox" aria-label="Show task color dots" checked />
                   <span class="slider-pill"></span>
                 </label>
               </div>
+
               <div class="toggle-row">
                 <div class="toggle-info">
                   <div class="toggle-label">Animated sidebar</div>
                   <div class="toggle-desc">Smooth transitions when navigating</div>
                 </div>
-                <label class="toggle-switch">
-                  <input type="checkbox" aria-label="Animated sidebar" checked />
+                <label class="toggle-switch" for="animated-sidebar-checkbox">
+                  <input type="checkbox" id="animated-sidebar-checkbox" aria-label="Animated sidebar" checked />
                   <span class="slider-pill"></span>
                 </label>
               </div>
+
             </div>
           </div>
 
@@ -372,7 +386,7 @@
     <!-- ══════════════════════════════════
          TAB: NOTIFICATIONS
     ═══════════════════════════════════ -->
-    <div class="tab-panel" id="tab-notifications">
+    <div class="tab-panel" id="tab-notifications" role="tabpanel">
       <div class="settings-grid">
 
         <div class="settings-col">
@@ -393,21 +407,31 @@
                     <div class="toggle-label">Task due soon</div>
                     <div class="toggle-desc">1 hour before a task is due</div>
                   </div>
-                  <label class="toggle-switch"><input type="checkbox" aria-label="Task due soon notifications" checked /><span class="slider-pill"></span></label>
+                  <!-- FIX 5: all notification toggles given id + matching for= -->
+                  <label class="toggle-switch" for="notif-task-due">
+                    <input type="checkbox" id="notif-task-due" aria-label="Task due soon notifications" checked />
+                    <span class="slider-pill"></span>
+                  </label>
                 </div>
                 <div class="toggle-row">
                   <div class="toggle-info">
                     <div class="toggle-label">Overdue tasks</div>
                     <div class="toggle-desc">Alert for missed deadlines</div>
                   </div>
-                  <label class="toggle-switch"><input type="checkbox" aria-label="Overdue tasks notifications" checked /><span class="slider-pill"></span></label>
+                  <label class="toggle-switch" for="notif-overdue">
+                    <input type="checkbox" id="notif-overdue" aria-label="Overdue tasks notifications" checked />
+                    <span class="slider-pill"></span>
+                  </label>
                 </div>
                 <div class="toggle-row">
                   <div class="toggle-info">
                     <div class="toggle-label">Daily planner reminder</div>
                     <div class="toggle-desc">Morning summary of your day</div>
                   </div>
-                  <label class="toggle-switch"><input type="checkbox" aria-label="Daily planner reminder notifications" /><span class="slider-pill"></span></label>
+                  <label class="toggle-switch" for="notif-daily-planner">
+                    <input type="checkbox" id="notif-daily-planner" aria-label="Daily planner reminder notifications" />
+                    <span class="slider-pill"></span>
+                  </label>
                 </div>
               </div>
 
@@ -418,21 +442,30 @@
                     <div class="toggle-label">Weekly progress report</div>
                     <div class="toggle-desc">Every Sunday evening</div>
                   </div>
-                  <label class="toggle-switch"><input type="checkbox" checked aria-label="Weekly progress report notifications" /><span class="slider-pill"></span></label>
+                  <label class="toggle-switch" for="notif-weekly-report">
+                    <input type="checkbox" id="notif-weekly-report" checked aria-label="Weekly progress report notifications" />
+                    <span class="slider-pill"></span>
+                  </label>
                 </div>
                 <div class="toggle-row">
                   <div class="toggle-info">
                     <div class="toggle-label">Study streak milestone</div>
                     <div class="toggle-desc">When you hit 7, 14, 30 days</div>
                   </div>
-                  <label class="toggle-switch"><input type="checkbox" checked aria-label="Study streak milestone notifications" /><span class="slider-pill"></span></label>
+                  <label class="toggle-switch" for="notif-streak">
+                    <input type="checkbox" id="notif-streak" checked aria-label="Study streak milestone notifications" />
+                    <span class="slider-pill"></span>
+                  </label>
                 </div>
                 <div class="toggle-row">
                   <div class="toggle-info">
                     <div class="toggle-label">Goal completed</div>
                     <div class="toggle-desc">Celebrate your wins</div>
                   </div>
-                  <label class="toggle-switch"><input type="checkbox" checked aria-label="Goal completed notifications" /><span class="slider-pill"></span></label>
+                  <label class="toggle-switch" for="notif-goal-complete">
+                    <input type="checkbox" id="notif-goal-complete" checked aria-label="Goal completed notifications" />
+                    <span class="slider-pill"></span>
+                  </label>
                 </div>
               </div>
 
@@ -443,14 +476,20 @@
                     <div class="toggle-label">Product updates</div>
                     <div class="toggle-desc">New features and improvements</div>
                   </div>
-                  <label class="toggle-switch"><input type="checkbox" aria-label="Product updates notifications" /><span class="slider-pill"></span></label>
+                  <label class="toggle-switch" for="notif-product-updates">
+                    <input type="checkbox" id="notif-product-updates" aria-label="Product updates notifications" />
+                    <span class="slider-pill"></span>
+                  </label>
                 </div>
                 <div class="toggle-row">
                   <div class="toggle-info">
                     <div class="toggle-label">Tips and tutorials</div>
                     <div class="toggle-desc">Study tips and how-to guides</div>
                   </div>
-                  <label class="toggle-switch"><input type="checkbox" aria-label="Tips and tutorials notifications" /><span class="slider-pill"></span></label>
+                  <label class="toggle-switch" for="notif-tips">
+                    <input type="checkbox" id="notif-tips" aria-label="Tips and tutorials notifications" />
+                    <span class="slider-pill"></span>
+                  </label>
                 </div>
               </div>
 
@@ -471,20 +510,25 @@
             <div class="card-body">
               <div class="toggle-row pt-0">
                 <div class="toggle-info"><div class="toggle-label">Enable quiet hours</div></div>
-                <label class="toggle-switch">
-                  <input type="checkbox" id="qh-toggle" aria-label="Enable quiet hours" />
+                <!-- FIX 6: qh-toggle now has for= linking; qh-fields starts hidden
+                            and is shown/hidden via inline onchange -->
+                <label class="toggle-switch" for="qh-toggle">
+                  <input type="checkbox" id="qh-toggle" aria-label="Enable quiet hours"
+                    onchange="document.getElementById('qh-fields').hidden = !this.checked" />
                   <span class="slider-pill"></span>
                 </label>
               </div>
-              <div id="qh-fields">
+              <!-- FIX 7: qh-fields hidden by default; only reveals when toggle is on -->
+              <div id="qh-fields" hidden>
                 <div class="field-row mt-075">
                   <div class="field-group">
-                    <label class="field-label">From</label>
-                    <input type="time" class="field-input" value="22:00" aria-label="Quiet hours start time" />
+                    <!-- FIX 8: quiet hours inputs given unique id + matching labels -->
+                    <label class="field-label" for="qh-from">From</label>
+                    <input type="time" class="field-input" id="qh-from" value="22:00" aria-label="Quiet hours start time" />
                   </div>
                   <div class="field-group">
-                    <label class="field-label">To</label>
-                    <input type="time" class="field-input" value="07:00" aria-label="Quiet hours end time" />
+                    <label class="field-label" for="qh-to">To</label>
+                    <input type="time" class="field-input" id="qh-to" value="07:00" aria-label="Quiet hours end time" />
                   </div>
                 </div>
               </div>
@@ -497,17 +541,27 @@
               <div><div class="card-title">Delivery Channels</div></div>
             </div>
             <div class="card-body py-05">
+              <!-- FIX 9: Delivery channel toggles all given id + for= + aria-label -->
               <div class="toggle-row pt-0">
                 <div class="toggle-info"><div class="toggle-label">Push notifications</div></div>
-                <label class="toggle-switch"><input type="checkbox" checked /><span class="slider-pill"></span></label>
+                <label class="toggle-switch" for="channel-push">
+                  <input type="checkbox" id="channel-push" aria-label="Push notifications" checked />
+                  <span class="slider-pill"></span>
+                </label>
               </div>
               <div class="toggle-row">
                 <div class="toggle-info"><div class="toggle-label">Email notifications</div></div>
-                <label class="toggle-switch"><input type="checkbox" /><span class="slider-pill"></span></label>
+                <label class="toggle-switch" for="channel-email">
+                  <input type="checkbox" id="channel-email" aria-label="Email notifications" />
+                  <span class="slider-pill"></span>
+                </label>
               </div>
               <div class="toggle-row">
                 <div class="toggle-info"><div class="toggle-label">In-app alerts</div></div>
-                <label class="toggle-switch"><input type="checkbox" checked /><span class="slider-pill"></span></label>
+                <label class="toggle-switch" for="channel-inapp">
+                  <input type="checkbox" id="channel-inapp" aria-label="In-app alerts" checked />
+                  <span class="slider-pill"></span>
+                </label>
               </div>
             </div>
           </div>
@@ -519,7 +573,7 @@
     <!-- ══════════════════════════════════
          TAB: STUDY PREFS
     ═══════════════════════════════════ -->
-    <div class="tab-panel" id="tab-study">
+    <div class="tab-panel" id="tab-study" role="tabpanel">
       <div class="settings-grid">
 
         <div class="settings-col">
@@ -534,8 +588,11 @@
             </div>
             <div class="card-body">
               <div class="field-group">
-                <label class="field-label">Daily study target (hours)</label>
-                <input type="range" min="1" max="12" value="4" id="study-hours" aria-label="Daily study target hours" />
+                <label class="field-label" for="study-hours">Daily study target (hours)</label>
+                <!-- FIX 10: range input wired to update display span via oninput -->
+                <input type="range" min="1" max="12" value="4" id="study-hours"
+                  aria-label="Daily study target hours"
+                  oninput="document.getElementById('study-h-val').textContent = this.value + 'h'" />
                 <div class="study-hours-display">
                   <span>1h</span>
                   <span id="study-h-val">4h</span>
@@ -543,8 +600,10 @@
                 </div>
               </div>
               <div class="field-group">
-                <label class="field-label">Weekly goal (tasks)</label>
-                <input type="number" class="field-input width-100px" value="25" min="1" max="100" aria-label="Weekly goal tasks" />
+                <label class="field-label" for="weekly-goal-tasks">Weekly goal (tasks)</label>
+                <!-- FIX 11: weekly goal input given an id matching its label -->
+                <input type="number" class="field-input width-100px" id="weekly-goal-tasks"
+                  value="25" min="1" max="100" aria-label="Weekly goal tasks" />
               </div>
               <div class="field-group mb-0">
                 <label class="field-label">Focus areas</label>
@@ -573,25 +632,32 @@
             <div class="card-body">
               <div class="field-row">
                 <div class="field-group">
-                  <label class="field-label">Focus (min)</label>
+                  <label class="field-label" for="pomodoro-focus">Focus (min)</label>
                   <input type="number" class="field-input" value="25" id="pomodoro-focus" min="5" max="90" aria-label="Pomodoro focus duration" />
                 </div>
                 <div class="field-group">
-                  <label class="field-label">Short break (min)</label>
+                  <label class="field-label" for="pomodoro-short">Short break (min)</label>
                   <input type="number" class="field-input" value="5" id="pomodoro-short" min="1" max="30" aria-label="Pomodoro short break duration" />
                 </div>
                 <div class="field-group">
-                  <label class="field-label">Long break (min)</label>
+                  <label class="field-label" for="pomodoro-long">Long break (min)</label>
                   <input type="number" class="field-input" value="15" id="pomodoro-long" min="5" max="60" aria-label="Pomodoro long break duration" />
                 </div>
               </div>
+              <!-- FIX 12: Pomodoro toggles given id + for= -->
               <div class="toggle-row">
                 <div class="toggle-info"><div class="toggle-label">Auto-start next session</div></div>
-                <label class="toggle-switch"><input type="checkbox" /><span class="slider-pill"></span></label>
+                <label class="toggle-switch" for="pomo-autostart">
+                  <input type="checkbox" id="pomo-autostart" aria-label="Auto-start next session" />
+                  <span class="slider-pill"></span>
+                </label>
               </div>
               <div class="toggle-row">
                 <div class="toggle-info"><div class="toggle-label">Sound on session end</div></div>
-                <label class="toggle-switch"><input type="checkbox" checked /><span class="slider-pill"></span></label>
+                <label class="toggle-switch" for="pomo-sound">
+                  <input type="checkbox" id="pomo-sound" aria-label="Sound on session end" checked />
+                  <span class="slider-pill"></span>
+                </label>
               </div>
             </div>
             <div class="save-row">
@@ -613,15 +679,16 @@
             </div>
             <div class="card-body">
               <div class="field-group">
-                <label class="field-label">Week starts on</label>
-                <select class="field-select" aria-label="Week starts on">
+                <label class="field-label" for="week-starts-on">Week starts on</label>
+                <!-- FIX 13: schedule selects given id + for= -->
+                <select class="field-select" id="week-starts-on" aria-label="Week starts on">
                   <option selected>Monday</option>
                   <option>Sunday</option>
                 </select>
               </div>
               <div class="field-group">
-                <label class="field-label">Preferred study time</label>
-                <select class="field-select" aria-label="Preferred study time">
+                <label class="field-label" for="preferred-study-time">Preferred study time</label>
+                <select class="field-select" id="preferred-study-time" aria-label="Preferred study time">
                   <option>Early morning (5–8 AM)</option>
                   <option selected>Morning (8–12 PM)</option>
                   <option>Afternoon (12–5 PM)</option>
@@ -650,19 +717,26 @@
               <div><div class="card-title">AI Study Assistant</div></div>
             </div>
             <div class="card-body py-05">
+              <!-- FIX 14: AI assistant toggles given id + for= -->
               <div class="toggle-row pt-0">
                 <div class="toggle-info">
                   <div class="toggle-label">Smart task suggestions</div>
                   <div class="toggle-desc">AI recommends tasks based on goals</div>
                 </div>
-                <label class="toggle-switch"><input type="checkbox" checked /><span class="slider-pill"></span></label>
+                <label class="toggle-switch" for="ai-smart-suggestions">
+                  <input type="checkbox" id="ai-smart-suggestions" aria-label="Smart task suggestions" checked />
+                  <span class="slider-pill"></span>
+                </label>
               </div>
               <div class="toggle-row">
                 <div class="toggle-info">
                   <div class="toggle-label">Auto-reschedule overdue</div>
                   <div class="toggle-desc">Moves missed tasks automatically</div>
                 </div>
-                <label class="toggle-switch"><input type="checkbox" /><span class="slider-pill"></span></label>
+                <label class="toggle-switch" for="ai-auto-reschedule">
+                  <input type="checkbox" id="ai-auto-reschedule" aria-label="Auto-reschedule overdue tasks" />
+                  <span class="slider-pill"></span>
+                </label>
               </div>
             </div>
           </div>
@@ -674,7 +748,7 @@
     <!-- ══════════════════════════════════
          TAB: SECURITY
     ═══════════════════════════════════ -->
-    <div class="tab-panel" id="tab-security">
+    <div class="tab-panel" id="tab-security" role="tabpanel">
       <div class="settings-grid">
 
         <div class="settings-col">
@@ -688,16 +762,17 @@
               </div>
             </div>
             <div class="card-body">
+              <!-- FIX 15: password labels given for= to match existing input ids -->
               <div class="field-group">
-                <label class="field-label">Current Password</label>
+                <label class="field-label" for="current-password">Current Password</label>
                 <input type="password" class="field-input" id="current-password" placeholder="Enter current password" />
               </div>
               <div class="field-group">
-                <label class="field-label">New Password</label>
+                <label class="field-label" for="new-password">New Password</label>
                 <input type="password" class="field-input" id="new-password" placeholder="At least 8 characters" />
               </div>
               <div class="field-group">
-                <label class="field-label">Confirm New Password</label>
+                <label class="field-label" for="confirm-password">Confirm New Password</label>
                 <input type="password" class="field-input" id="confirm-password" placeholder="Repeat new password" />
               </div>
               <div class="pw-badges">
@@ -739,7 +814,8 @@
                   <div class="session-device">iPhone 14 — Safari</div>
                   <div class="session-meta">Accra, Ghana • 2 hours ago</div>
                 </div>
-                <span class="session-revoke">Revoke</span>
+                <!-- FIX 16: Revoke changed to <button> for correct interactivity -->
+                <button class="session-revoke">Revoke</button>
               </div>
 
               <div class="session-item">
@@ -748,7 +824,7 @@
                   <div class="session-device">iPad — StudyPro App</div>
                   <div class="session-meta">Kumasi, Ghana • 3 days ago</div>
                 </div>
-                <span class="session-revoke">Revoke</span>
+                <button class="session-revoke">Revoke</button>
               </div>
 
             </div>
