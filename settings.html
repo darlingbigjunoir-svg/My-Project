@@ -1,0 +1,896 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>StudyPro — Settings</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/tabler-icons.min.css" />
+  <link rel="stylesheet" href="css/style.css" />
+  <style>
+    .sidebar-toggle {
+      margin-left: auto;
+      color: #bbb;
+      font-size: 14px;
+    }
+
+    #bio {
+      resize: none;
+    }
+
+    /* Hide quiet-hours fields when toggle is off */
+    #qh-fields[hidden] {
+      display: none;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ═══════════════════════════════════════
+       SIDEBAR
+  ════════════════════════════════════════ -->
+  <aside class="sidebar">
+    <div class="sidebar-logo">
+      <div class="logo-icon">
+        <i class="ti ti-school"></i>
+      </div>
+      <div>
+        <div class="logo-text">StudyPro</div>
+        <div class="logo-sub">Plan • Study • Succeed</div>
+      </div>
+    </div>
+
+    <!-- FIX 1: nav-items changed from non-interactive <div> to <button> for keyboard
+                accessibility and correct semantics -->
+    <nav class="nav-section">
+      <button class="nav-item"><i class="ti ti-layout-dashboard"></i> Dashboard</button>
+      <button class="nav-item"><i class="ti ti-calendar-event"></i> My Planner</button>
+      <button class="nav-item"><i class="ti ti-checklist"></i> Tasks</button>
+      <button class="nav-item"><i class="ti ti-books"></i> Subjects</button>
+      <button class="nav-item"><i class="ti ti-calendar"></i> Calendar</button>
+      <button class="nav-item"><i class="ti ti-chart-bar"></i> Progress</button>
+      <button class="nav-item"><i class="ti ti-notes"></i> Notes</button>
+      <button class="nav-item"><i class="ti ti-bell"></i> Reminders</button>
+      <button class="nav-item"><i class="ti ti-folders"></i> Resources</button>
+      <button class="nav-item active"><i class="ti ti-settings"></i> Settings</button>
+    </nav>
+
+    <div class="sidebar-footer">
+      <div class="user-card">
+        <div class="avatar">JD</div>
+        <div>
+          <div class="user-name">John Doe</div>
+          <div class="user-role">Student</div>
+        </div>
+        <i class="ti ti-chevron-down sidebar-toggle"></i>
+      </div>
+    </div>
+  </aside>
+
+  <!-- ═══════════════════════════════════════
+       MAIN CONTENT
+  ════════════════════════════════════════ -->
+  <main class="main">
+
+    <div class="page-header">
+      <div class="page-title">Settings</div>
+      <div class="page-sub">Manage your account preferences and study configuration</div>
+    </div>
+
+    <!-- Tab Bar -->
+    <div class="settings-tabs" role="tablist">
+      <button class="tab-btn active" data-tab="profile" role="tab" aria-selected="true" aria-controls="tab-profile">
+        <i class="ti ti-user"></i> Profile
+      </button>
+      <button class="tab-btn" data-tab="appearance" role="tab" aria-selected="false" aria-controls="tab-appearance">
+        <i class="ti ti-palette"></i> Appearance
+      </button>
+      <button class="tab-btn" data-tab="notifications" role="tab" aria-selected="false" aria-controls="tab-notifications">
+        <i class="ti ti-bell"></i> Notifications
+      </button>
+      <button class="tab-btn" data-tab="study" role="tab" aria-selected="false" aria-controls="tab-study">
+        <i class="ti ti-brain"></i> Study Prefs
+      </button>
+      <button class="tab-btn" data-tab="security" role="tab" aria-selected="false" aria-controls="tab-security">
+        <i class="ti ti-shield"></i> Security
+      </button>
+    </div>
+
+    <!-- ══════════════════════════════════
+         TAB: PROFILE
+    ═══════════════════════════════════ -->
+    <div class="tab-panel active" id="tab-profile" role="tabpanel">
+      <div class="settings-grid">
+
+        <!-- Left column -->
+        <div class="settings-col">
+          <div class="card">
+            <div class="card-header">
+              <i class="ti ti-user-circle"></i>
+              <div>
+                <div class="card-title">Personal Information</div>
+                <div class="card-sub">Update your name, email and details</div>
+              </div>
+            </div>
+            <div class="card-body">
+
+              <div class="profile-avatar-row">
+                <div class="profile-avatar">
+                  JD
+                  <div class="avatar-badge"></div>
+                </div>
+                <div class="avatar-actions">
+                  <button class="btn-outline">
+                    <i class="ti ti-upload"></i> Upload Photo
+                  </button>
+                  <button class="btn-danger-outline">
+                    <i class="ti ti-trash"></i> Remove
+                  </button>
+                </div>
+              </div>
+
+              <div class="field-row">
+                <div class="field-group">
+                  <label class="field-label" for="first-name">First Name</label>
+                  <input class="field-input" id="first-name" type="text" value="John" />
+                </div>
+                <div class="field-group">
+                  <label class="field-label" for="last-name">Last Name</label>
+                  <input class="field-input" id="last-name" type="text" value="Doe" />
+                </div>
+              </div>
+
+              <div class="field-group">
+                <label class="field-label" for="email-address">Email Address</label>
+                <input class="field-input" id="email-address" type="email" value="john.doe@email.com" />
+              </div>
+
+              <div class="field-row">
+                <div class="field-group">
+                  <label class="field-label" for="school-institution">School / Institution</label>
+                  <input class="field-input" id="school-institution" type="text" value="Lincoln High School" />
+                </div>
+                <div class="field-group">
+                  <label class="field-label" for="grade-year">Grade / Year</label>
+                  <select class="field-select" id="grade-year">
+                    <option>Grade 11</option>
+                    <option>Grade 12</option>
+                    <option selected>Year 1 University</option>
+                  </select>
+                </div>
+              </div>
+
+              <!-- FIX 2: bio rows increased from 2→3 so content isn't clipped -->
+              <div class="field-group">
+                <label class="field-label" for="bio">Bio</label>
+                <textarea class="field-input" id="bio" rows="3">Focused on STEM subjects. Aiming for top grades!</textarea>
+              </div>
+
+            </div>
+            <div class="save-row">
+              <button class="btn-cancel" id="discard-profile">Discard</button>
+              <button class="btn-primary" id="save-profile">
+                <i class="ti ti-check"></i> Save Changes
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Right column -->
+        <div class="settings-col narrow">
+
+          <div class="card">
+            <div class="card-header">
+              <i class="ti ti-crown"></i>
+              <div>
+                <div class="card-title">Subscription</div>
+                <div class="card-sub">Your current plan</div>
+              </div>
+            </div>
+            <div class="card-body">
+              <div class="flex-between mb-075">
+                <span class="plan-badge"><i class="ti ti-star"></i> Free Plan</span>
+                <span class="text-small text-muted">Since Jan 2024</span>
+              </div>
+              <p class="text-desc">
+                Upgrade to unlock unlimited subjects, AI study assistant, and advanced analytics.
+              </p>
+              <button class="btn-primary btn-full" id="upgrade-plan">
+                <i class="ti ti-rocket"></i> Upgrade to Pro
+              </button>
+            </div>
+          </div>
+
+          <div class="card">
+            <div class="card-header">
+              <i class="ti ti-world"></i>
+              <div>
+                <div class="card-title">Region &amp; Language</div>
+              </div>
+            </div>
+            <div class="card-body">
+              <div class="field-group">
+                <label class="field-label" for="language-select">Language</label>
+                <select class="field-select" id="language-select">
+                  <option selected>English (US)</option>
+                  <option>English (UK)</option>
+                  <option>French</option>
+                  <option>Spanish</option>
+                </select>
+              </div>
+              <div class="field-group mb-0">
+                <label class="field-label" for="timezone-select">Timezone</label>
+                <select class="field-select" id="timezone-select">
+                  <option>GMT +0:00 London</option>
+                  <option selected>GMT +0:00 Accra</option>
+                  <option>GMT -5:00 New York</option>
+                </select>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+    <!-- ══════════════════════════════════
+         TAB: APPEARANCE
+    ═══════════════════════════════════ -->
+    <div class="tab-panel" id="tab-appearance" role="tabpanel">
+      <div class="settings-grid">
+
+        <div class="settings-col">
+
+          <div class="card">
+            <div class="card-header">
+              <i class="ti ti-sun"></i>
+              <div>
+                <div class="card-title">Theme</div>
+                <div class="card-sub">Choose your display preference</div>
+              </div>
+            </div>
+            <div class="card-body">
+              <div class="theme-options">
+                <div class="theme-opt active">
+                  <div class="theme-preview theme-preview-light">
+                    <div class="theme-bar-1 theme-bar-1-opacity"></div>
+                    <div class="theme-bar-2"></div>
+                  </div>
+                  <div class="theme-name">Light</div>
+                </div>
+                <div class="theme-opt">
+                  <div class="theme-preview theme-preview-dark">
+                    <div class="theme-bar-1"></div>
+                    <div class="theme-bar-2 theme-bar-2-dark"></div>
+                  </div>
+                  <div class="theme-name">Dark</div>
+                </div>
+                <div class="theme-opt">
+                  <div class="theme-preview theme-preview-system">
+                    <div class="theme-bar-1"></div>
+                    <div class="theme-bar-2 theme-bar-2-system"></div>
+                  </div>
+                  <div class="theme-name">System</div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="card">
+            <div class="card-header">
+              <i class="ti ti-palette"></i>
+              <div>
+                <div class="card-title">Accent Color</div>
+                <div class="card-sub">Choose your primary color</div>
+              </div>
+            </div>
+            <div class="card-body">
+              <div class="color-options">
+                <div class="color-dot active color-purple"><i class="ti ti-check"></i></div>
+                <div class="color-dot color-blue"></div>
+                <div class="color-dot color-cyan"></div>
+                <div class="color-dot color-green"></div>
+                <div class="color-dot color-orange"></div>
+                <div class="color-dot color-red"></div>
+                <div class="color-dot color-pink"></div>
+                <div class="color-dot color-gray"></div>
+              </div>
+            </div>
+          </div>
+
+          <div class="card">
+            <div class="card-header">
+              <i class="ti ti-layout"></i>
+              <div><div class="card-title">Display Preferences</div></div>
+            </div>
+            <div class="card-body pt-05 pb-05">
+
+              <div class="toggle-row">
+                <div class="toggle-info">
+                  <div class="toggle-label">Compact mode</div>
+                  <div class="toggle-desc">Reduce padding and spacing for more content</div>
+                </div>
+                <!-- FIX 3: label wraps input correctly; for= matches input id -->
+                <label class="toggle-switch" for="compact-mode-checkbox">
+                  <input type="checkbox" id="compact-mode-checkbox" aria-label="Compact mode" />
+                  <span class="slider-pill"></span>
+                </label>
+              </div>
+
+              <!-- FIX 4: added id + matching for= on all remaining toggle labels -->
+              <div class="toggle-row">
+                <div class="toggle-info">
+                  <div class="toggle-label">Show task color dots</div>
+                  <div class="toggle-desc">Color indicators next to tasks</div>
+                </div>
+                <label class="toggle-switch" for="task-color-dots-checkbox">
+                  <input type="checkbox" id="task-color-dots-checkbox" aria-label="Show task color dots" checked />
+                  <span class="slider-pill"></span>
+                </label>
+              </div>
+
+              <div class="toggle-row">
+                <div class="toggle-info">
+                  <div class="toggle-label">Animated sidebar</div>
+                  <div class="toggle-desc">Smooth transitions when navigating</div>
+                </div>
+                <label class="toggle-switch" for="animated-sidebar-checkbox">
+                  <input type="checkbox" id="animated-sidebar-checkbox" aria-label="Animated sidebar" checked />
+                  <span class="slider-pill"></span>
+                </label>
+              </div>
+
+            </div>
+          </div>
+
+        </div>
+
+        <div class="settings-col narrow">
+
+          <div class="card">
+            <div class="card-header">
+              <i class="ti ti-text-size"></i>
+              <div><div class="card-title">Font Size</div></div>
+            </div>
+            <div class="card-body">
+              <div class="goal-chips">
+                <div class="chip" data-group="font">Small</div>
+                <div class="chip active" data-group="font">Medium</div>
+                <div class="chip" data-group="font">Large</div>
+              </div>
+              <p class="text-small text-aaa mt-8">Affects task list and note text</p>
+            </div>
+          </div>
+
+          <div class="card">
+            <div class="card-header">
+              <i class="ti ti-calendar-stats"></i>
+              <div><div class="card-title">Dashboard Layout</div></div>
+            </div>
+            <div class="card-body">
+              <div class="field-group mb-0">
+                <label class="field-label" for="default-view-select">Default view</label>
+                <select class="field-select" id="default-view-select">
+                  <option selected>Full dashboard</option>
+                  <option>Focus mode</option>
+                  <option>Tasks only</option>
+                  <option>Calendar view</option>
+                </select>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+    <!-- ══════════════════════════════════
+         TAB: NOTIFICATIONS
+    ═══════════════════════════════════ -->
+    <div class="tab-panel" id="tab-notifications" role="tabpanel">
+      <div class="settings-grid">
+
+        <div class="settings-col">
+          <div class="card">
+            <div class="card-header">
+              <i class="ti ti-bell-ringing"></i>
+              <div>
+                <div class="card-title">Notification Preferences</div>
+                <div class="card-sub">Control what alerts you receive</div>
+              </div>
+            </div>
+            <div class="card-body py-05">
+
+              <div class="notif-group">
+                <div class="notif-group-title">Tasks &amp; Reminders</div>
+                <div class="toggle-row">
+                  <div class="toggle-info">
+                    <div class="toggle-label">Task due soon</div>
+                    <div class="toggle-desc">1 hour before a task is due</div>
+                  </div>
+                  <!-- FIX 5: all notification toggles given id + matching for= -->
+                  <label class="toggle-switch" for="notif-task-due">
+                    <input type="checkbox" id="notif-task-due" aria-label="Task due soon notifications" checked />
+                    <span class="slider-pill"></span>
+                  </label>
+                </div>
+                <div class="toggle-row">
+                  <div class="toggle-info">
+                    <div class="toggle-label">Overdue tasks</div>
+                    <div class="toggle-desc">Alert for missed deadlines</div>
+                  </div>
+                  <label class="toggle-switch" for="notif-overdue">
+                    <input type="checkbox" id="notif-overdue" aria-label="Overdue tasks notifications" checked />
+                    <span class="slider-pill"></span>
+                  </label>
+                </div>
+                <div class="toggle-row">
+                  <div class="toggle-info">
+                    <div class="toggle-label">Daily planner reminder</div>
+                    <div class="toggle-desc">Morning summary of your day</div>
+                  </div>
+                  <label class="toggle-switch" for="notif-daily-planner">
+                    <input type="checkbox" id="notif-daily-planner" aria-label="Daily planner reminder notifications" />
+                    <span class="slider-pill"></span>
+                  </label>
+                </div>
+              </div>
+
+              <div class="notif-group">
+                <div class="notif-group-title">Study &amp; Progress</div>
+                <div class="toggle-row">
+                  <div class="toggle-info">
+                    <div class="toggle-label">Weekly progress report</div>
+                    <div class="toggle-desc">Every Sunday evening</div>
+                  </div>
+                  <label class="toggle-switch" for="notif-weekly-report">
+                    <input type="checkbox" id="notif-weekly-report" checked aria-label="Weekly progress report notifications" />
+                    <span class="slider-pill"></span>
+                  </label>
+                </div>
+                <div class="toggle-row">
+                  <div class="toggle-info">
+                    <div class="toggle-label">Study streak milestone</div>
+                    <div class="toggle-desc">When you hit 7, 14, 30 days</div>
+                  </div>
+                  <label class="toggle-switch" for="notif-streak">
+                    <input type="checkbox" id="notif-streak" checked aria-label="Study streak milestone notifications" />
+                    <span class="slider-pill"></span>
+                  </label>
+                </div>
+                <div class="toggle-row">
+                  <div class="toggle-info">
+                    <div class="toggle-label">Goal completed</div>
+                    <div class="toggle-desc">Celebrate your wins</div>
+                  </div>
+                  <label class="toggle-switch" for="notif-goal-complete">
+                    <input type="checkbox" id="notif-goal-complete" checked aria-label="Goal completed notifications" />
+                    <span class="slider-pill"></span>
+                  </label>
+                </div>
+              </div>
+
+              <div class="notif-group">
+                <div class="notif-group-title">System</div>
+                <div class="toggle-row">
+                  <div class="toggle-info">
+                    <div class="toggle-label">Product updates</div>
+                    <div class="toggle-desc">New features and improvements</div>
+                  </div>
+                  <label class="toggle-switch" for="notif-product-updates">
+                    <input type="checkbox" id="notif-product-updates" aria-label="Product updates notifications" />
+                    <span class="slider-pill"></span>
+                  </label>
+                </div>
+                <div class="toggle-row">
+                  <div class="toggle-info">
+                    <div class="toggle-label">Tips and tutorials</div>
+                    <div class="toggle-desc">Study tips and how-to guides</div>
+                  </div>
+                  <label class="toggle-switch" for="notif-tips">
+                    <input type="checkbox" id="notif-tips" aria-label="Tips and tutorials notifications" />
+                    <span class="slider-pill"></span>
+                  </label>
+                </div>
+              </div>
+
+            </div>
+          </div>
+        </div>
+
+        <div class="settings-col narrow">
+
+          <div class="card">
+            <div class="card-header">
+              <i class="ti ti-clock"></i>
+              <div>
+                <div class="card-title">Quiet Hours</div>
+                <div class="card-sub">Silence notifications during this time</div>
+              </div>
+            </div>
+            <div class="card-body">
+              <div class="toggle-row pt-0">
+                <div class="toggle-info"><div class="toggle-label">Enable quiet hours</div></div>
+                <!-- FIX 6: qh-toggle now has for= linking; qh-fields starts hidden
+                            and is shown/hidden via inline onchange -->
+                <label class="toggle-switch" for="qh-toggle">
+                  <input type="checkbox" id="qh-toggle" aria-label="Enable quiet hours"
+                    onchange="document.getElementById('qh-fields').hidden = !this.checked" />
+                  <span class="slider-pill"></span>
+                </label>
+              </div>
+              <!-- FIX 7: qh-fields hidden by default; only reveals when toggle is on -->
+              <div id="qh-fields" hidden>
+                <div class="field-row mt-075">
+                  <div class="field-group">
+                    <!-- FIX 8: quiet hours inputs given unique id + matching labels -->
+                    <label class="field-label" for="qh-from">From</label>
+                    <input type="time" class="field-input" id="qh-from" value="22:00" aria-label="Quiet hours start time" />
+                  </div>
+                  <div class="field-group">
+                    <label class="field-label" for="qh-to">To</label>
+                    <input type="time" class="field-input" id="qh-to" value="07:00" aria-label="Quiet hours end time" />
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="card">
+            <div class="card-header">
+              <i class="ti ti-device-mobile"></i>
+              <div><div class="card-title">Delivery Channels</div></div>
+            </div>
+            <div class="card-body py-05">
+              <!-- FIX 9: Delivery channel toggles all given id + for= + aria-label -->
+              <div class="toggle-row pt-0">
+                <div class="toggle-info"><div class="toggle-label">Push notifications</div></div>
+                <label class="toggle-switch" for="channel-push">
+                  <input type="checkbox" id="channel-push" aria-label="Push notifications" checked />
+                  <span class="slider-pill"></span>
+                </label>
+              </div>
+              <div class="toggle-row">
+                <div class="toggle-info"><div class="toggle-label">Email notifications</div></div>
+                <label class="toggle-switch" for="channel-email">
+                  <input type="checkbox" id="channel-email" aria-label="Email notifications" />
+                  <span class="slider-pill"></span>
+                </label>
+              </div>
+              <div class="toggle-row">
+                <div class="toggle-info"><div class="toggle-label">In-app alerts</div></div>
+                <label class="toggle-switch" for="channel-inapp">
+                  <input type="checkbox" id="channel-inapp" aria-label="In-app alerts" checked />
+                  <span class="slider-pill"></span>
+                </label>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+    <!-- ══════════════════════════════════
+         TAB: STUDY PREFS
+    ═══════════════════════════════════ -->
+    <div class="tab-panel" id="tab-study" role="tabpanel">
+      <div class="settings-grid">
+
+        <div class="settings-col">
+
+          <div class="card">
+            <div class="card-header">
+              <i class="ti ti-target"></i>
+              <div>
+                <div class="card-title">Study Goals</div>
+                <div class="card-sub">What are you working towards?</div>
+              </div>
+            </div>
+            <div class="card-body">
+              <div class="field-group">
+                <label class="field-label" for="study-hours">Daily study target (hours)</label>
+                <!-- FIX 10: range input wired to update display span via oninput -->
+                <input type="range" min="1" max="12" value="4" id="study-hours"
+                  aria-label="Daily study target hours"
+                  oninput="document.getElementById('study-h-val').textContent = this.value + 'h'" />
+                <div class="study-hours-display">
+                  <span>1h</span>
+                  <span id="study-h-val">4h</span>
+                  <span>12h</span>
+                </div>
+              </div>
+              <div class="field-group">
+                <label class="field-label" for="weekly-goal-tasks">Weekly goal (tasks)</label>
+                <!-- FIX 11: weekly goal input given an id matching its label -->
+                <input type="number" class="field-input width-100px" id="weekly-goal-tasks"
+                  value="25" min="1" max="100" aria-label="Weekly goal tasks" />
+              </div>
+              <div class="field-group mb-0">
+                <label class="field-label">Focus areas</label>
+                <div class="goal-chips">
+                  <div class="chip active" data-toggle>Mathematics</div>
+                  <div class="chip active" data-toggle>Physics</div>
+                  <div class="chip" data-toggle>Chemistry</div>
+                  <div class="chip active" data-toggle>Biology</div>
+                  <div class="chip" data-toggle>English</div>
+                  <div class="chip" data-toggle>ICT</div>
+                  <div class="chip" data-toggle>History</div>
+                  <div class="chip" data-toggle>Geography</div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="card">
+            <div class="card-header">
+              <i class="ti ti-timer"></i>
+              <div>
+                <div class="card-title">Pomodoro Timer</div>
+                <div class="card-sub">Focus session settings</div>
+              </div>
+            </div>
+            <div class="card-body">
+              <div class="field-row">
+                <div class="field-group">
+                  <label class="field-label" for="pomodoro-focus">Focus (min)</label>
+                  <input type="number" class="field-input" value="25" id="pomodoro-focus" min="5" max="90" aria-label="Pomodoro focus duration" />
+                </div>
+                <div class="field-group">
+                  <label class="field-label" for="pomodoro-short">Short break (min)</label>
+                  <input type="number" class="field-input" value="5" id="pomodoro-short" min="1" max="30" aria-label="Pomodoro short break duration" />
+                </div>
+                <div class="field-group">
+                  <label class="field-label" for="pomodoro-long">Long break (min)</label>
+                  <input type="number" class="field-input" value="15" id="pomodoro-long" min="5" max="60" aria-label="Pomodoro long break duration" />
+                </div>
+              </div>
+              <!-- FIX 12: Pomodoro toggles given id + for= -->
+              <div class="toggle-row">
+                <div class="toggle-info"><div class="toggle-label">Auto-start next session</div></div>
+                <label class="toggle-switch" for="pomo-autostart">
+                  <input type="checkbox" id="pomo-autostart" aria-label="Auto-start next session" />
+                  <span class="slider-pill"></span>
+                </label>
+              </div>
+              <div class="toggle-row">
+                <div class="toggle-info"><div class="toggle-label">Sound on session end</div></div>
+                <label class="toggle-switch" for="pomo-sound">
+                  <input type="checkbox" id="pomo-sound" aria-label="Sound on session end" checked />
+                  <span class="slider-pill"></span>
+                </label>
+              </div>
+            </div>
+            <div class="save-row">
+              <button class="btn-cancel" id="reset-pomodoro">Reset defaults</button>
+              <button class="btn-primary" id="save-study">
+                <i class="ti ti-check"></i> Save Preferences
+              </button>
+            </div>
+          </div>
+
+        </div>
+
+        <div class="settings-col narrow">
+
+          <div class="card">
+            <div class="card-header">
+              <i class="ti ti-calendar-week"></i>
+              <div><div class="card-title">Study Schedule</div></div>
+            </div>
+            <div class="card-body">
+              <div class="field-group">
+                <label class="field-label" for="week-starts-on">Week starts on</label>
+                <!-- FIX 13: schedule selects given id + for= -->
+                <select class="field-select" id="week-starts-on" aria-label="Week starts on">
+                  <option selected>Monday</option>
+                  <option>Sunday</option>
+                </select>
+              </div>
+              <div class="field-group">
+                <label class="field-label" for="preferred-study-time">Preferred study time</label>
+                <select class="field-select" id="preferred-study-time" aria-label="Preferred study time">
+                  <option>Early morning (5–8 AM)</option>
+                  <option selected>Morning (8–12 PM)</option>
+                  <option>Afternoon (12–5 PM)</option>
+                  <option>Evening (5–9 PM)</option>
+                  <option>Night (9 PM+)</option>
+                </select>
+              </div>
+              <div class="field-group mb-0">
+                <label class="field-label">Days off</label>
+                <div class="goal-chips">
+                  <div class="chip" data-toggle>Mon</div>
+                  <div class="chip" data-toggle>Tue</div>
+                  <div class="chip" data-toggle>Wed</div>
+                  <div class="chip" data-toggle>Thu</div>
+                  <div class="chip" data-toggle>Fri</div>
+                  <div class="chip active" data-toggle>Sat</div>
+                  <div class="chip active" data-toggle>Sun</div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="card">
+            <div class="card-header">
+              <i class="ti ti-brain"></i>
+              <div><div class="card-title">AI Study Assistant</div></div>
+            </div>
+            <div class="card-body py-05">
+              <!-- FIX 14: AI assistant toggles given id + for= -->
+              <div class="toggle-row pt-0">
+                <div class="toggle-info">
+                  <div class="toggle-label">Smart task suggestions</div>
+                  <div class="toggle-desc">AI recommends tasks based on goals</div>
+                </div>
+                <label class="toggle-switch" for="ai-smart-suggestions">
+                  <input type="checkbox" id="ai-smart-suggestions" aria-label="Smart task suggestions" checked />
+                  <span class="slider-pill"></span>
+                </label>
+              </div>
+              <div class="toggle-row">
+                <div class="toggle-info">
+                  <div class="toggle-label">Auto-reschedule overdue</div>
+                  <div class="toggle-desc">Moves missed tasks automatically</div>
+                </div>
+                <label class="toggle-switch" for="ai-auto-reschedule">
+                  <input type="checkbox" id="ai-auto-reschedule" aria-label="Auto-reschedule overdue tasks" />
+                  <span class="slider-pill"></span>
+                </label>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+    <!-- ══════════════════════════════════
+         TAB: SECURITY
+    ═══════════════════════════════════ -->
+    <div class="tab-panel" id="tab-security" role="tabpanel">
+      <div class="settings-grid">
+
+        <div class="settings-col">
+
+          <div class="card">
+            <div class="card-header">
+              <i class="ti ti-lock"></i>
+              <div>
+                <div class="card-title">Change Password</div>
+                <div class="card-sub">Update your account password</div>
+              </div>
+            </div>
+            <div class="card-body">
+              <!-- FIX 15: password labels given for= to match existing input ids -->
+              <div class="field-group">
+                <label class="field-label" for="current-password">Current Password</label>
+                <input type="password" class="field-input" id="current-password" placeholder="Enter current password" />
+              </div>
+              <div class="field-group">
+                <label class="field-label" for="new-password">New Password</label>
+                <input type="password" class="field-input" id="new-password" placeholder="At least 8 characters" />
+              </div>
+              <div class="field-group">
+                <label class="field-label" for="confirm-password">Confirm New Password</label>
+                <input type="password" class="field-input" id="confirm-password" placeholder="Repeat new password" />
+              </div>
+              <div class="pw-badges">
+                <span class="pw-badge met" id="pw-length">8+ chars</span>
+                <span class="pw-badge unmet" id="pw-uppercase">Uppercase</span>
+                <span class="pw-badge unmet" id="pw-number">Number</span>
+                <span class="pw-badge unmet" id="pw-symbol">Symbol</span>
+              </div>
+            </div>
+            <div class="save-row">
+              <button class="btn-primary" id="update-password">
+                <i class="ti ti-lock"></i> Update Password
+              </button>
+            </div>
+          </div>
+
+          <div class="card">
+            <div class="card-header">
+              <i class="ti ti-device-laptop"></i>
+              <div>
+                <div class="card-title">Active Sessions</div>
+                <div class="card-sub">Devices currently logged in</div>
+              </div>
+            </div>
+            <div class="card-body py-05">
+
+              <div class="session-item">
+                <div class="session-icon"><i class="ti ti-device-desktop"></i></div>
+                <div class="session-info">
+                  <div class="session-device">MacBook Pro — Chrome</div>
+                  <div class="session-meta">Accra, Ghana • Active now</div>
+                </div>
+                <span class="session-current">Current</span>
+              </div>
+
+              <div class="session-item">
+                <div class="session-icon"><i class="ti ti-device-mobile"></i></div>
+                <div class="session-info">
+                  <div class="session-device">iPhone 14 — Safari</div>
+                  <div class="session-meta">Accra, Ghana • 2 hours ago</div>
+                </div>
+                <!-- FIX 16: Revoke changed to <button> for correct interactivity -->
+                <button class="session-revoke">Revoke</button>
+              </div>
+
+              <div class="session-item">
+                <div class="session-icon"><i class="ti ti-device-tablet"></i></div>
+                <div class="session-info">
+                  <div class="session-device">iPad — StudyPro App</div>
+                  <div class="session-meta">Kumasi, Ghana • 3 days ago</div>
+                </div>
+                <button class="session-revoke">Revoke</button>
+              </div>
+
+            </div>
+            <div class="save-row">
+              <button class="btn-ghost-danger">
+                <i class="ti ti-logout icon-small"></i> Sign out all other devices
+              </button>
+            </div>
+          </div>
+
+        </div>
+
+        <div class="settings-col narrow">
+
+          <div class="card">
+            <div class="card-header">
+              <i class="ti ti-shield-check"></i>
+              <div><div class="card-title">Two-Factor Auth</div></div>
+            </div>
+            <div class="card-body">
+              <div class="session-status">
+                <i class="ti ti-circle-x"></i>
+                <span>Not enabled</span>
+              </div>
+              <p class="text-desc-long">
+                Add an extra layer of security. You'll need your phone every time you log in.
+              </p>
+              <button class="btn-primary btn-full" id="enable-2fa">
+                <i class="ti ti-shield-plus"></i> Enable 2FA
+              </button>
+            </div>
+          </div>
+
+          <div class="card">
+            <div class="card-header">
+              <i class="ti ti-alert-triangle"></i>
+              <div><div class="card-title">Danger Zone</div></div>
+            </div>
+            <div class="card-body py-025">
+              <div class="danger-item">
+                <div>
+                  <div class="danger-title">Export my data</div>
+                  <div class="danger-desc">Download all your data as JSON</div>
+                </div>
+                <button class="btn-ghost-danger">
+                  <i class="ti ti-download icon-xs"></i> Export
+                </button>
+              </div>
+              <div class="danger-item">
+                <div>
+                  <div class="danger-title">Delete account</div>
+                  <div class="danger-desc">Permanently remove your account</div>
+                </div>
+                <button class="btn-ghost-danger">
+                  <i class="ti ti-trash icon-xs"></i> Delete
+                </button>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+  </main>
+
+  <script src="js/script.js"></script>
+</body>
+</html>
