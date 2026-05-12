@@ -322,3 +322,220 @@ renderTasks();
 renderCalendar();
 renderWeekly();
 renderReminders();
+
+
+/* StudyPro Settings — settings.js */
+
+document.addEventListener('DOMContentLoaded', () => {
+
+  /* ── Tab Switching ── */
+  const tabBtns = document.querySelectorAll('.tab-btn');
+  const tabPanels = document.querySelectorAll('.tab-panel');
+
+  tabBtns.forEach(btn => {
+    btn.addEventListener('click', () => {
+      const target = btn.dataset.tab;
+
+      tabBtns.forEach(b => b.classList.remove('active'));
+      tabPanels.forEach(p => p.classList.remove('active'));
+
+      btn.classList.add('active');
+      document.getElementById('tab-' + target).classList.add('active');
+    });
+  });
+
+  /* ── Theme Selector ── */
+  document.querySelectorAll('.theme-opt').forEach(opt => {
+    opt.addEventListener('click', () => {
+      document.querySelectorAll('.theme-opt').forEach(o => o.classList.remove('active'));
+      opt.classList.add('active');
+    });
+  });
+
+  /* ── Accent Color Dots ── */
+  document.querySelectorAll('.color-dot').forEach(dot => {
+    dot.addEventListener('click', () => {
+      document.querySelectorAll('.color-dot').forEach(d => {
+        d.classList.remove('active');
+        d.innerHTML = '';
+      });
+      dot.classList.add('active');
+      dot.innerHTML = '<i class="ti ti-check"></i>';
+    });
+  });
+
+  /* ── Toggle Chips (study focus areas, days off) ── */
+  document.querySelectorAll('.chip[data-toggle]').forEach(chip => {
+    chip.addEventListener('click', () => chip.classList.toggle('active'));
+  });
+
+  /* ── Single-select Chips (font size) ── */
+  document.querySelectorAll('.chip[data-group]').forEach(chip => {
+    chip.addEventListener('click', () => {
+      const group = chip.dataset.group;
+      document.querySelectorAll(`.chip[data-group="${group}"]`).forEach(c => c.classList.remove('active'));
+      chip.classList.add('active');
+    });
+  });
+
+  /* ── Quiet Hours Toggle ── */
+  const qhToggle = document.getElementById('qh-toggle');
+  const qhFields = document.getElementById('qh-fields');
+
+  if (qhToggle && qhFields) {
+    qhToggle.addEventListener('change', () => {
+      qhFields.style.opacity = qhToggle.checked ? '1' : '0.4';
+      qhFields.style.pointerEvents = qhToggle.checked ? 'auto' : 'none';
+    });
+  }
+
+  /* ── Study Hours Slider ── */
+  const studySlider = document.getElementById('study-hours');
+  const studyVal = document.getElementById('study-h-val');
+
+  if (studySlider && studyVal) {
+    studySlider.addEventListener('input', () => {
+      studyVal.textContent = studySlider.value + 'h';
+    });
+  }
+
+  /* ── Password Strength Checker ── */
+  const newPwInput = document.getElementById('new-password');
+  if (newPwInput) {
+    newPwInput.addEventListener('input', () => {
+      const val = newPwInput.value;
+
+      const badges = {
+        'pw-length':    val.length >= 8,
+        'pw-uppercase': /[A-Z]/.test(val),
+        'pw-number':    /[0-9]/.test(val),
+        'pw-symbol':    /[^A-Za-z0-9]/.test(val),
+      };
+
+      Object.entries(badges).forEach(([id, met]) => {
+        const el = document.getElementById(id);
+        if (!el) return;
+        el.classList.toggle('met', met);
+        el.classList.toggle('unmet', !met);
+      });
+    });
+  }
+
+  /* ── Revoke Session Buttons ── */
+  document.querySelectorAll('.session-revoke').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const row = btn.closest('.session-item');
+      if (row && confirm('Revoke this session?')) {
+        row.style.transition = 'opacity 0.3s';
+        row.style.opacity = '0';
+        setTimeout(() => row.remove(), 300);
+      }
+    });
+  });
+
+  /* ── Save / Discard Buttons (Profile) ── */
+  const saveProfile = document.getElementById('save-profile');
+  if (saveProfile) {
+    saveProfile.addEventListener('click', () => {
+      showToast('Profile saved successfully!', 'success');
+    });
+  }
+
+  const discardProfile = document.getElementById('discard-profile');
+  if (discardProfile) {
+    discardProfile.addEventListener('click', () => {
+      showToast('Changes discarded.', 'info');
+    });
+  }
+
+  /* ── Update Password Button ── */
+  const updatePw = document.getElementById('update-password');
+  if (updatePw) {
+    updatePw.addEventListener('click', () => {
+      const current = document.getElementById('current-password').value;
+      const newPw   = document.getElementById('new-password').value;
+      const confirm = document.getElementById('confirm-password').value;
+
+      if (!current || !newPw || !confirm) {
+        showToast('Please fill in all password fields.', 'error'); return;
+      }
+      if (newPw !== confirm) {
+        showToast('New passwords do not match.', 'error'); return;
+      }
+      if (newPw.length < 8) {
+        showToast('Password must be at least 8 characters.', 'error'); return;
+      }
+      showToast('Password updated successfully!', 'success');
+    });
+  }
+
+  /* ── Save Study Prefs ── */
+  const saveStudy = document.getElementById('save-study');
+  if (saveStudy) {
+    saveStudy.addEventListener('click', () => {
+      showToast('Study preferences saved!', 'success');
+    });
+  }
+
+  /* ── Reset Pomodoro Defaults ── */
+  const resetPomodoro = document.getElementById('reset-pomodoro');
+  if (resetPomodoro) {
+    resetPomodoro.addEventListener('click', () => {
+      document.getElementById('pomodoro-focus').value  = 25;
+      document.getElementById('pomodoro-short').value  = 5;
+      document.getElementById('pomodoro-long').value   = 15;
+      showToast('Pomodoro timer reset to defaults.', 'info');
+    });
+  }
+
+  /* ── Enable 2FA ── */
+  const enable2fa = document.getElementById('enable-2fa');
+  if (enable2fa) {
+    enable2fa.addEventListener('click', () => {
+      showToast('2FA setup coming soon!', 'info');
+    });
+  }
+
+  /* ── Upgrade Plan ── */
+  const upgradePlan = document.getElementById('upgrade-plan');
+  if (upgradePlan) {
+    upgradePlan.addEventListener('click', () => {
+      showToast('Redirecting to upgrade page…', 'info');
+    });
+  }
+
+  /* ── Toast Helper ── */
+  function showToast(message, type = 'info') {
+    const existing = document.querySelector('.sp-toast');
+    if (existing) existing.remove();
+
+    const colors = {
+      success: { bg: '#dcfce7', color: '#166534', icon: 'ti-circle-check' },
+      error:   { bg: '#fef2f2', color: '#dc2626', icon: 'ti-alert-circle'  },
+      info:    { bg: '#eff6ff', color: '#1d4ed8', icon: 'ti-info-circle'   },
+    };
+    const c = colors[type] || colors.info;
+
+    const toast = document.createElement('div');
+    toast.className = 'sp-toast';
+    toast.innerHTML = `<i class="ti ${c.icon}" style="font-size:16px"></i> ${message}`;
+    Object.assign(toast.style, {
+      position: 'fixed', bottom: '1.5rem', right: '1.5rem',
+      background: c.bg, color: c.color,
+      padding: '10px 16px', borderRadius: '8px',
+      fontSize: '13px', fontWeight: '500',
+      display: 'flex', alignItems: 'center', gap: '8px',
+      boxShadow: '0 4px 12px rgba(0,0,0,0.08)',
+      zIndex: '9999', opacity: '0',
+      transition: 'opacity 0.25s',
+    });
+
+    document.body.appendChild(toast);
+    requestAnimationFrame(() => { toast.style.opacity = '1'; });
+    setTimeout(() => {
+      toast.style.opacity = '0';
+      setTimeout(() => toast.remove(), 300);
+    }, 3000);
+  }
+
+});
