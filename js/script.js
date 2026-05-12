@@ -53,12 +53,12 @@ document.addEventListener('click', e => {
 
 // ── NAV ITEMS ──────────────────────────────────────────
 document.querySelectorAll('.nav-item').forEach(item => {
-  item.addEventListener('click', e => {
-    e.preventDefault();
+  item.addEventListener('click', () => {
     document.querySelectorAll('.nav-item').forEach(n => n.classList.remove('active'));
     item.classList.add('active');
   });
 });
+
 
 // ── TASKS ──────────────────────────────────────────────
 let tasks = JSON.parse(localStorage.getItem('sp-tasks') || 'null') || [
