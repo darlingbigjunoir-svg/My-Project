@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>StudyPro — Dashboard</title>
+  <link rel="short-cut icon" href="favicon.ico"/>
+  <link rel="stylesheet" href="css/style.css"/>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Manrope:wght@400;500;600;700&display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
+</head>
+<body>
+
+  <!-- SIDEBAR -->
+  <aside class="sidebar" id="sidebar">
+    <div class="sidebar-brand">
+      <div class="brand-icon"><i class="fas fa-graduation-cap"></i></div>
+      <div class="brand-text">
+        <span class="brand-name">StudyPro</span>
+        <span class="brand-tagline">Plan • Study • Succeed</span>
+      </div>
+    </div>
+
+    <nav class="sidebar-nav">
+      <a href="#" class="nav-item active" data-page="dashboard">
+        <i class="fas fa-house"></i><span>Dashboard</span>
+      </a>
+      <a href="#" class="nav-item" data-page="planner">
+        <i class="fas fa-calendar-days"></i><span>My Planner</span>
+      </a>
+      <a href="#" class="nav-item" data-page="tasks">
+        <i class="fas fa-list-check"></i><span>Tasks</span>
+      </a>
+      <a href="#" class="nav-item" data-page="subjects">
+        <i class="fas fa-book-open"></i><span>Subjects</span>
+      </a>
+     
+      <a href="#" class="nav-item" data-page="progress">
+        <i class="fas fa-chart-line"></i><span>Progress</span>
+      </a>
+      <a href="#" class="nav-item" data-page="notes">
+        <i class="fas fa-sticky-note"></i><span>Notes</span>
+      </a>
+      <a href="#" class="nav-item" data-page="reminders">
+        <i class="fas fa-bell"></i><span>Reminders</span>
+      </a>
+      <a href="#" class="nav-item" data-page="resources">
+        <i class="fas fa-folder-open"></i><span>Resources</span>
+      </a>
+      <a href="#" class="nav-item" data-page="settings">
+        <i class="fas fa-gear"></i><span>Settings</span>
+      </a>
+    </nav>
+
+    <div class="sidebar-motivation">
+      <div class="motivation-rocket">🚀</div>
+      <p class="motivation-title">Keep going, John! 🚀</p>
+      <p class="motivation-text" id="dailyQuote">Consistency today brings success tomorrow.</p>
+    </div>
+
+    <div class="sidebar-user">
+      <div class="user-avatar">JD</div>
+      <div class="user-info">
+        <span class="user-name">John Doe</span>
+        <span class="user-role">Student</span>
+      </div>
+      <button type="button" class="user-chevron" aria-label="Toggle user menu"><i class="fas fa-chevron-down"></i></button>
+    </div>
+  </aside>
+
+  <!-- MAIN CONTENT -->
+  <div class="main-wrapper">
+
+    <!-- TOP NAV -->
+    <header class="topnav">
+      <button type="button" class="hamburger" id="hamburger" title="Menu"><i class="fas fa-bars"></i></button>
+      <div class="search-bar">
+        <i class="fas fa-magnifying-glass"></i>
+        <input type="text" placeholder="Search tasks, subjects, notes..." id="searchInput"/>
+      </div>
+      <div class="topnav-actions">
+        <button class="icon-btn theme-toggle" id="themeToggle" title="Toggle theme">
+          <i class="fas fa-moon" id="themeIcon"></i>
+        </button>
+        <button class="icon-btn notif-btn" id="notifBtn">
+          <i class="fas fa-bell"></i>
+          <span class="notif-badge">3</span>
+        </button>
+      </div>
+    </header>
+
+    <!-- DASHBOARD PAGE -->
+    <main class="content" id="dashboardPage">
+
+      <!-- GREETING -->
+      <div class="greeting-row">
+        <div>
+          <h1 class="greeting-title" id="greetingText">Good evening, John! 👋</h1>
+          <p class="greeting-sub">Focus on your goals. You're doing great!</p>
+        </div>
+        <div class="streak-badge">
+          <span class="streak-fire">🔥</span>
+          <div>
+            <span class="streak-num" id="streakCount">7</span>
+            <span class="streak-label">day streak</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- STATS CARDS -->
+      <div class="stats-grid">
+        <div class="stat-card">
+          <div class="stat-icon purple"><i class="fas fa-clipboard-list"></i></div>
+          <div class="stat-info">
+            <span class="stat-label">Tasks Today</span>
+            <span class="stat-value">8</span>
+            <span class="stat-sub">Total tasks</span>
+          </div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-icon green"><i class="fas fa-circle-check"></i></div>
+          <div class="stat-info">
+            <span class="stat-label">Completed</span>
+            <span class="stat-value">5</span>
+            <span class="stat-sub green-text">62% Done</span>
+          </div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-icon blue"><i class="fas fa-clock"></i></div>
+          <div class="stat-info">
+            <span class="stat-label">Study Time</span>
+            <span class="stat-value">4h 20m</span>
+            <span class="stat-sub">Today</span>
+          </div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-icon orange"><i class="fas fa-chart-line"></i></div>
+          <div class="stat-info">
+            <span class="stat-label">Progress</span>
+            <span class="stat-value">72%</span>
+            <div class="progress-bar-mini">
+              <div class="progress-fill"></div>
+            </div>
+            <span class="stat-sub">This Week</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- MIDDLE ROW -->
+      <div class="middle-row">
+
+        <!-- TODAY'S PLAN -->
+        <div class="panel tasks-panel">
+          <div class="panel-header">
+            <h2>Today's Plan</h2>
+            <button class="link-btn">View all</button>
+          </div>
+          <div class="task-list" id="taskList">
+            
+          </div>
+          <button class="add-task-btn" id="addTaskBtn">
+            <i class="fas fa-plus"></i> Add Task
+          </button>
+        </div>
+
+        <!-- RIGHT COLUMN -->
+        <div class="right-col">
+
+          <!-- CALENDAR -->
+          <div class="panel calendar-panel">
+            <div class="panel-header">
+              <h2>Calendar</h2>
+            </div>
+            <div class="cal-nav">
+              <button type="button" class="cal-arrow" id="calPrev" title="Previous month"><i class="fas fa-chevron-left"></i></button>
+              <span class="cal-month" id="calMonthLabel">May 2024</span>
+              <button type="button" class="cal-arrow" id="calNext" title="Next month"><i class="fas fa-chevron-right"></i></button>
+            </div>
+            <div class="cal-grid">
+              <div class="cal-day-name">Mon</div>
+              <div class="cal-day-name">Tue</div>
+              <div class="cal-day-name">Wed</div>
+              <div class="cal-day-name">Thu</div>
+              <div class="cal-day-name">Fri</div>
+              <div class="cal-day-name">Sat</div>
+              <div class="cal-day-name">Sun</div>
+            </div>
+            <div class="cal-days" id="calDays"></div>
+          </div>
+
+          <!-- PROGRESS DONUT -->
+          <div class="panel progress-panel">
+            <div class="panel-header">
+              <h2>Progress This Week</h2>
+              <button class="link-btn">View report</button>
+            </div>
+            <div class="donut-wrap">
+              <svg class="donut-svg" viewBox="0 0 120 120">
+                <circle class="donut-bg" cx="60" cy="60" r="48"/>
+                <circle class="donut-seg donut-completed" cx="60" cy="60" r="48" stroke-dasharray="216 86" stroke-dashoffset="0"/>
+                <circle class="donut-seg donut-progress" cx="60" cy="60" r="48" stroke-dasharray="43 259" stroke-dashoffset="-216"/>
+                <circle class="donut-seg donut-pending" cx="60" cy="60" r="48" stroke-dasharray="43 259" stroke-dashoffset="-259"/>
+                <text x="60" y="56" class="donut-pct">72%</text>
+                <text x="60" y="70" class="donut-lbl">Overall</text>
+              </svg>
+              <div class="donut-legend">
+                <div class="legend-item"><span class="dot green"></span><div><strong>Completed</strong><small>18 tasks</small></div></div>
+                <div class="legend-item"><span class="dot yellow"></span><div><strong>In Progress</strong><small>6 tasks</small></div></div>
+                <div class="legend-item"><span class="dot grey"></span><div><strong>Pending</strong><small>8 tasks</small></div></div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- BOTTOM ROW -->
+      <div class="bottom-row">
+
+        <!-- WEEKLY OVERVIEW -->
+        <div class="panel weekly-panel">
+          <div class="panel-header">
+            <h2>Weekly Overview</h2>
+            <button class="link-btn">View full calendar</button>
+          </div>
+          <div class="weekly-grid" id="weeklyGrid"></div>
+        </div>
+
+        <!-- REMINDERS -->
+        <div class="panel reminders-panel">
+          <div class="panel-header">
+            <h2>Upcoming Reminders</h2>
+            <button class="link-btn">View all</button>
+          </div>
+          <div class="reminder-list" id="reminderList"></div>
+        </div>
+
+      </div>
+
+      <!-- FILE UPLOAD SECTION -->
+      <div class="panel upload-panel">
+        <div class="panel-header">
+          <h2><i class="fas fa-cloud-arrow-up"></i> Upload Resources</h2>
+          <span class="badge-label">Notes • Slides • Audio</span>
+        </div>
+        <div class="upload-zone" id="uploadZone">
+          <i class="fas fa-file-arrow-up upload-icon"></i>
+          <p class="upload-title">Drop your files here</p>
+          <p class="upload-sub">Supports PDF, DOCX, PPTX, MP3, MP4, PNG, JPG</p>
+          <input type="file" id="fileInput" multiple accept=".pdf,.doc,.docx,.ppt,.pptx,.mp3,.mp4,.png,.jpg,.jpeg" hidden/>
+          <button class="btn-upload" id="uploadBtn">Browse Files</button>
+        </div>
+        <div class="uploaded-files" id="uploadedFiles"></div>
+      </div>
+
+    </main>
+  </div>
+
+  <!-- ADD TASK MODAL -->
+  <div class="modal-overlay" id="modalOverlay">
+    <div class="modal" id="taskModal">
+      <div class="modal-header">
+        <h3>Add New Task</h3>
+        <button type="button" class="modal-close" id="modalClose" aria-label="Close modal"><i class="fas fa-xmark"></i></button>
+      </div>
+      <div class="modal-body">
+        <div class="form-group">
+          <label for="taskSubject">Subject</label>
+          <input type="text" id="taskSubject" title="Subject" placeholder="e.g. Mathematics"/>
+        </div>
+        <div class="form-group">
+          <label for="taskDesc">Task Description</label>
+          <input type="text" id="taskDesc" title="Task Description" placeholder="e.g. Practice calculus problems"/>
+        </div>
+        <div class="form-row">
+          <div class="form-group">
+            <label for="taskTime">Time</label>
+            <input type="time" id="taskTime" title="Time"/>
+          </div>
+          <div class="form-group">
+            <label for="taskPriority">Priority</label>
+            <select id="taskPriority" title="Priority">
+              <option>High</option>
+              <option>Medium</option>
+              <option>Low</option>
+            </select>
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button class="btn-cancel" id="cancelTask">Cancel</button>
+        <button class="btn-save" id="saveTask">Add Task</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="js/script.js"></script>
+</body>
+</html>
