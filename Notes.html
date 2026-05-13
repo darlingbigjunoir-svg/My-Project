@@ -1,0 +1,322 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>StudyPro — Notes</title>
+  <link rel="stylesheet" href="css/style.css" />
+  <!-- Tabler Icons -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/tabler-icons.min.css" />
+</head>
+<body>
+
+  <h1 class="sr-only">StudyPro Notes Page</h1>
+
+  <div class="notes-layout">
+
+    <!-- ======== Sidebar ======== -->
+    <aside class="sidebar">
+      <div class="sidebar-logo">
+        <div class="logo-text">StudyTracker</div>
+        <div class="logo-sub">Plan • Study • Succeed</div>
+      </div>
+
+      <nav class="sidebar-nav" aria-label="Main navigation">
+        <a href="index.html"    class="nav-item"><i class="ti ti-layout-dashboard" aria-hidden="true"></i> Dashboard</a>
+        <a href="planner.html"  class="nav-item"><i class="ti ti-calendar"          aria-hidden="true"></i> My Planner</a>
+        <a href="tasks.html"    class="nav-item"><i class="ti ti-checkbox"           aria-hidden="true"></i> Tasks</a>
+        <a href="subjects.html" class="nav-item"><i class="ti ti-books"              aria-hidden="true"></i> Subjects</a>
+        <a href="progress.html" class="nav-item"><i class="ti ti-chart-bar"          aria-hidden="true"></i> Progress</a>
+        <a href="notes.html"    class="nav-item active"><i class="ti ti-notes"       aria-hidden="true"></i> Notes</a>
+        <a href="reminders.html"class="nav-item"><i class="ti ti-bell"               aria-hidden="true"></i> Reminders</a>
+        <a href="resources.html"class="nav-item"><i class="ti ti-folder"             aria-hidden="true"></i> Resources</a>
+        <a href="settings.html" class="nav-item"><i class="ti ti-settings"           aria-hidden="true"></i> Settings</a>
+      </nav>
+
+      <div class="sidebar-bottom">
+        <div class="user-row">
+          <div class="avatar" aria-hidden="true">JD</div>
+          <div>
+            <div class="user-name">John Doe</div>
+            <div class="user-role">Student</div>
+          </div>
+        </div>
+      </div>
+    </aside>
+
+    <!-- ======== Main ======== -->
+    <div class="main">
+
+      <!-- Top bar -->
+      <header class="topbar">
+        <div class="topbar-left">
+          <span class="page-title">Notes</span>
+          <span class="badge-count" id="noteCount">24 notes</span>
+        </div>
+        <div class="topbar-actions">
+          <button class="btn-icon" aria-label="Sort notes" title="Sort">
+            <i class="ti ti-arrows-sort" aria-hidden="true"></i>
+          </button>
+          <button class="btn-icon" aria-label="Filter notes" title="Filter">
+            <i class="ti ti-filter" aria-hidden="true"></i>
+          </button>
+          <button class="btn-icon" aria-label="Grid view" title="Grid view">
+            <i class="ti ti-layout-grid" aria-hidden="true"></i>
+          </button>
+          <button class="btn-new" id="newNoteBtn">
+            <i class="ti ti-plus" aria-hidden="true"></i> New Note
+          </button>
+        </div>
+      </header>
+
+      <!-- Content -->
+      <div class="content">
+
+        <!-- ===== Notes list panel ===== -->
+        <section class="notes-panel" aria-label="Notes list">
+          <div class="search-wrap">
+            <div class="search-box">
+              <i class="ti ti-search" aria-hidden="true"></i>
+              <input type="text" id="searchInput" placeholder="Search notes…" aria-label="Search notes" />
+            </div>
+          </div>
+
+          <div class="filter-tabs" role="tablist" aria-label="Filter notes">
+            <button class="tab active" role="tab" aria-selected="true"  data-filter="all">All</button>
+            <button class="tab"        role="tab" aria-selected="false" data-filter="starred">Starred</button>
+            <button class="tab"        role="tab" aria-selected="false" data-filter="recent">Recent</button>
+            <button class="tab"        role="tab" aria-selected="false" data-filter="shared">Shared</button>
+          </div>
+
+          <div class="note-list" id="noteList" role="list">
+
+            <div class="note-item active" role="listitem" data-subject="math" data-title="Calculus — Chain Rule" onclick="selectNote(this)">
+              <div class="note-item-header">
+                <span class="note-title">Calculus — Chain Rule</span>
+                <span class="note-date">Today</span>
+              </div>
+              <div class="note-preview">The chain rule is a formula for computing the derivative of the composition of two or more functions…</div>
+              <div class="note-tags"><span class="tag tag-math">Math</span></div>
+            </div>
+
+            <div class="note-item" role="listitem" data-subject="biology" data-title="Cell Division — Mitosis" onclick="selectNote(this)">
+              <div class="note-item-header">
+                <span class="note-title">Cell Division — Mitosis</span>
+                <span class="note-date">Yesterday</span>
+              </div>
+              <div class="note-preview">Mitosis is a type of cell division resulting in two daughter cells with the same number of chromosomes…</div>
+              <div class="note-tags"><span class="tag tag-biology">Biology</span></div>
+            </div>
+
+            <div class="note-item" role="listitem" data-subject="physics" data-title="Newton's Laws of Motion" onclick="selectNote(this)">
+              <div class="note-item-header">
+                <span class="note-title">Newton's Laws of Motion</span>
+                <span class="note-date">May 10</span>
+              </div>
+              <div class="note-preview">First law: An object at rest stays at rest. Second law: F = ma. Third law: action-reaction…</div>
+              <div class="note-tags"><span class="tag tag-physics">Physics</span></div>
+            </div>
+
+            <div class="note-item" role="listitem" data-subject="chemistry" data-title="Periodic Table Groups" onclick="selectNote(this)">
+              <div class="note-item-header">
+                <span class="note-title">Periodic Table Groups</span>
+                <span class="note-date">May 9</span>
+              </div>
+              <div class="note-preview">Group 1: Alkali metals. Group 2: Alkaline earth metals. Groups 3–12: Transition metals…</div>
+              <div class="note-tags"><span class="tag tag-chemistry">Chemistry</span></div>
+            </div>
+
+            <div class="note-item" role="listitem" data-subject="history" data-title="World War II — Key Events" onclick="selectNote(this)">
+              <div class="note-item-header">
+                <span class="note-title">World War II — Key Events</span>
+                <span class="note-date">May 7</span>
+              </div>
+              <div class="note-preview">1939: Germany invades Poland, WWII begins. 1941: US enters after Pearl Harbor. 1945: V-E Day…</div>
+              <div class="note-tags"><span class="tag tag-history">History</span></div>
+            </div>
+
+            <div class="note-item" role="listitem" data-subject="english" data-title="Shakespeare — Macbeth Themes" onclick="selectNote(this)">
+              <div class="note-item-header">
+                <span class="note-title">Shakespeare — Macbeth Themes</span>
+                <span class="note-date">May 6</span>
+              </div>
+              <div class="note-preview">Ambition, guilt, and the corrupting nature of power are the central themes explored throughout Macbeth…</div>
+              <div class="note-tags"><span class="tag tag-english">English</span></div>
+            </div>
+
+            <div class="note-item" role="listitem" data-subject="math" data-title="Integration — Basic Rules" onclick="selectNote(this)">
+              <div class="note-item-header">
+                <span class="note-title">Integration — Basic Rules</span>
+                <span class="note-date">May 5</span>
+              </div>
+              <div class="note-preview">Power rule, substitution, integration by parts — core techniques for solving integrals…</div>
+              <div class="note-tags"><span class="tag tag-math">Math</span></div>
+            </div>
+
+          </div>
+        </section>
+
+        <!-- ===== Editor panel ===== -->
+        <main class="editor-panel" aria-label="Note editor">
+
+          <div class="editor-topbar">
+            <div class="editor-title-wrap">
+              <input
+                type="text"
+                class="editor-title"
+                id="editorTitle"
+                value="Calculus — Chain Rule"
+                aria-label="Note title"
+              />
+              <div class="editor-meta" id="editorMeta">Math &nbsp;·&nbsp; Last edited today at 3:42 PM &nbsp;·&nbsp; 342 words</div>
+            </div>
+            <div class="editor-actions">
+              <button class="btn-icon" aria-label="Star this note"><i class="ti ti-star"  aria-hidden="true"></i></button>
+              <button class="btn-icon" aria-label="Share note">    <i class="ti ti-share" aria-hidden="true"></i></button>
+              <button class="btn-icon" aria-label="More options">  <i class="ti ti-dots"  aria-hidden="true"></i></button>
+            </div>
+          </div>
+
+          <div class="editor-toolbar" role="toolbar" aria-label="Text formatting">
+            <button class="tool-btn tool-btn-bold"   title="Bold"            aria-label="Bold">B</button>
+            <button class="tool-btn tool-btn-italic" title="Italic"          aria-label="Italic">I</button>
+            <button class="tool-btn tool-btn-under"  title="Underline"       aria-label="Underline">U</button>
+            <div class="tool-divider" role="separator"></div>
+            <button class="tool-btn" title="Bullet list"    aria-label="Bullet list">   <i class="ti ti-list"         aria-hidden="true"></i></button>
+            <button class="tool-btn" title="Numbered list"  aria-label="Numbered list"> <i class="ti ti-list-numbers" aria-hidden="true"></i></button>
+            <button class="tool-btn" title="Blockquote"     aria-label="Blockquote">    <i class="ti ti-blockquote"   aria-hidden="true"></i></button>
+            <div class="tool-divider" role="separator"></div>
+            <button class="tool-btn" title="Inline code"    aria-label="Inline code">   <i class="ti ti-code"         aria-hidden="true"></i></button>
+            <button class="tool-btn" title="Insert link"    aria-label="Insert link">   <i class="ti ti-link"         aria-hidden="true"></i></button>
+            <button class="tool-btn" title="Insert image"   aria-label="Insert image">  <i class="ti ti-photo"        aria-hidden="true"></i></button>
+            <div class="tool-divider" role="separator"></div>
+            <button class="tool-btn" title="Highlight"      aria-label="Highlight">     <i class="ti ti-highlight"    aria-hidden="true"></i></button>
+          </div>
+
+          <div class="editor-body">
+            <div class="editor-content" contenteditable="true" id="editorContent" aria-label="Note content" role="textbox" aria-multiline="true">
+
+              <h2>What is the Chain Rule?</h2>
+              <p>The chain rule is used to differentiate composite functions. If a function y depends on u, and u depends on x, then the derivative of y with respect to x is found by multiplying the derivatives together.</p>
+              <div class="formula-block">dy/dx = (dy/du) &times; (du/dx)</div>
+
+              <h2>When to use it</h2>
+              <p>Use the chain rule whenever you see a function nested inside another function — sometimes called a "function of a function." The key is identifying the outer and inner functions correctly.</p>
+              <ul>
+                <li>Outer function: the main operation applied last</li>
+                <li>Inner function: the expression plugged into the outer function</li>
+                <li>Differentiate outer, then multiply by derivative of inner</li>
+              </ul>
+
+              <h2>Example</h2>
+              <p>Find the derivative of f(x) = (3x² + 1)⁵</p>
+              <div class="formula-block">f'(x) = 5(3x&sup2; + 1)&sup4; &times; 6x = 30x(3x&sup2; + 1)&sup4;</div>
+
+              <div class="highlight-block">
+                <strong>Exam tip:</strong> Always simplify after applying the chain rule. Leaving the answer in expanded form loses marks if further factorisation is possible.
+              </div>
+
+              <h2>Practice problems</h2>
+              <p>Try differentiating: sin(x²), e^(3x+1), and √(2x−5). Use the chain rule step by step for each and verify by expanding where possible.</p>
+
+            </div>
+          </div>
+
+          <div class="stats-strip" aria-label="Note statistics">
+            <div class="stat-item"><i class="ti ti-clock"        aria-hidden="true"></i> <span class="stat-val">12 min</span> read</div>
+            <div class="stat-item"><i class="ti ti-text-size"    aria-hidden="true"></i> <span class="stat-val" id="wordCount">342</span> words</div>
+            <div class="stat-item"><i class="ti ti-link"         aria-hidden="true"></i> <span class="stat-val">2</span> links</div>
+            <div class="stat-item stat-item--right"><i class="ti ti-device-floppy" aria-hidden="true"></i> <span class="stat-val">Auto-saved</span></div>
+          </div>
+        </main>
+
+        <!-- ===== Info panel ===== -->
+        <aside class="info-panel" aria-label="Note details">
+
+          <div class="info-section">
+            <div class="info-label">Subject</div>
+            <div class="subject-badge">
+              <i class="ti ti-math" aria-hidden="true"></i> Mathematics
+            </div>
+          </div>
+
+          <div class="info-section">
+            <div class="info-label">Details</div>
+            <div class="info-row"><span class="info-key">Created</span>  <span class="info-val">May 13</span></div>
+            <div class="info-row"><span class="info-key">Modified</span> <span class="info-val">Today</span></div>
+            <div class="info-row"><span class="info-key">Words</span>    <span class="info-val">342</span></div>
+            <div class="info-row"><span class="info-key">Topic</span>    <span class="info-val">Calculus</span></div>
+          </div>
+
+          <div class="info-section">
+            <div class="info-label">Tags</div>
+            <div class="tag-list">
+              <span class="tag tag-math">calculus</span>
+              <span class="tag tag-math">derivatives</span>
+              <span class="tag tag-math">chain rule</span>
+            </div>
+          </div>
+
+          <div class="info-section">
+            <div class="info-label">Study progress</div>
+            <div class="progress-row">
+              <div class="progress-label"><span>Understanding</span><span>80%</span></div>
+              <div class="progress-bar-bg"><div class="progress-bar-fill" style="width: 80%;"></div></div>
+            </div>
+            <div class="progress-row">
+              <div class="progress-label"><span>Practice</span><span>50%</span></div>
+              <div class="progress-bar-bg"><div class="progress-bar-fill progress-bar-fill--warning" style="width: 50%;"></div></div>
+            </div>
+          </div>
+
+          <div class="info-section">
+            <div class="info-label">Related notes</div>
+            <a href="#" class="related-note"><i class="ti ti-notes" aria-hidden="true"></i><span class="related-note-title">Integration — Basic Rules</span></a>
+            <a href="#" class="related-note"><i class="ti ti-notes" aria-hidden="true"></i><span class="related-note-title">Newton's Laws of Motion</span></a>
+            <a href="#" class="related-note"><i class="ti ti-notes" aria-hidden="true"></i><span class="related-note-title">Calculus — Limits</span></a>
+          </div>
+
+        </aside>
+
+      </div><!-- /.content -->
+    </div><!-- /.main -->
+  </div><!-- /.notes-layout -->
+
+  <!-- ======== New Note Modal ======== -->
+  <div class="modal-overlay" id="newNoteModal" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+    <div class="modal">
+      <div class="modal-header">
+        <span class="modal-title" id="modalTitle">New Note</span>
+        <button class="modal-close" id="modalClose" aria-label="Close modal">
+          <i class="ti ti-x" aria-hidden="true"></i>
+        </button>
+      </div>
+
+      <div class="form-group">
+        <label class="form-label" for="newTitle">Note title</label>
+        <input class="form-input" id="newTitle" type="text" placeholder="e.g. Quadratic Equations" />
+      </div>
+
+      <div class="form-group">
+        <label class="form-label" for="newSubject">Subject</label>
+        <select class="form-input form-select" id="newSubject">
+          <option value="">Select a subject…</option>
+          <option value="math">Mathematics</option>
+          <option value="biology">Biology</option>
+          <option value="physics">Physics</option>
+          <option value="chemistry">Chemistry</option>
+          <option value="history">History</option>
+          <option value="english">English</option>
+        </select>
+      </div>
+
+      <div class="modal-actions">
+        <button class="btn-cancel" id="modalCancel">Cancel</button>
+        <button class="btn-submit" id="modalSubmit">Create Note</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="js/script.js"></script>
+</body>
+</html>

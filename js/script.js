@@ -684,3 +684,85 @@ if (logoutBtn) {
     window.location.href = "index.html";
   });
 }
+
+
+    // ---- Note selection ----
+    function selectNote(el) {
+      document.querySelectorAll('.note-item').forEach(n => n.classList.remove('active'));
+      el.classList.add('active');
+      const title = el.dataset.title || '';
+      document.getElementById('editorTitle').value = title;
+    }
+
+    // ---- Search / filter ----
+    document.getElementById('searchInput').addEventListener('input', function () {
+      const query = this.value.toLowerCase();
+      document.querySelectorAll('.note-item').forEach(item => {
+        const title = (item.dataset.title || '').toLowerCase();
+        item.style.display = title.includes(query) ? '' : 'none';
+      });
+    });
+
+    // ---- Filter tabs ----
+    document.querySelectorAll('.tab').forEach(tab => {
+      tab.addEventListener('click', function () {
+        document.querySelectorAll('.tab').forEach(t => {
+          t.classList.remove('active');
+          t.setAttribute('aria-selected', 'false');
+        });
+        this.classList.add('active');
+        this.setAttribute('aria-selected', 'true');
+      });
+    });
+
+    // ---- Word count ----
+    document.getElementById('editorContent').addEventListener('input', function () {
+      const words = this.innerText.trim().split(/\s+/).filter(Boolean).length;
+      document.getElementById('wordCount').textContent = words;
+    });
+
+    // ---- New note modal ----
+    const modal       = document.getElementById('newNoteModal');
+    const openBtn     = document.getElementById('newNoteBtn');
+    const closeBtn    = document.getElementById('modalClose');
+    const cancelBtn   = document.getElementById('modalCancel');
+    const submitBtn   = document.getElementById('modalSubmit');
+
+    openBtn.addEventListener('click',  () => modal.classList.add('open'));
+    closeBtn.addEventListener('click', () => modal.classList.remove('open'));
+    cancelBtn.addEventListener('click',() => modal.classList.remove('open'));
+    modal.addEventListener('click', e => { if (e.target === modal) modal.classList.remove('open'); });
+
+    submitBtn.addEventListener('click', () => {
+      const title   = document.getElementById('newTitle').value.trim();
+      const subject = document.getElementById('newSubject').value;
+      if (!title) { document.getElementById('newTitle').focus(); return; }
+
+      const tagClass = subject ? `tag-${subject}` : 'tag-math';
+      const tagLabel = document.getElementById('newSubject').options[document.getElementById('newSubject').selectedIndex].text;
+
+      const item = document.createElement('div');
+      item.className = 'note-item';
+      item.setAttribute('role', 'listitem');
+      item.dataset.subject = subject || 'math';
+      item.dataset.title   = title;
+      item.setAttribute('onclick', 'selectNote(this)');
+      item.innerHTML = `
+        <div class="note-item-header">
+          <span class="note-title">${title}</span>
+          <span class="note-date">Just now</span>
+        </div>
+        <div class="note-preview">Start writing your note…</div>
+        <div class="note-tags"><span class="tag ${tagClass}">${tagLabel !== 'Select a subject…' ? tagLabel : 'General'}</span></div>
+      `;
+      document.getElementById('noteList').prepend(item);
+
+      const count = document.querySelectorAll('.note-item').length;
+      document.getElementById('noteCount').textContent = `${count} notes`;
+
+      document.getElementById('newTitle').value   = '';
+      document.getElementById('newSubject').value = '';
+      modal.classList.remove('open');
+      selectNote(item);
+    });
+  
