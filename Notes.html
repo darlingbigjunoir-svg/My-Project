@@ -231,56 +231,73 @@
         </main>
 
         <!-- ===== Info panel ===== -->
-        <aside class="info-panel" aria-label="Note details">
+<aside class="info-panel" aria-label="Note details">
 
-          <div class="info-section">
-            <div class="info-label">Subject</div>
-            <div class="subject-badge">
-              <i class="ti ti-math" aria-hidden="true"></i> Mathematics
-            </div>
-          </div>
+  <div class="info-section">
+    <div class="info-label">Subject</div>
+    <div class="subject-badge">
+      <i class="ti ti-calculator" aria-hidden="true"></i> Mathematics
+    </div>
+  </div>
 
-          <div class="info-section">
-            <div class="info-label">Details</div>
-            <div class="info-row"><span class="info-key">Created</span>  <span class="info-val">May 13</span></div>
-            <div class="info-row"><span class="info-key">Modified</span> <span class="info-val">Today</span></div>
-            <div class="info-row"><span class="info-key">Words</span>    <span class="info-val">342</span></div>
-            <div class="info-row"><span class="info-key">Topic</span>    <span class="info-val">Calculus</span></div>
-          </div>
+  <div class="info-section">
+    <div class="info-label">Details</div>
+    <div class="info-row"><span class="info-key">Created</span>  <span class="info-val">May 13</span></div>
+    <div class="info-row"><span class="info-key">Modified</span> <span class="info-val">Today</span></div>
+    <div class="info-row"><span class="info-key">Words</span>    <span class="info-val">342</span></div>
+    <div class="info-row"><span class="info-key">Topic</span>    <span class="info-val">Calculus</span></div>
+  </div>
 
-          <div class="info-section">
-            <div class="info-label">Tags</div>
-            <div class="tag-list">
-              <span class="tag tag-math">calculus</span>
-              <span class="tag tag-math">derivatives</span>
-              <span class="tag tag-math">chain rule</span>
-            </div>
-          </div>
+  <div class="info-section">
+    <div class="info-label">Tags</div>
+    <div class="tag-list">
+      <span class="tag tag-math">calculus</span>
+      <span class="tag tag-math">derivatives</span>
+      <span class="tag tag-math">chain rule</span>
+    </div>
+  </div>
 
-          <div class="info-section">
-            <div class="info-label">Study progress</div>
-            <div class="progress-row">
-              <div class="progress-label"><span>Understanding</span><span>80%</span></div>
-              <div class="progress-bar-bg"><div class="progress-bar-fill" style="width: 80%;"></div></div>
-            </div>
-            <div class="progress-row">
-              <div class="progress-label"><span>Practice</span><span>50%</span></div>
-              <div class="progress-bar-bg"><div class="progress-bar-fill progress-bar-fill--warning" style="width: 50%;"></div></div>
-            </div>
-          </div>
+  <div class="info-section">
+    <div class="info-label">Study progress</div>
+    <div class="progress-row">
+      <div class="progress-label"><span>Understanding</span><span>80%</span></div>
+      <div class="progress-bar-bg">
+        <div class="progress-bar-fill" style="width: 80%;"></div>
+      </div>
+    </div>
+    <div class="progress-row">
+      <div class="progress-label"><span>Practice</span><span>50%</span></div>
+      <div class="progress-bar-bg">
+        <div class="progress-bar-fill" style="width: 50%; background: #f59e0b;"></div>
+      </div>
+    </div>
+  </div>
 
-          <div class="info-section">
-            <div class="info-label">Related notes</div>
-            <a href="#" class="related-note"><i class="ti ti-notes" aria-hidden="true"></i><span class="related-note-title">Integration — Basic Rules</span></a>
-            <a href="#" class="related-note"><i class="ti ti-notes" aria-hidden="true"></i><span class="related-note-title">Newton's Laws of Motion</span></a>
-            <a href="#" class="related-note"><i class="ti ti-notes" aria-hidden="true"></i><span class="related-note-title">Calculus — Limits</span></a>
-          </div>
+  <div class="info-section">
+    <div class="info-label">Related notes</div>
+    <ul class="related-list" role="list">
+      <li role="listitem">
+        <a href="javascript:void(0)" class="related-note">
+          <i class="ti ti-notes" aria-hidden="true"></i>
+          <span class="related-note-title">Integration — Basic Rules</span>
+        </a>
+      </li>
+      <li role="listitem">
+        <a href="javascript:void(0)" class="related-note">
+          <i class="ti ti-notes" aria-hidden="true"></i>
+          <span class="related-note-title">Newton's Laws of Motion</span>
+        </a>
+      </li>
+      <li role="listitem">
+        <a href="javascript:void(0)" class="related-note">
+          <i class="ti ti-notes" aria-hidden="true"></i>
+          <span class="related-note-title">Calculus — Limits</span>
+        </a>
+      </li>
+    </ul>
+  </div>
 
-        </aside>
-
-      </div><!-- /.content -->
-    </div><!-- /.main -->
-  </div><!-- /.notes-layout -->
+</aside>
 
   <!-- ======== New Note Modal ======== -->
   <div class="modal-overlay" id="newNoteModal" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
