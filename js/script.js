@@ -5,7 +5,7 @@ function setGreeting() {
   const h = new Date().getHours();
   const greet = h < 12 ? 'Good morning' : h < 17 ? 'Good afternoon' : 'Good evening';
   const el = document.getElementById('greetingText');
-  if (el) el.textContent = `${greet}, John! 👋`;
+  if (el) el.textContent = `${greet}, Student! 👋`;
 }
 setGreeting();
 
