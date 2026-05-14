@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>StudyPro — Progress</title>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
+ 
+</head>
+<body>
+
+<!-- ══════════ SIDEBAR ══════════ -->
+<aside class="sidebar">
+  <div class="logo">
+    <div class="logo-icon"><i class="fas fa-graduation-cap"></i></div>
+    <div class="logo-text"><h2>StudyPro</h2><span>Plan • Study • Succeed</span></div>
+  </div>
+  <nav class="nav">
+    <a href="#"><i class="fas fa-home"></i> Dashboard</a>
+    <a href="#"><i class="fas fa-calendar-alt"></i> My Planner</a>
+    <a href="#"><i class="fas fa-check-square"></i> Tasks</a>
+    <a href="#"><i class="fas fa-book-open"></i> Subjects</a>
+    <a href="#"><i class="fas fa-calendar"></i> Calendar</a>
+    <a href="#" class="active"><i class="fas fa-chart-line"></i> Progress</a>
+    <a href="#"><i class="fas fa-sticky-note"></i> Notes</a>
+    <a href="#"><i class="fas fa-bell"></i> Reminders</a>
+    <a href="#"><i class="fas fa-folder"></i> Resources</a>
+    <a href="#"><i class="fas fa-cog"></i> Settings</a>
+  </nav>
+  <div class="sidebar-footer">
+    <div class="rocket">🚀</div>
+    <p>Keep going, John! 🚀</p>
+    <small>Consistency today brings success tomorrow.</small>
+  </div>
+  <div class="user-info">
+    <div class="avatar">JD</div>
+    <div><div class="name">John Doe</div><div class="role">Student</div></div>
+    <i class="fas fa-chevron-down" style="font-size:11px;"></i>
+  </div>
+</aside>
+
+<!-- ══════════ MAIN ══════════ -->
+<div class="main">
+
+  <!-- TOPBAR -->
+  <header class="topbar">
+    <div class="search-box">
+      <i class="fas fa-search"></i>
+      <input type="text" placeholder="Search tasks, subjects, notes..."/>
+    </div>
+    <div class="topbar-actions">
+      <button class="icon-btn"><i class="fas fa-moon"></i></button>
+      <button class="icon-btn">
+        <i class="fas fa-bell"></i><span class="notif-badge">3</span>
+      </button>
+    </div>
+  </header>
+
+  <!-- CONTENT -->
+  <div class="content">
+
+    <!-- PAGE HEADER -->
+    <div class="page-header">
+      <div>
+        <h1>Progress</h1>
+        <p>Track your academic performance and study habits</p>
+      </div>
+      <div class="header-right">
+        <div class="period-tabs">
+          <button class="period-tab" onclick="setPeriod(this,'week')">Week</button>
+          <button class="period-tab active" onclick="setPeriod(this,'month')">Month</button>
+          <button class="period-tab" onclick="setPeriod(this,'term')">Term</button>
+        </div>
+        <button class="btn btn-outline"><i class="fas fa-download"></i> Export</button>
+      </div>
+    </div>
+
+    <!-- STAT CARDS -->
+    <div class="stats-grid">
+      <div class="stat-card purple-card">
+        <div class="stat-icon ic-purple"><i class="fas fa-trophy"></i></div>
+        <div>
+          <div class="stat-label">Overall Score</div>
+          <div class="stat-value">72%</div>
+          <div class="stat-change up"><i class="fas fa-arrow-up" style="font-size:10px;"></i> +4% this week</div>
+        </div>
+      </div>
+      <div class="stat-card green-card">
+        <div class="stat-icon ic-green"><i class="fas fa-circle-check"></i></div>
+        <div>
+          <div class="stat-label">Tasks Completed</div>
+          <div class="stat-value">18</div>
+          <div class="stat-change up"><i class="fas fa-arrow-up" style="font-size:10px;"></i> 3 more than last week</div>
+        </div>
+      </div>
+      <div class="stat-card orange-card">
+        <div class="stat-icon ic-orange"><i class="fas fa-clock"></i></div>
+        <div>
+          <div class="stat-label">Study Hours</div>
+          <div class="stat-value">24h</div>
+          <div class="stat-change up"><i class="fas fa-arrow-up" style="font-size:10px;"></i> +2h vs last week</div>
+        </div>
+      </div>
+      <div class="stat-card blue-card">
+        <div class="stat-icon ic-blue"><i class="fas fa-fire"></i></div>
+        <div>
+          <div class="stat-label">Study Streak</div>
+          <div class="stat-value">7 days</div>
+          <div class="stat-change neutral"><i class="fas fa-minus" style="font-size:10px;"></i> Personal best!</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ROW 1: Weekly Chart + Donut -->
+    <div class="row row-2-1">
+      <div class="panel">
+        <div class="panel-header">
+          <div>
+            <h3>Study Activity</h3>
+            <p>Hours studied per day this month</p>
+          </div>
+          <a class="view-link">View full report</a>
+        </div>
+        <div class="panel-body">
+          <div class="chart-wrap" style="height:220px;">
+            <canvas id="activityChart"></canvas>
+          </div>
+        </div>
+      </div>
+      <div class="panel">
+        <div class="panel-header">
+          <div><h3>Tasks Overview</h3><p>This week</p></div>
+        </div>
+        <div class="panel-body">
+          <div class="donut-wrap">
+            <div class="donut-chart-box">
+              <canvas id="donutChart" width="160" height="160"></canvas>
+              <div class="donut-center">
+                <span class="big">72%</span>
+                <span class="small">Overall</span>
+              </div>
+            </div>
+            <div class="donut-legend">
+              <div class="legend-item">
+                <div class="legend-dot" style="background:var(--green);"></div>
+                <span class="legend-label">Completed</span>
+                <span class="legend-val">18 tasks</span>
+              </div>
+              <div class="legend-item">
+                <div class="legend-dot" style="background:var(--orange);"></div>
+                <span class="legend-label">In Progress</span>
+                <span class="legend-val">6 tasks</span>
+              </div>
+              <div class="legend-item">
+                <div class="legend-dot" style="background:#E5E7EB;"></div>
+                <span class="legend-label">Pending</span>
+                <span class="legend-val">8 tasks</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ROW 2: Subject Progress + Goals -->
+    <div class="row row-2-1">
+      <div class="panel">
+        <div class="panel-header">
+          <div><h3>Subject Progress</h3><p>Performance across all subjects</p></div>
+          <a class="view-link">View all</a>
+        </div>
+        <div class="panel-body" id="subjectProgressBody"></div>
+      </div>
+      <div class="panel">
+        <div class="panel-header">
+          <div><h3>Study Goals</h3><p>Weekly targets</p></div>
+        </div>
+        <div class="panel-body">
+          <div class="goal-grid">
+            <div class="goal-card">
+              <div class="goal-card-top">
+                <span class="goal-icon">⏱️</span>
+                <span class="goal-pct" style="color:var(--purple);">80%</span>
+              </div>
+              <div class="goal-title">Study Time</div>
+              <div class="goal-bar-wrap"><div class="goal-bar-fill" style="width:80%;background:var(--purple);"></div></div>
+              <div class="goal-sub">4h / 5h daily goal</div>
+            </div>
+            <div class="goal-card">
+              <div class="goal-card-top">
+                <span class="goal-icon">✅</span>
+                <span class="goal-pct" style="color:var(--green);">75%</span>
+              </div>
+              <div class="goal-title">Tasks Done</div>
+              <div class="goal-bar-wrap"><div class="goal-bar-fill" style="width:75%;background:var(--green);"></div></div>
+              <div class="goal-sub">18 / 24 this week</div>
+            </div>
+            <div class="goal-card">
+              <div class="goal-card-top">
+                <span class="goal-icon">📖</span>
+                <span class="goal-pct" style="color:var(--blue);">60%</span>
+              </div>
+              <div class="goal-title">Topics Covered</div>
+              <div class="goal-bar-wrap"><div class="goal-bar-fill" style="width:60%;background:var(--blue);"></div></div>
+              <div class="goal-sub">6 / 10 this week</div>
+            </div>
+            <div class="goal-card">
+              <div class="goal-card-top">
+                <span class="goal-icon">🔥</span>
+                <span class="goal-pct" style="color:var(--orange);">100%</span>
+              </div>
+              <div class="goal-title">Daily Streak</div>
+              <div class="goal-bar-wrap"><div class="goal-bar-fill" style="width:100%;background:var(--orange);"></div></div>
+              <div class="goal-sub">7 / 7 days ✨</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ROW 3: Grades + Study Time -->
+    <div class="row row-2-1">
+      <div class="panel">
+        <div class="panel-header">
+          <div><h3>Grade Overview</h3><p>Latest assessment scores per subject</p></div>
+          <a class="view-link">Full report</a>
+        </div>
+        <table class="grade-table">
+          <thead>
+            <tr>
+              <th>Subject</th>
+              <th>Last Score</th>
+              <th>Grade</th>
+              <th>Avg Score</th>
+              <th>Trend</th>
+            </tr>
+          </thead>
+          <tbody id="gradeTableBody"></tbody>
+        </table>
+      </div>
+      <div class="panel">
+        <div class="panel-header">
+          <div><h3>Time by Subject</h3><p>Hours this week</p></div>
+        </div>
+        <div class="panel-body">
+          <div class="chart-wrap" style="height:180px;margin-bottom:20px;">
+            <canvas id="radarChart"></canvas>
+          </div>
+          <div class="time-breakdown" id="timeBreakdown"></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ROW 4: Activity Heatmap + Achievements -->
+    <div class="row row-1-1">
+      <div class="panel">
+        <div class="panel-header">
+          <div><h3>Study Activity Heatmap</h3><p>Last 5 weeks consistency</p></div>
+        </div>
+        <div class="panel-body">
+          <div id="heatmapDayLabels" class="activity-grid" style="margin-bottom:4px;"></div>
+          <div id="heatmapGrid" class="activity-grid"></div>
+          <div class="activity-legend">
+            <span>Less</span>
+            <div class="activity-legend-cells">
+              <div class="activity-legend-cell l0" style="background:#F3F4F6;"></div>
+              <div class="activity-legend-cell l1" style="background:#DDD6FE;"></div>
+              <div class="activity-legend-cell l2" style="background:#A78BFA;"></div>
+              <div class="activity-legend-cell l3" style="background:#7C3AED;"></div>
+              <div class="activity-legend-cell l4" style="background:#5B21B6;"></div>
+            </div>
+            <span>More</span>
+          </div>
+        </div>
+      </div>
+      <div class="panel">
+        <div class="panel-header">
+          <div><h3>Recent Achievements</h3><p>Milestones unlocked</p></div>
+          <a class="view-link">View all</a>
+        </div>
+        <div class="panel-body">
+          <div class="achievement-list" id="achievementList"></div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+</body>
+</html>
