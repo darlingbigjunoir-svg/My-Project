@@ -8,19 +8,24 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
   <link rel="stylesheet" href="css/style.css">
 </head>
+
 <body>
 
 <!-- ══════════ SIDEBAR ══════════ -->
 <aside class="sidebar">
   <div class="logo">
     <div class="logo-icon"><i class="fas fa-graduation-cap"></i></div>
-    <div class="logo-text"><h2>StudyPro</h2><span>Plan • Study • Succeed</span></div>
+    <div class="logo-text">
+      <h2>StudyPro</h2>
+      <span>Plan • Study • Succeed</span>
+    </div>
   </div>
-   <nav class="nav">
+
+  <nav class="nav">
     <a href="index.html"><i class="fas fa-home"></i> Dashboard</a>
-    <a href="planner.html"><i class="fas fa-calendar-alt"></i> My Planner</a>
+    <a href="planner.html" class="active"><i class="fas fa-calendar-alt"></i> My Planner</a>
     <a href="tasks.html"><i class="fas fa-check-square"></i> Tasks</a>
-    <a href="subjects.html" class="active"><i class="fas fa-book-open"></i> Subjects</a>
+    <a href="subjects.html"><i class="fas fa-book-open"></i> Subjects</a>
     <a href="calendar.html"><i class="fas fa-calendar"></i> Calendar</a>
     <a href="progress.html"><i class="fas fa-chart-line"></i> Progress</a>
     <a href="notes.html"><i class="fas fa-sticky-note"></i> Notes</a>
@@ -28,49 +33,69 @@
     <a href="resources.html"><i class="fas fa-folder"></i> Resources</a>
     <a href="settings.html"><i class="fas fa-cog"></i> Settings</a>
   </nav>
+
   <div class="sidebar-footer">
     <div class="rocket">🚀</div>
-    <p>Keep going, John! 🚀</p>
+    <p>Keep going, Student!</p>
     <small>Consistency today brings success tomorrow.</small>
   </div>
+
   <div class="user-info">
     <div class="avatar">JD</div>
-    <div><div class="uname">John Doe</div><div class="urole">Student</div></div>
+    <div>
+      <div class="uname">John Doe</div>
+      <div class="urole">Student</div>
+    </div>
     <i class="fas fa-chevron-down" style="font-size:11px;"></i>
   </div>
 </aside>
 
 <!-- ══════════ MAIN ══════════ -->
 <div class="main">
+
+  <!-- TOPBAR -->
   <header class="topbar">
     <div class="search-box">
       <i class="fas fa-search"></i>
       <input type="text" placeholder="Search tasks, subjects, notes..."/>
     </div>
+
     <div class="topbar-actions">
       <button class="icon-btn"><i class="fas fa-moon"></i></button>
-      <button class="icon-btn"><i class="fas fa-bell"></i><span class="notif-badge">3</span></button>
+      <button class="icon-btn">
+        <i class="fas fa-bell"></i>
+        <span class="notif-badge">3</span>
+      </button>
     </div>
   </header>
 
+  <!-- CONTENT -->
   <div class="content">
 
-    <!-- PAGE HEADER -->
+    <!-- HEADER -->
     <div class="page-header">
       <div>
         <h1>My Planner</h1>
         <p>Organise your study schedule and stay on track</p>
       </div>
+
       <div class="header-right">
         <div class="view-tabs">
-          <button class="view-tab active" id="weekTabBtn" onclick="switchView('week')"><i class="fas fa-calendar-week"></i> Week</button>
-          <button class="view-tab" id="monthTabBtn" onclick="switchView('month')"><i class="fas fa-calendar"></i> Month</button>
+          <button class="view-tab active" onclick="switchView('week')">
+            <i class="fas fa-calendar-week"></i> Week
+          </button>
+          <button class="view-tab" onclick="switchView('month')">
+            <i class="fas fa-calendar"></i> Month
+          </button>
         </div>
-        <button class="btn btn-primary" onclick="openModal()"><i class="fas fa-plus"></i> Add Session</button>
+
+        <button class="btn btn-primary" onclick="openModal()">
+          <i class="fas fa-plus"></i> Add Session
+        </button>
       </div>
     </div>
 
-    <!-- STAT STRIP -->
+    <!-- STATS -->
     <div class="stat-strip">
       <div class="stat-card">
         <div class="stat-icon ic-purple"><i class="fas fa-calendar-check"></i></div>
@@ -80,6 +105,7 @@
           <div class="stat-sub">sessions planned</div>
         </div>
       </div>
+
       <div class="stat-card">
         <div class="stat-icon ic-green"><i class="fas fa-clock"></i></div>
         <div>
@@ -88,6 +114,7 @@
           <div class="stat-sub">this week</div>
         </div>
       </div>
+
       <div class="stat-card">
         <div class="stat-icon ic-orange"><i class="fas fa-layer-group"></i></div>
         <div>
@@ -96,6 +123,7 @@
           <div class="stat-sub">covered this week</div>
         </div>
       </div>
+
       <div class="stat-card">
         <div class="stat-icon ic-blue"><i class="fas fa-bolt"></i></div>
         <div>
@@ -106,137 +134,83 @@
       </div>
     </div>
 
-    <!-- PLANNER BODY -->
+    <!-- PLANNER -->
     <div class="planner-body">
 
-      <!-- LEFT: Mini calendar + upcoming -->
-      <div style="width:280px;flex-shrink:0;display:flex;flex-direction:column;gap:14px;">
+      <!-- LEFT -->
+      <div style="width:280px;display:flex;flex-direction:column;gap:14px;">
+        
         <div class="mini-cal">
           <div class="mini-cal-header">
-            <button class="cal-nav-btn" onclick="shiftMini(-1)"><i class="fas fa-chevron-left"></i></button>
+            <button onclick="shiftMini(-1)"><i class="fas fa-chevron-left"></i></button>
             <h3 id="miniCalTitle"></h3>
-            <button class="cal-nav-btn" onclick="shiftMini(1)"><i class="fas fa-chevron-right"></i></button>
+            <button onclick="shiftMini(1)"><i class="fas fa-chevron-right"></i></button>
           </div>
-          <div class="cal-grid" id="miniCalGrid"></div>
+          <div id="miniCalGrid"></div>
         </div>
 
         <div class="upcoming-panel">
-          <div class="upcoming-header">
-            <h4>Upcoming Sessions</h4>
-            <span style="font-size:11px;color:var(--purple);font-weight:700;cursor:pointer;">View all</span>
-          </div>
-          <div class="upcoming-list" id="upcomingList"></div>
+          <h4>Upcoming Sessions</h4>
+          <div id="upcomingList"></div>
         </div>
       </div>
 
-      <!-- RIGHT: Week view -->
-      <div class="week-wrap" id="weekWrap">
-        <div class="week-header">
-          <button class="week-nav-btn" onclick="shiftWeek(-1)"><i class="fas fa-chevron-left"></i></button>
-          <button class="week-nav-btn" onclick="shiftWeek(1)"><i class="fas fa-chevron-right"></i></button>
-          <span class="week-range" id="weekRangeLabel"></span>
-          <button class="today-btn" onclick="goToday()">Today</button>
-          <div style="margin-left:auto;display:flex;gap:8px;">
-            <button class="btn btn-outline btn-sm" onclick="openModal()"><i class="fas fa-plus"></i> Add</button>
-          </div>
-        </div>
-        <div class="week-cols-wrap">
-          
-          <div style="display:flex;flex-direction:column;width:100%;">
-            <div style="display:flex;">
-              <div class="time-gutter"><div class="time-gutter-top"></div></div>
-              <div class="days-area" id="dayHeaders">
-                <div class="day-headers" id="dayHeadersInner" style="grid-template-columns:repeat(7,1fr);"></div>
-              </div>
-            </div>
-            <div class="time-rows-wrap" id="timeRowsWrap">
-              <div class="time-labels" id="timeLabels"></div>
-              <div class="day-grid" id="dayGrid" style="display:grid;grid-template-columns:repeat(7,1fr);flex:1;position:relative;"></div>
-            </div>
-          </div>
-        </div>
+      <!-- WEEK VIEW -->
+      <div id="weekWrap">
+        <button onclick="shiftWeek(-1)">←</button>
+        <button onclick="shiftWeek(1)">→</button>
+        <button onclick="goToday()">Today</button>
+
+        <div id="dayGrid"></div>
       </div>
 
       <!-- MONTH VIEW -->
-      <div class="month-wrap" id="monthWrap">
-        <div class="month-header">
-          <button class="week-nav-btn" onclick="shiftMonth(-1)"><i class="fas fa-chevron-left"></i></button>
-          <button class="week-nav-btn" onclick="shiftMonth(1)"><i class="fas fa-chevron-right"></i></button>
-          <span class="week-range" id="monthRangeLabel"></span>
-          <button class="today-btn" onclick="goToday()">Today</button>
-        </div>
+      <div id="monthWrap">
+
+        <!-- ✅ FIXED HEADER -->
         <div class="month-grid-header">
-          ${['Mon','Tue','Wed','Thu','Fri','Sat','Sun'].map(d=>`<div class="month-day-label">${d}</div>`).join('')}
+          <div class="month-day-label">Mon</div>
+          <div class="month-day-label">Tue</div>
+          <div class="month-day-label">Wed</div>
+          <div class="month-day-label">Thu</div>
+          <div class="month-day-label">Fri</div>
+          <div class="month-day-label">Sat</div>
+          <div class="month-day-label">Sun</div>
         </div>
-        <div class="month-grid" id="monthGrid"></div>
+
+        <div id="monthGrid"></div>
       </div>
 
-    </div><!-- /planner-body -->
-  </div><!-- /content -->
-</div><!-- /main -->
+    </div>
+  </div>
+</div>
 
-<!-- ══════════ ADD SESSION MODAL ══════════ -->
-<div class="modal-overlay" id="modalOverlay" onclick="closeModalOutside(event)">
+<!-- MODAL -->
+<div id="modalOverlay" onclick="closeModalOutside(event)">
   <div class="modal">
-    <div class="modal-header">
-      <h3>Add Study Session</h3>
-      <button class="close-btn" onclick="closeModal()"><i class="fas fa-times"></i></button>
-    </div>
-    <div class="form-group">
-      <label>Session Title</label>
-      <input type="text" id="evTitle" placeholder="e.g. Calculus Revision"/>
-    </div>
-    <div class="form-row">
-      <div class="form-group">
-        <label>Subject</label>
-        <select id="evSubject">
-          <option value="Mathematics">Mathematics</option>
-          <option value="Physics">Physics</option>
-          <option value="Chemistry">Chemistry</option>
-          <option value="Biology">Biology</option>
-          <option value="English">English</option>
-          <option value="ICT">ICT</option>
-          <option value="Other">Other</option>
-        </select>
-      </div>
-      <div class="form-group">
-        <label>Date</label>
-        <input type="date" id="evDate"/>
-      </div>
-    </div>
-    <div class="form-row">
-      <div class="form-group">
-        <label>Start Time</label>
-        <input type="time" id="evStart" value="09:00"/>
-      </div>
-      <div class="form-group">
-        <label>End Time</label>
-        <input type="time" id="evEnd" value="10:00"/>
-      </div>
-    </div>
-    <div class="form-group">
-      <label>Colour</label>
-      <div class="color-row" id="colorRow"></div>
-    </div>
-    <div class="modal-footer">
-      <button class="btn btn-outline" onclick="closeModal()">Cancel</button>
-      <button class="btn btn-primary" onclick="addEvent()"><i class="fas fa-plus"></i> Add Session</button>
-    </div>
+
+    <h3>Add Study Session</h3>
+
+    <label for="evTitle">Title</label>
+    <input type="text" id="evTitle">
+
+    <label for="evDate">Date</label>
+    <input type="date" id="evDate">
+
+    <label for="evStart">Start</label>
+    <input type="time" id="evStart">
+
+    <label for="evEnd">End</label>
+    <input type="time" id="evEnd">
+
+    <button onclick="addEvent()">Add</button>
+    <button onclick="closeModal()">Cancel</button>
+
   </div>
 </div>
 
-<!-- EVENT POPUP -->
-<div class="ev-popup" id="evPopup">
-  <div class="ev-popup-title" id="popTitle"></div>
-  <div class="ev-popup-row"><i class="fas fa-book"></i><span id="popSubject"></span></div>
-  <div class="ev-popup-row"><i class="fas fa-clock"></i><span id="popTime"></span></div>
-  <div class="ev-popup-row"><i class="fas fa-calendar"></i><span id="popDate"></span></div>
-  <div class="ev-popup-actions">
-    <button class="ev-popup-btn" onclick="closePopup()"><i class="fas fa-pen"></i> Edit</button>
-    <button class="ev-popup-btn del" id="popDelBtn"><i class="fas fa-trash"></i> Delete</button>
-  </div>
-</div>
-
+<!-- SCRIPT -->
+<script src="js/script.js"></script>
 
 </body>
 </html>
