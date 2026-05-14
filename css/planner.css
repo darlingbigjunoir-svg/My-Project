@@ -1,4 +1,4 @@
- 
+ <style>
     /* ── CSS Variables ── */
     :root {
       --clr-primary:       #6C63FF;
@@ -501,4 +501,4 @@
     ::-webkit-scrollbar-track { background: transparent; }
     ::-webkit-scrollbar-thumb { background: var(--clr-border-2); border-radius: 9999px; }
     ::-webkit-scrollbar-thumb:hover { background: var(--clr-primary); }
-  
+  </style>
