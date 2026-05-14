@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>StudyPro — Subjects</title>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
+  
+</head>
+<body>
+
+<!-- ════════════ SIDEBAR ════════════ -->
+<aside class="sidebar">
+  <div class="logo">
+    <div class="logo-icon"><i class="fas fa-graduation-cap"></i></div>
+    <div class="logo-text">
+      <h2>StudyPro</h2>
+      <span>Plan • Study • Succeed</span>
+    </div>
+  </div>
+  <nav class="nav">
+    <a href="#"><i class="fas fa-home"></i> Dashboard</a>
+    <a href="#"><i class="fas fa-calendar-alt"></i> My Planner</a>
+    <a href="#"><i class="fas fa-check-square"></i> Tasks</a>
+    <a href="#" class="active"><i class="fas fa-book-open"></i> Subjects</a>
+    <a href="#"><i class="fas fa-calendar"></i> Calendar</a>
+    <a href="#"><i class="fas fa-chart-line"></i> Progress</a>
+    <a href="#"><i class="fas fa-sticky-note"></i> Notes</a>
+    <a href="#"><i class="fas fa-bell"></i> Reminders</a>
+    <a href="#"><i class="fas fa-folder"></i> Resources</a>
+    <a href="#"><i class="fas fa-cog"></i> Settings</a>
+  </nav>
+  <div class="sidebar-footer">
+    <div class="rocket">🚀</div>
+    <p>Keep going, John! 🚀</p>
+    <small>Consistency today brings success tomorrow.</small>
+  </div>
+  <div class="user-info">
+    <div class="avatar">JD</div>
+    <div>
+      <div class="name">John Doe</div>
+      <div class="role">Student</div>
+    </div>
+    <i class="fas fa-chevron-down" style="font-size:11px;"></i>
+  </div>
+</aside>
+
+<!-- ════════════ MAIN ════════════ -->
+<div class="main">
+  <!-- TOPBAR -->
+  <header class="topbar">
+    <div class="search-box">
+      <i class="fas fa-search"></i>
+      <input type="text" placeholder="Search tasks, subjects, notes..."/>
+    </div>
+    <div class="topbar-actions">
+      <button class="icon-btn"><i class="fas fa-moon"></i></button>
+      <button class="icon-btn">
+        <i class="fas fa-bell"></i>
+        <span class="badge">3</span>
+      </button>
+    </div>
+  </header>
+
+  <!-- CONTENT -->
+  <div class="content">
+
+    <!-- PAGE HEADER -->
+    <div class="page-header">
+      <div>
+        <h1>Subjects</h1>
+        <p>Track progress and manage all your study subjects</p>
+      </div>
+      <button class="btn btn-primary" onclick="openModal()">
+        <i class="fas fa-plus"></i> Add Subject
+      </button>
+    </div>
+
+    <!-- STAT CARDS -->
+    <div class="stats-grid">
+      <div class="stat-card">
+        <div class="stat-icon purple"><i class="fas fa-book"></i></div>
+        <div>
+          <div class="stat-label">Total Subjects</div>
+          <div class="stat-value" id="statTotal">6</div>
+          <div class="stat-sub">Enrolled</div>
+        </div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-icon green"><i class="fas fa-chart-pie"></i></div>
+        <div>
+          <div class="stat-label">Avg Progress</div>
+          <div class="stat-value" id="statAvg">68%</div>
+          <div class="stat-sub up"><i class="fas fa-arrow-up" style="font-size:10px;"></i> +4% this week</div>
+        </div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-icon orange"><i class="fas fa-layer-group"></i></div>
+        <div>
+          <div class="stat-label">Total Topics</div>
+          <div class="stat-value" id="statTopics">54</div>
+          <div class="stat-sub">Across all subjects</div>
+        </div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-icon blue"><i class="fas fa-circle-check"></i></div>
+        <div>
+          <div class="stat-label">Topics Done</div>
+          <div class="stat-value" id="statDone">37</div>
+          <div class="stat-sub up">69% complete</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- TOOLBAR -->
+    <div class="toolbar">
+      <div class="toolbar-left">
+        <button class="view-btn active" id="gridBtn" onclick="setView('grid')" title="Grid view"><i class="fas fa-th-large"></i></button>
+        <button class="view-btn" id="listBtn" onclick="setView('list')" title="List view"><i class="fas fa-list"></i></button>
+      </div>
+      <div class="search-inline">
+        <i class="fas fa-search"></i>
+        <input type="text" placeholder="Search subjects..." id="subSearch" oninput="renderSubjects()"/>
+      </div>
+      <select class="select-filter" id="sortFilter" onchange="renderSubjects()">
+        <option value="name">Sort: Name</option>
+        <option value="progress">Sort: Progress</option>
+        <option value="tasks">Sort: Tasks</option>
+      </select>
+      <div class="toolbar-right">
+        <span style="font-size:13px;color:var(--text-mid);" id="countLabel">6 subjects</span>
+      </div>
+    </div>
+
+    <!-- GRID VIEW -->
+    <div class="subjects-grid" id="gridView"></div>
+
+    <!-- LIST VIEW -->
+    <div class="subjects-list" id="listView"></div>
+
+  </div>
+</div>
+
+<!-- ════════════ ADD SUBJECT MODAL ════════════ -->
+<div class="modal-overlay" id="modalOverlay" onclick="closeModalOutside(event)">
+  <div class="modal">
+    <div class="modal-header">
+      <h3>Add New Subject</h3>
+      <button class="close-btn" onclick="closeModal()"><i class="fas fa-times"></i></button>
+    </div>
+    <div class="form-row">
+      <div class="form-group">
+        <label>Subject Name</label>
+        <input type="text" id="newName" placeholder="e.g. Mathematics"/>
+      </div>
+      <div class="form-group">
+        <label>Teacher / Tutor</label>
+        <input type="text" id="newTeacher" placeholder="e.g. Mr. Asante"/>
+      </div>
+    </div>
+    <div class="form-row">
+      <div class="form-group">
+        <label>Icon</label>
+        <select id="newIcon">
+          <option value="fas fa-square-root-variable">📐 Mathematics</option>
+          <option value="fas fa-atom">⚛️ Physics</option>
+          <option value="fas fa-flask">🧪 Chemistry</option>
+          <option value="fas fa-dna">🧬 Biology</option>
+          <option value="fas fa-book">📖 English / Lit</option>
+          <option value="fas fa-laptop-code">💻 ICT</option>
+          <option value="fas fa-landmark">🏛️ History</option>
+          <option value="fas fa-globe">🌍 Geography</option>
+          <option value="fas fa-music">🎵 Music</option>
+          <option value="fas fa-palette">🎨 Art</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label>Total Topics</label>
+        <input type="number" id="newTopics" placeholder="e.g. 10" min="1" value="10"/>
+      </div>
+    </div>
+    <div class="form-group">
+      <label>Next Topic</label>
+      <input type="text" id="newNextTopic" placeholder="e.g. Chapter 1: Introduction"/>
+    </div>
+    <div class="form-group">
+      <label>Colour</label>
+      <div class="color-picker" id="colorPicker"></div>
+    </div>
+    <div class="modal-footer">
+      <button class="btn btn-outline" onclick="closeModal()">Cancel</button>
+      <button class="btn btn-primary" onclick="addSubject()"><i class="fas fa-plus"></i> Add Subject</button>
+    </div>
+  </div>
+</div>
+
+<!-- ════════════ DETAIL PANEL ════════════ -->
+<div class="detail-overlay" id="detailOverlay" onclick="closeDetailOutside(event)">
+  <div class="detail-panel" id="detailPanel"></div>
+</div>
+
+
+</body>
+</html>
