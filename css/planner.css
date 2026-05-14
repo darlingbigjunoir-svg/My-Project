@@ -1,4 +1,5 @@
  
+    /* ── CSS Variables ── */
     :root {
       --clr-primary:       #6C63FF;
       --clr-primary-light: #8B85FF;
@@ -9,13 +10,13 @@
       --clr-danger:        #EF4444;
       --clr-info:          #3B82F6;
       --clr-teal:          #14B8A6;
- 
+
       --sidebar-bg:        #1E1B3A;
       --sidebar-text:      #C5C2E8;
       --sidebar-text-muted:#7A76A8;
       --sidebar-border:    #2D2A50;
       --sidebar-hover-bg:  rgba(255,255,255,0.06);
- 
+
       --clr-bg:            #F5F4FF;
       --clr-surface:       #FFFFFF;
       --clr-surface-2:     #F0EFFF;
@@ -25,7 +26,7 @@
       --clr-text-2:        #4B4878;
       --clr-text-muted:    #9590C4;
       --clr-shadow:        rgba(108,99,255,0.10);
- 
+
       --sidebar-width:     220px;
       --font-sans: 'Plus Jakarta Sans', sans-serif;
       --r-sm: 6px; --r-md: 10px; --r-lg: 16px; --r-xl: 20px; --r-full: 9999px;
@@ -33,7 +34,7 @@
       --shadow-sm: 0 1px 4px var(--clr-shadow);
       --shadow-md: 0 4px 16px var(--clr-shadow);
     }
- 
+
     * { box-sizing: border-box; margin: 0; padding: 0; }
     html { font-size: 15px; }
     body {
@@ -47,7 +48,7 @@
     }
     a { color: inherit; text-decoration: none; }
     button { font-family: inherit; font-size: inherit; cursor: pointer; }
- 
+
     /* ══ SIDEBAR ══ */
     .sidebar {
       position: fixed;
@@ -59,7 +60,7 @@
       z-index: 200;
       overflow-y: auto;
     }
- 
+
     .sidebar-brand {
       display: flex;
       align-items: center;
@@ -76,7 +77,7 @@
     }
     .brand-name { font-size: 1.05rem; font-weight: 800; color: #fff; }
     .brand-tagline { font-size: 0.6rem; color: var(--sidebar-text-muted); letter-spacing: 0.04em; }
- 
+
     .sidebar-nav {
       flex: 1;
       padding: 12px;
@@ -103,7 +104,7 @@
       box-shadow: 0 4px 12px rgba(108,99,255,0.4);
     }
     .nav-item.active i { opacity: 1; }
- 
+
     /* Motivation box */
     .sidebar-motivation {
       margin: 12px;
@@ -124,7 +125,7 @@
     .motivation-text { font-size: 0.7rem; color: var(--sidebar-text-muted); line-height: 1.45; }
     /* Stars decoration */
     .motivation-stars { position: absolute; top: 8px; right: 10px; color: rgba(255,255,255,0.25); font-size: 0.5rem; }
- 
+
     /* User */
     .sidebar-user {
       display: flex;
@@ -144,7 +145,7 @@
     .user-name { font-size: 0.82rem; font-weight: 600; color: #fff; }
     .user-role { font-size: 0.68rem; color: var(--sidebar-text-muted); }
     .user-chevron { margin-left: auto; color: var(--sidebar-text-muted); font-size: 0.7rem; }
- 
+
     /* ══ MAIN ══ */
     .main {
       margin-left: var(--sidebar-width);
@@ -153,7 +154,7 @@
       flex-direction: column;
       min-height: 100vh;
     }
- 
+
     /* Topbar */
     .topbar {
       position: sticky; top: 0; z-index: 100;
@@ -188,7 +189,7 @@
       flex: 1; font-size: 0.85rem; color: var(--clr-text);
     }
     .search-bar input::placeholder { color: var(--clr-text-muted); }
- 
+
     .topbar-actions { display: flex; align-items: center; gap: 8px; }
     .icon-btn {
       width: 36px; height: 36px; border-radius: var(--r-md);
@@ -205,7 +206,7 @@
       width: 15px; height: 15px; border-radius: 50%;
       display: flex; align-items: center; justify-content: center;
     }
- 
+
     /* ══ CONTENT AREA ══ */
     .content {
       flex: 1;
@@ -215,7 +216,7 @@
       gap: 0;
       overflow: hidden;
     }
- 
+
     .content-left {
       padding: 24px;
       display: flex;
@@ -224,7 +225,7 @@
       overflow-y: auto;
       border-right: 1px solid var(--clr-border);
     }
- 
+
     .content-right {
       padding: 20px;
       display: flex;
@@ -233,7 +234,7 @@
       overflow-y: auto;
       background: var(--clr-surface);
     }
- 
+
     /* ── Greeting ── */
     .greeting-title {
       font-size: 1.65rem;
@@ -246,7 +247,7 @@
       color: var(--clr-text-muted);
       margin-top: 2px;
     }
- 
+
     /* ── Stat Strip (4 cards) ── */
     .stats-grid {
       display: grid;
@@ -286,7 +287,7 @@
       background: linear-gradient(90deg, var(--clr-warning), #FB923C);
       border-radius: var(--r-full);
     }
- 
+
     /* ── Today's Plan panel ── */
     .panel {
       background: var(--clr-surface);
@@ -306,7 +307,7 @@
       cursor: pointer; transition: opacity var(--tr-fast);
     }
     .link-btn:hover { opacity: 0.7; }
- 
+
     /* Task rows */
     .task-item {
       display: flex;
@@ -338,7 +339,7 @@
     .priority-badge.medium { background: rgba(245,158,11,0.12); color: var(--clr-warning); }
     .priority-badge.low    { background: rgba(34,197,94,0.1);   color: var(--clr-success); }
     .task-more { background: none; border: none; color: var(--clr-text-muted); padding: 4px; font-size: 0.9rem; }
- 
+
     /* ── Weekly Overview ── */
     .weekly-grid {
       display: grid;
@@ -388,9 +389,9 @@
       padding: 0; cursor: pointer; transition: opacity var(--tr-fast);
     }
     .week-add:hover { opacity: 0.7; }
- 
+
     /* ══ RIGHT COLUMN ══ */
- 
+
     /* Calendar */
     .cal-title { font-size: 0.95rem; font-weight: 700; color: var(--clr-text); margin-bottom: 12px; }
     .cal-nav {
@@ -427,7 +428,7 @@
       box-shadow: 0 2px 8px rgba(108,99,255,0.35);
     }
     .cal-day.other { color: var(--clr-text-muted); opacity: 0.4; }
- 
+
     /* Progress donut */
     .progress-header {
       display: flex; align-items: center; justify-content: space-between;
@@ -459,7 +460,7 @@
     .leg-dot.grey   { background: #E2E0F9; border: 1px solid var(--clr-border-2); }
     .leg-label { font-size: 0.78rem; font-weight: 600; color: var(--clr-text); display: block; line-height: 1.2; }
     .leg-sub { font-size: 0.68rem; color: var(--clr-text-muted); display: block; }
- 
+
     /* Reminders */
     .reminders-header {
       display: flex; align-items: center; justify-content: space-between;
@@ -481,7 +482,7 @@
     .reminder-name { font-size: 0.8rem; font-weight: 600; color: var(--clr-text); }
     .reminder-time { font-size: 0.7rem; color: var(--clr-text-muted); }
     .reminder-more { background: none; border: none; color: var(--clr-text-muted); font-size: 0.85rem; padding: 4px; }
- 
+
     /* ══ Subject colours ══ */
     .math-color    { color: #6C63FF; } .math-bar    { background: #6C63FF; }
     .physics-color { color: #3B82F6; } .physics-bar { background: #3B82F6; }
@@ -489,14 +490,15 @@
     .bio-color     { color: #22C55E; } .bio-bar     { background: #22C55E; }
     .eng-color     { color: #EF4444; } .eng-bar     { background: #EF4444; }
     .ict-color     { color: #F59E0B; } .ict-bar     { background: #F59E0B; }
- 
+
     /* divider between sections in right panel */
     .right-divider {
       height: 1px; background: var(--clr-border); margin: 0 -20px;
     }
- 
+
     /* scrollbar */
     ::-webkit-scrollbar { width: 5px; }
     ::-webkit-scrollbar-track { background: transparent; }
     ::-webkit-scrollbar-thumb { background: var(--clr-border-2); border-radius: 9999px; }
     ::-webkit-scrollbar-thumb:hover { background: var(--clr-primary); }
+  
