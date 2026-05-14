@@ -1,0 +1,381 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>StudyPro — Reminders</title>
+  <link rel="stylesheet" href="reminders.css" />
+</head>
+<body>
+
+  <!-- ══════════════════════════════════
+       SIDEBAR
+  ══════════════════════════════════════ -->
+  <aside class="sidebar" id="sidebar">
+    <div class="sidebar-logo">
+      <div class="logo-badge">
+        <div class="logo-icon">📚</div>
+        <div>
+          <div class="logo-text">StudyTracker</div>
+          <div class="logo-sub">Plan • Study • Succeed</div>
+        </div>
+      </div>
+    </div>
+
+    <nav class="sidebar-nav">
+      <div class="nav-section-label">Main</div>
+      <a href="index.html"    class="nav-link"><span class="nav-icon">🏠</span> Dashboard</a>
+      <a href="planner.html"  class="nav-link"><span class="nav-icon">📅</span> My Planner</a>
+      <a href="tasks.html"    class="nav-link"><span class="nav-icon">✅</span> Tasks <span class="nav-badge">8</span></a>
+      <a href="subjects.html" class="nav-link"><span class="nav-icon">📖</span> Subjects</a>
+      <a href="progress.html" class="nav-link"><span class="nav-icon">📈</span> Progress</a>
+
+      <div class="nav-section-label">Content</div>
+      <a href="notes.html"     class="nav-link"><span class="nav-icon">📝</span> Notes</a>
+      <a href="reminders.html" class="nav-link active"><span class="nav-icon">🔔</span> Reminders <span class="nav-badge">5</span></a>
+      <a href="resources.html" class="nav-link"><span class="nav-icon">📂</span> Resources</a>
+
+      <div class="nav-section-label">System</div>
+      <a href="settings.html" class="nav-link"><span class="nav-icon">⚙️</span> Settings</a>
+    </nav>
+
+    <div class="sidebar-user">
+      <div class="user-avatar">JD</div>
+      <div class="user-info">
+        <div class="user-name">John Doe</div>
+        <div class="user-role">Student</div>
+      </div>
+    </div>
+  </aside>
+
+  <!-- ══════════════════════════════════
+       MAIN WRAP
+  ══════════════════════════════════════ -->
+  <div class="main-wrap">
+
+    <!-- Top Bar -->
+    <header class="topbar">
+      <div class="topbar-title">
+        <h1>🔔 Reminders</h1>
+        <span>Stay on top of everything that matters</span>
+      </div>
+      <div class="topbar-actions">
+        <button class="topbar-icon-btn" title="Notifications">
+          🔔
+          <span class="notif-dot"></span>
+        </button>
+        <button class="topbar-icon-btn" title="Search">🔍</button>
+        <button class="btn btn-primary" id="openAddModal">＋ Add Reminder</button>
+      </div>
+    </header>
+
+    <!-- Page Content -->
+    <main class="page-content">
+
+      <!-- ── Stats Row ──────────────────── -->
+      <section class="stats-row">
+        <div class="stat-card">
+          <div class="stat-icon-wrap purple">🔔</div>
+          <div class="stat-info">
+            <div class="stat-value" id="statTotal">12</div>
+            <div class="stat-label">Total Reminders</div>
+            <div class="stat-change up">↑ 3 this week</div>
+          </div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-icon-wrap green">✅</div>
+          <div class="stat-info">
+            <div class="stat-value" id="statDone">7</div>
+            <div class="stat-label">Completed</div>
+            <div class="stat-change up">↑ 58% rate</div>
+          </div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-icon-wrap yellow">⏰</div>
+          <div class="stat-info">
+            <div class="stat-value" id="statPending">5</div>
+            <div class="stat-label">Pending</div>
+            <div class="stat-change down">2 overdue</div>
+          </div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-icon-wrap red">🔥</div>
+          <div class="stat-info">
+            <div class="stat-value" id="statToday">3</div>
+            <div class="stat-label">Due Today</div>
+            <div class="stat-change down">⚠ Act now</div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ── Toolbar ────────────────────── -->
+      <div class="toolbar">
+        <div class="search-box">
+          <span class="search-icon">🔍</span>
+          <input type="text" id="searchInput" placeholder="Search reminders…" />
+        </div>
+        <select class="filter-select" id="filterCategory">
+          <option value="all">All Categories</option>
+          <option value="study">Study</option>
+          <option value="assignment">Assignment</option>
+          <option value="exam">Exam</option>
+          <option value="personal">Personal</option>
+          <option value="health">Health</option>
+        </select>
+        <select class="filter-select" id="filterPriority">
+          <option value="all">All Priorities</option>
+          <option value="high">High</option>
+          <option value="medium">Medium</option>
+          <option value="low">Low</option>
+        </select>
+        <div class="view-toggle">
+          <button class="view-btn active" id="viewList" title="List view">☰</button>
+          <button class="view-btn" id="viewGrid" title="Grid view">⊞</button>
+        </div>
+      </div>
+
+      <!-- ── Tabs ───────────────────────── -->
+      <div class="tab-row">
+        <button class="tab-btn active" data-tab="all">All <span class="tab-count" id="countAll">12</span></button>
+        <button class="tab-btn" data-tab="today">Today <span class="tab-count" id="countToday">3</span></button>
+        <button class="tab-btn" data-tab="upcoming">Upcoming <span class="tab-count" id="countUpcoming">5</span></button>
+        <button class="tab-btn" data-tab="done">Completed <span class="tab-count" id="countDone">7</span></button>
+        <button class="tab-btn" data-tab="overdue">Overdue <span class="tab-count" id="countOverdue">2</span></button>
+      </div>
+
+      <!-- ── Content Grid ───────────────── -->
+      <div class="content-grid">
+
+        <!-- Reminders List -->
+        <div>
+          <div class="reminders-list" id="remindersList">
+            <!-- Cards injected by JS -->
+          </div>
+          <div class="empty-state" id="emptyState">
+            <div class="emoji">🎉</div>
+            <p>No reminders here!</p>
+            <small>Add a new reminder or switch tabs.</small>
+          </div>
+        </div>
+
+        <!-- Right Panel -->
+        <aside class="right-panel">
+
+          <!-- Add Reminder (inline form) -->
+          <div class="add-reminder-card">
+            <div class="card-header">
+              <div class="card-title">🆕 Quick Add</div>
+            </div>
+            <div class="card-body">
+              <div class="form-group">
+                <label class="form-label">Title</label>
+                <input type="text" class="form-input" id="qTitle" placeholder="Reminder title…" />
+              </div>
+              <div class="form-group">
+                <label class="form-label">Description</label>
+                <textarea class="form-textarea" id="qDesc" placeholder="Optional details…"></textarea>
+              </div>
+              <div class="form-row">
+                <div class="form-group">
+                  <label class="form-label">Date</label>
+                  <input type="date" class="form-input" id="qDate" />
+                </div>
+                <div class="form-group">
+                  <label class="form-label">Time</label>
+                  <input type="time" class="form-input" id="qTime" />
+                </div>
+              </div>
+              <div class="form-group">
+                <label class="form-label">Category</label>
+                <select class="form-select" id="qCategory">
+                  <option value="study">Study</option>
+                  <option value="assignment">Assignment</option>
+                  <option value="exam">Exam</option>
+                  <option value="personal">Personal</option>
+                  <option value="health">Health</option>
+                </select>
+              </div>
+              <div class="form-group">
+                <label class="form-label">Priority</label>
+                <div class="priority-pills">
+                  <button class="priority-pill selected" data-priority="high">🔴 High</button>
+                  <button class="priority-pill" data-priority="medium">🟡 Med</button>
+                  <button class="priority-pill" data-priority="low">🟢 Low</button>
+                </div>
+              </div>
+              <div class="form-actions">
+                <button class="btn btn-ghost" id="qClear">Clear</button>
+                <button class="btn btn-primary" id="qAdd">Add</button>
+              </div>
+            </div>
+          </div>
+
+          <!-- Upcoming Today -->
+          <div class="upcoming-card">
+            <div class="card-header">
+              <div class="card-title">📋 Today's Schedule</div>
+            </div>
+            <div class="upcoming-item">
+              <div class="upcoming-dot red"></div>
+              <div class="upcoming-text">
+                <div class="upcoming-name">Submit Math Assignment</div>
+                <div class="upcoming-time">Due at 11:59 PM</div>
+              </div>
+              <span class="badge badge-high upcoming-badge">High</span>
+            </div>
+            <div class="upcoming-item">
+              <div class="upcoming-dot yellow"></div>
+              <div class="upcoming-text">
+                <div class="upcoming-name">Study for Biology Quiz</div>
+                <div class="upcoming-time">3:00 PM</div>
+              </div>
+              <span class="badge badge-medium upcoming-badge">Med</span>
+            </div>
+            <div class="upcoming-item">
+              <div class="upcoming-dot green"></div>
+              <div class="upcoming-text">
+                <div class="upcoming-name">Read Chapter 7</div>
+                <div class="upcoming-time">5:00 PM</div>
+              </div>
+              <span class="badge badge-low upcoming-badge">Low</span>
+            </div>
+            <div class="upcoming-item">
+              <div class="upcoming-dot blue"></div>
+              <div class="upcoming-text">
+                <div class="upcoming-name">Team Study Call</div>
+                <div class="upcoming-time">7:30 PM</div>
+              </div>
+              <span class="badge badge-info upcoming-badge">Info</span>
+            </div>
+          </div>
+
+          <!-- Habit Tracker mini -->
+          <div class="habit-card">
+            <div class="card-header">
+              <div class="card-title">📆 Weekly Habits</div>
+            </div>
+            <div class="habit-item">
+              <div class="habit-name">📖 Daily Reading</div>
+              <div class="habit-dots">
+                <div class="habit-dot done"></div>
+                <div class="habit-dot done"></div>
+                <div class="habit-dot done"></div>
+                <div class="habit-dot partial"></div>
+                <div class="habit-dot"></div>
+                <div class="habit-dot"></div>
+                <div class="habit-dot"></div>
+              </div>
+            </div>
+            <div class="habit-item">
+              <div class="habit-name">🏃 Exercise</div>
+              <div class="habit-dots">
+                <div class="habit-dot done"></div>
+                <div class="habit-dot done"></div>
+                <div class="habit-dot"></div>
+                <div class="habit-dot done"></div>
+                <div class="habit-dot"></div>
+                <div class="habit-dot"></div>
+                <div class="habit-dot"></div>
+              </div>
+            </div>
+            <div class="habit-item">
+              <div class="habit-name">💧 Drink Water</div>
+              <div class="habit-dots">
+                <div class="habit-dot done"></div>
+                <div class="habit-dot done"></div>
+                <div class="habit-dot done"></div>
+                <div class="habit-dot done"></div>
+                <div class="habit-dot partial"></div>
+                <div class="habit-dot"></div>
+                <div class="habit-dot"></div>
+              </div>
+            </div>
+            <div class="habit-item">
+              <div class="habit-name">🧘 Meditation</div>
+              <div class="habit-dots">
+                <div class="habit-dot done"></div>
+                <div class="habit-dot"></div>
+                <div class="habit-dot done"></div>
+                <div class="habit-dot"></div>
+                <div class="habit-dot"></div>
+                <div class="habit-dot"></div>
+                <div class="habit-dot"></div>
+              </div>
+            </div>
+          </div>
+
+        </aside>
+      </div><!-- /content-grid -->
+
+    </main>
+  </div><!-- /main-wrap -->
+
+  <!-- ══════════════════════════════════
+       FULL ADD MODAL
+  ══════════════════════════════════════ -->
+  <div class="modal-overlay" id="modalOverlay">
+    <div class="modal">
+      <div class="modal-header">
+        <div class="modal-title">🔔 New Reminder</div>
+        <button class="modal-close" id="closeModal">✕</button>
+      </div>
+      <div class="form-group">
+        <label class="form-label">Title *</label>
+        <input type="text" class="form-input" id="mTitle" placeholder="What do you need to remember?" />
+      </div>
+      <div class="form-group">
+        <label class="form-label">Description</label>
+        <textarea class="form-textarea" id="mDesc" placeholder="Add extra details…"></textarea>
+      </div>
+      <div class="form-row">
+        <div class="form-group">
+          <label class="form-label">Date *</label>
+          <input type="date" class="form-input" id="mDate" />
+        </div>
+        <div class="form-group">
+          <label class="form-label">Time</label>
+          <input type="time" class="form-input" id="mTime" />
+        </div>
+      </div>
+      <div class="form-row">
+        <div class="form-group">
+          <label class="form-label">Category</label>
+          <select class="form-select" id="mCategory">
+            <option value="study">Study</option>
+            <option value="assignment">Assignment</option>
+            <option value="exam">Exam</option>
+            <option value="personal">Personal</option>
+            <option value="health">Health</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label class="form-label">Repeat</label>
+          <select class="form-select" id="mRepeat">
+            <option value="none">No Repeat</option>
+            <option value="daily">Daily</option>
+            <option value="weekly">Weekly</option>
+            <option value="monthly">Monthly</option>
+          </select>
+        </div>
+      </div>
+      <div class="form-group">
+        <label class="form-label">Priority</label>
+        <div class="priority-pills" id="modalPriorityPills">
+          <button class="priority-pill selected" data-priority="high">🔴 High</button>
+          <button class="priority-pill" data-priority="medium">🟡 Medium</button>
+          <button class="priority-pill" data-priority="low">🟢 Low</button>
+        </div>
+      </div>
+      <div class="form-actions" style="margin-top:16px;">
+        <button class="btn btn-ghost" id="cancelModal">Cancel</button>
+        <button class="btn btn-primary" id="saveModal">💾 Save Reminder</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Toast container -->
+  <div class="toast-container" id="toastContainer"></div>
+
+
+</body>
+</html>

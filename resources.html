@@ -1,0 +1,642 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>StudyPro — Resources</title>
+
+  <!-- Shared site stylesheet -->
+  <link rel="stylesheet" href="reminders.css" />
+
+  <!-- Resources-specific styles -->
+  <style>
+    /* ── Drop Zone ──────────────────────────────────────────── */
+    .drop-zone {
+      border: 2px dashed var(--border-active);
+      border-radius: var(--radius-lg);
+      padding: 48px 28px;
+      text-align: center;
+      cursor: pointer;
+      transition: all 0.25s;
+      background: var(--bg-card);
+      position: relative;
+    }
+    .drop-zone:hover,
+    .drop-zone.drag-over {
+      border-color: var(--accent);
+      background: rgba(108,99,255,0.06);
+    }
+    .drop-zone input[type="file"] {
+      position: absolute;
+      inset: 0;
+      opacity: 0;
+      cursor: pointer;
+      width: 100%;
+      height: 100%;
+    }
+    .drop-icon { font-size: 44px; margin-bottom: 12px; }
+    .drop-title { font-size: 16px; font-weight: 700; color: var(--text-primary); margin-bottom: 6px; }
+    .drop-sub   { font-size: 12px; color: var(--text-muted); margin-bottom: 18px; line-height: 1.6; }
+    .drop-types {
+      display: flex;
+      justify-content: center;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+    .type-chip {
+      background: var(--bg-hover);
+      border: 1px solid var(--border);
+      border-radius: 20px;
+      padding: 4px 12px;
+      font-size: 10px;
+      font-weight: 700;
+      color: var(--text-muted);
+      letter-spacing: 0.4px;
+    }
+
+    /* ── Resource Cards ─────────────────────────────────────── */
+    .resources-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+      gap: 16px;
+    }
+
+    .resource-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-md);
+      padding: 18px;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      transition: all 0.25s;
+      animation: slideIn 0.3s ease both;
+      cursor: pointer;
+    }
+    @keyframes slideIn {
+      from { opacity:0; transform:translateY(10px); }
+      to   { opacity:1; transform:translateY(0); }
+    }
+    .resource-card:hover {
+      border-color: var(--border-active);
+      transform: translateY(-3px);
+      box-shadow: var(--shadow-md);
+    }
+
+    .resource-thumb {
+      width: 100%;
+      height: 110px;
+      border-radius: var(--radius-sm);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+      font-size: 36px;
+      position: relative;
+      overflow: hidden;
+    }
+    .resource-thumb .file-ext {
+      font-size: 10px;
+      font-weight: 800;
+      letter-spacing: 1px;
+      padding: 2px 8px;
+      border-radius: 4px;
+      position: absolute;
+      top: 8px;
+      right: 8px;
+    }
+
+    .thumb-pdf     { background: rgba(248,113,113,0.12); }
+    .thumb-docx    { background: rgba(56,189,248,0.12); }
+    .thumb-pptx    { background: rgba(251,146,60,0.12); }
+    .thumb-mp3     { background: rgba(34,197,94,0.12); }
+    .thumb-mp4     { background: rgba(108,99,255,0.12); }
+    .thumb-img     { background: rgba(250,204,21,0.12); }
+    .thumb-other   { background: var(--bg-hover); }
+
+    .ext-pdf  { background: rgba(248,113,113,0.2); color: var(--red); }
+    .ext-docx { background: rgba(56,189,248,0.2);  color: var(--blue); }
+    .ext-pptx { background: rgba(251,146,60,0.2);  color: var(--orange); }
+    .ext-mp3  { background: rgba(34,197,94,0.2);   color: var(--green); }
+    .ext-mp4  { background: rgba(108,99,255,0.2);  color: var(--accent-light); }
+    .ext-img  { background: rgba(250,204,21,0.2);  color: var(--yellow); }
+
+    .resource-info { flex: 1; }
+    .resource-name {
+      font-size: 13px;
+      font-weight: 700;
+      color: var(--text-primary);
+      margin-bottom: 4px;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+    .resource-meta {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 11px;
+      color: var(--text-muted);
+      font-family: var(--font-mono);
+    }
+    .resource-subject {
+      font-size: 10px;
+      font-weight: 700;
+      padding: 2px 8px;
+      border-radius: 10px;
+      background: var(--accent-glow);
+      color: var(--accent-light);
+      margin-top: 6px;
+      display: inline-block;
+    }
+
+    .resource-actions {
+      display: flex;
+      gap: 8px;
+    }
+    .resource-actions .icon-btn { flex: 1; justify-content: center; }
+
+    /* ── List View ──────────────────────────────────────────── */
+    .resources-list-view {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+    .resource-row {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-sm);
+      padding: 14px 18px;
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      transition: all 0.2s;
+      animation: slideIn 0.3s ease both;
+    }
+    .resource-row:hover {
+      border-color: var(--border-active);
+      background: var(--bg-hover);
+    }
+    .row-icon {
+      width: 42px; height: 42px;
+      border-radius: var(--radius-sm);
+      display: grid;
+      place-items: center;
+      font-size: 22px;
+      flex-shrink: 0;
+    }
+    .row-details { flex: 1; min-width: 0; }
+    .row-name {
+      font-size: 13px;
+      font-weight: 700;
+      color: var(--text-primary);
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+    .row-meta {
+      font-size: 11px;
+      color: var(--text-muted);
+      font-family: var(--font-mono);
+      margin-top: 2px;
+    }
+    .row-actions { display: flex; gap: 6px; flex-shrink: 0; }
+
+    /* ── Storage bar ────────────────────────────────────────── */
+    .storage-bar-wrap {
+      background: var(--bg-hover);
+      border-radius: 10px;
+      height: 8px;
+      overflow: hidden;
+      margin-top: 8px;
+    }
+    .storage-bar-fill {
+      height: 100%;
+      border-radius: 10px;
+      background: linear-gradient(90deg, var(--accent), var(--accent-light));
+      transition: width 0.6s ease;
+    }
+    .storage-labels {
+      display: flex;
+      justify-content: space-between;
+      font-size: 11px;
+      color: var(--text-muted);
+      margin-top: 6px;
+      font-family: var(--font-mono);
+    }
+
+    /* ── Category filter pills ──────────────────────────────── */
+    .cat-pills {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+    .cat-pill {
+      padding: 7px 16px;
+      border-radius: 20px;
+      font-size: 12px;
+      font-weight: 600;
+      border: 1px solid var(--border);
+      background: var(--bg-card);
+      color: var(--text-muted);
+      cursor: pointer;
+      transition: all 0.2s;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .cat-pill:hover { border-color: var(--border-active); color: var(--text-primary); }
+    .cat-pill.active {
+      background: var(--accent-glow);
+      border-color: var(--accent);
+      color: var(--accent-light);
+    }
+    .cat-pill-count {
+      background: var(--bg-hover);
+      padding: 1px 7px;
+      border-radius: 10px;
+      font-size: 10px;
+      font-family: var(--font-mono);
+    }
+    .cat-pill.active .cat-pill-count { background: var(--accent); color: #fff; }
+
+    /* ── Upload progress ────────────────────────────────────── */
+    .upload-progress-item {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-sm);
+      padding: 12px 16px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 8px;
+      animation: slideIn 0.3s ease;
+    }
+    .upload-progress-item .file-name {
+      flex: 1;
+      font-size: 12px;
+      font-weight: 600;
+      color: var(--text-primary);
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+    .progress-bar-wrap {
+      width: 100px;
+      height: 5px;
+      background: var(--bg-hover);
+      border-radius: 10px;
+      overflow: hidden;
+    }
+    .progress-bar-fill {
+      height: 100%;
+      background: linear-gradient(90deg, var(--accent), var(--green));
+      border-radius: 10px;
+      transition: width 0.4s ease;
+    }
+    .upload-pct {
+      font-size: 10px;
+      color: var(--text-muted);
+      font-family: var(--font-mono);
+      width: 30px;
+      text-align: right;
+    }
+
+    /* ── Recent activity ────────────────────────────────────── */
+    .activity-item {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 10px 0;
+      border-bottom: 1px solid var(--border);
+    }
+    .activity-item:last-child { border-bottom: none; }
+    .activity-dot {
+      width: 8px; height: 8px;
+      border-radius: 50%;
+      flex-shrink: 0;
+    }
+    .activity-text { flex: 1; font-size: 12px; color: var(--text-secondary); line-height: 1.5; }
+    .activity-text strong { color: var(--text-primary); }
+    .activity-time { font-size: 10px; color: var(--text-muted); font-family: var(--font-mono); white-space: nowrap; }
+
+    /* ── Responsive adjustments ─────────────────────────────── */
+    @media (max-width: 900px) {
+      .resources-grid { grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); }
+    }
+    @media (max-width: 600px) {
+      .resources-grid { grid-template-columns: 1fr 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ══════════════════════════════════════
+       SIDEBAR
+  ══════════════════════════════════════════ -->
+  <aside class="sidebar" id="sidebar">
+    <div class="sidebar-logo">
+      <div class="logo-badge">
+        <div class="logo-icon">📚</div>
+        <div>
+          <div class="logo-text">StudyTracker</div>
+          <div class="logo-sub">Plan • Study • Succeed</div>
+        </div>
+      </div>
+    </div>
+
+    <nav class="sidebar-nav">
+      <div class="nav-section-label">Main</div>
+      <a href="index.html"    class="nav-link"><span class="nav-icon">🏠</span> Dashboard</a>
+      <a href="planner.html"  class="nav-link"><span class="nav-icon">📅</span> My Planner</a>
+      <a href="tasks.html"    class="nav-link"><span class="nav-icon">✅</span> Tasks <span class="nav-badge">8</span></a>
+      <a href="subjects.html" class="nav-link"><span class="nav-icon">📖</span> Subjects</a>
+      <a href="progress.html" class="nav-link"><span class="nav-icon">📈</span> Progress</a>
+
+      <div class="nav-section-label">Content</div>
+      <a href="notes.html"     class="nav-link"><span class="nav-icon">📝</span> Notes</a>
+      <a href="reminders.html" class="nav-link"><span class="nav-icon">🔔</span> Reminders <span class="nav-badge">5</span></a>
+      <a href="resources.html" class="nav-link active"><span class="nav-icon">📂</span> Resources</a>
+
+      <div class="nav-section-label">System</div>
+      <a href="settings.html" class="nav-link"><span class="nav-icon">⚙️</span> Settings</a>
+    </nav>
+
+    <div class="sidebar-user">
+      <div class="user-avatar">JD</div>
+      <div class="user-info">
+        <div class="user-name">John Doe</div>
+        <div class="user-role">Student</div>
+      </div>
+    </div>
+  </aside>
+
+  <!-- ══════════════════════════════════════
+       MAIN WRAP
+  ══════════════════════════════════════════ -->
+  <div class="main-wrap">
+
+    <!-- Top Bar -->
+    <header class="topbar">
+      <div class="topbar-title">
+        <h1>📂 Resources</h1>
+        <span>Manage your study materials in one place</span>
+      </div>
+      <div class="topbar-actions">
+        <button class="topbar-icon-btn" title="Notifications">🔔<span class="notif-dot"></span></button>
+        <button class="btn btn-ghost" id="btnNewFolder">📁 New Folder</button>
+        <button class="btn btn-primary" id="btnUpload">⬆ Upload File</button>
+      </div>
+    </header>
+
+    <!-- Page Content -->
+    <main class="page-content">
+
+      <!-- ── Stats Row ────────────────────────── -->
+      <section class="stats-row">
+        <div class="stat-card">
+          <div class="stat-icon-wrap purple">📂</div>
+          <div class="stat-info">
+            <div class="stat-value" id="statFiles">24</div>
+            <div class="stat-label">Total Files</div>
+            <div class="stat-change up">↑ 6 this week</div>
+          </div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-icon-wrap blue">📁</div>
+          <div class="stat-info">
+            <div class="stat-value">7</div>
+            <div class="stat-label">Folders</div>
+            <div class="stat-change up">↑ 2 new</div>
+          </div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-icon-wrap green">💾</div>
+          <div class="stat-info">
+            <div class="stat-value">348 MB</div>
+            <div class="stat-label">Storage Used</div>
+            <div class="stat-change down">69% of 500 MB</div>
+          </div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-icon-wrap yellow">⭐</div>
+          <div class="stat-info">
+            <div class="stat-value">9</div>
+            <div class="stat-label">Starred Files</div>
+            <div class="stat-change up">↑ 3 starred</div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ── Drop Zone ─────────────────────────── -->
+      <div class="drop-zone" id="dropZone">
+        <input type="file" id="fileInput" multiple accept=".pdf,.docx,.pptx,.mp3,.mp4,.png,.jpg,.jpeg" />
+        <div class="drop-icon">☁️</div>
+        <div class="drop-title">Drop your files here</div>
+        <div class="drop-sub">Notes • Slides • Audio • Video • Images<br>or click to browse from your device</div>
+        <div class="drop-types">
+          <span class="type-chip">PDF</span>
+          <span class="type-chip">DOCX</span>
+          <span class="type-chip">PPTX</span>
+          <span class="type-chip">MP3</span>
+          <span class="type-chip">MP4</span>
+          <span class="type-chip">PNG</span>
+          <span class="type-chip">JPG</span>
+        </div>
+      </div>
+
+      <!-- Upload progress list (hidden until files chosen) -->
+      <div id="uploadProgressList"></div>
+
+      <!-- ── Toolbar ───────────────────────────── -->
+      <div class="toolbar">
+        <div class="search-box">
+          <span class="search-icon">🔍</span>
+          <input type="text" id="searchInput" placeholder="Search files…" />
+        </div>
+        <select class="filter-select" id="filterType">
+          <option value="all">All Types</option>
+          <option value="pdf">PDF</option>
+          <option value="docx">Word</option>
+          <option value="pptx">PowerPoint</option>
+          <option value="mp3">Audio</option>
+          <option value="mp4">Video</option>
+          <option value="img">Images</option>
+        </select>
+        <select class="filter-select" id="filterSort">
+          <option value="recent">Most Recent</option>
+          <option value="name">Name A–Z</option>
+          <option value="size">Largest First</option>
+          <option value="starred">Starred</option>
+        </select>
+        <div class="view-toggle">
+          <button class="view-btn active" id="viewGrid" title="Grid view">⊞</button>
+          <button class="view-btn" id="viewList" title="List view">☰</button>
+        </div>
+      </div>
+
+      <!-- ── Category Pills ────────────────────── -->
+      <div class="cat-pills" id="catPills">
+        <button class="cat-pill active" data-cat="all">📋 All <span class="cat-pill-count" id="cAll">24</span></button>
+        <button class="cat-pill" data-cat="notes">📝 Notes <span class="cat-pill-count" id="cNotes">8</span></button>
+        <button class="cat-pill" data-cat="slides">🖥 Slides <span class="cat-pill-count" id="cSlides">5</span></button>
+        <button class="cat-pill" data-cat="audio">🎧 Audio <span class="cat-pill-count" id="cAudio">4</span></button>
+        <button class="cat-pill" data-cat="video">🎬 Video <span class="cat-pill-count" id="cVideo">3</span></button>
+        <button class="cat-pill" data-cat="images">🖼 Images <span class="cat-pill-count" id="cImages">4</span></button>
+        <button class="cat-pill" data-cat="starred">⭐ Starred <span class="cat-pill-count" id="cStarred">9</span></button>
+      </div>
+
+      <!-- ── Main Content Grid ──────────────────── -->
+      <div class="content-grid">
+
+        <!-- Files area -->
+        <div>
+          <!-- Section label -->
+          <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:14px;">
+            <div style="font-size:13px;font-weight:700;color:var(--text-secondary);" id="sectionLabel">📋 All Files</div>
+            <div style="font-size:12px;color:var(--text-muted);" id="fileCount">24 files</div>
+          </div>
+
+          <!-- Grid/List container -->
+          <div id="filesContainer" class="resources-grid"></div>
+
+          <!-- Empty state -->
+          <div class="empty-state" id="emptyState">
+            <div class="emoji">📭</div>
+            <p>No files found</p>
+            <small>Upload a file or try a different filter.</small>
+          </div>
+        </div>
+
+        <!-- Right Panel -->
+        <aside class="right-panel">
+
+          <!-- Storage -->
+          <div class="add-reminder-card">
+            <div class="card-header">
+              <div class="card-title">💾 Storage</div>
+            </div>
+            <div class="card-body">
+              <div class="storage-bar-wrap">
+                <div class="storage-bar-fill" style="width:69%"></div>
+              </div>
+              <div class="storage-labels">
+                <span>348 MB used</span>
+                <span>152 MB free</span>
+              </div>
+              <div style="margin-top:14px;display:flex;flex-direction:column;gap:8px;">
+                <div style="display:flex;align-items:center;justify-content:space-between;font-size:12px;">
+                  <span style="display:flex;align-items:center;gap:8px;color:var(--text-secondary);"><span style="width:10px;height:10px;background:var(--red);border-radius:2px;display:inline-block;"></span> PDFs</span>
+                  <span style="color:var(--text-muted);font-family:var(--font-mono);">120 MB</span>
+                </div>
+                <div style="display:flex;align-items:center;justify-content:space-between;font-size:12px;">
+                  <span style="display:flex;align-items:center;gap:8px;color:var(--text-secondary);"><span style="width:10px;height:10px;background:var(--accent);border-radius:2px;display:inline-block;"></span> Videos</span>
+                  <span style="color:var(--text-muted);font-family:var(--font-mono);">140 MB</span>
+                </div>
+                <div style="display:flex;align-items:center;justify-content:space-between;font-size:12px;">
+                  <span style="display:flex;align-items:center;gap:8px;color:var(--text-secondary);"><span style="width:10px;height:10px;background:var(--blue);border-radius:2px;display:inline-block;"></span> Docs</span>
+                  <span style="color:var(--text-muted);font-family:var(--font-mono);">50 MB</span>
+                </div>
+                <div style="display:flex;align-items:center;justify-content:space-between;font-size:12px;">
+                  <span style="display:flex;align-items:center;gap:8px;color:var(--text-secondary);"><span style="width:10px;height:10px;background:var(--yellow);border-radius:2px;display:inline-block;"></span> Other</span>
+                  <span style="color:var(--text-muted);font-family:var(--font-mono);">38 MB</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Recent Activity -->
+          <div class="upcoming-card">
+            <div class="card-header">
+              <div class="card-title">🕐 Recent Activity</div>
+            </div>
+            <div style="padding:4px 16px 8px;" id="activityList">
+              <div class="activity-item">
+                <div class="activity-dot" style="background:var(--green)"></div>
+                <div class="activity-text"><strong>Calculus Notes.pdf</strong> uploaded</div>
+                <div class="activity-time">2m ago</div>
+              </div>
+              <div class="activity-item">
+                <div class="activity-dot" style="background:var(--blue)"></div>
+                <div class="activity-text"><strong>Bio Slides.pptx</strong> viewed</div>
+                <div class="activity-time">1h ago</div>
+              </div>
+              <div class="activity-item">
+                <div class="activity-dot" style="background:var(--yellow)"></div>
+                <div class="activity-text"><strong>History Essay.docx</strong> starred</div>
+                <div class="activity-time">3h ago</div>
+              </div>
+              <div class="activity-item">
+                <div class="activity-dot" style="background:var(--accent)"></div>
+                <div class="activity-text"><strong>Lecture 3.mp4</strong> uploaded</div>
+                <div class="activity-time">Yesterday</div>
+              </div>
+              <div class="activity-item">
+                <div class="activity-dot" style="background:var(--red)"></div>
+                <div class="activity-text"><strong>Physics Lab.pdf</strong> deleted</div>
+                <div class="activity-time">Yesterday</div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Quick Links -->
+          <div class="habit-card">
+            <div class="card-header">
+              <div class="card-title">🔗 Quick Access</div>
+            </div>
+            <div class="habit-item" style="cursor:pointer;">
+              <span style="font-size:18px;">📄</span>
+              <div class="habit-name">Lecture Notes</div>
+              <span style="font-size:11px;color:var(--text-muted);font-family:var(--font-mono);">8 files</span>
+            </div>
+            <div class="habit-item" style="cursor:pointer;">
+              <span style="font-size:18px;">🖥</span>
+              <div class="habit-name">Presentations</div>
+              <span style="font-size:11px;color:var(--text-muted);font-family:var(--font-mono);">5 files</span>
+            </div>
+            <div class="habit-item" style="cursor:pointer;">
+              <span style="font-size:18px;">🎧</span>
+              <div class="habit-name">Audio Recordings</div>
+              <span style="font-size:11px;color:var(--text-muted);font-family:var(--font-mono);">4 files</span>
+            </div>
+            <div class="habit-item" style="cursor:pointer;">
+              <span style="font-size:18px;">⭐</span>
+              <div class="habit-name">Starred</div>
+              <span style="font-size:11px;color:var(--text-muted);font-family:var(--font-mono);">9 files</span>
+            </div>
+          </div>
+
+        </aside>
+      </div>
+
+    </main>
+  </div>
+
+  <!-- ══════════════════════════════════════
+       FILE PREVIEW MODAL
+  ══════════════════════════════════════════ -->
+  <div class="modal-overlay" id="previewModal">
+    <div class="modal" style="max-width:540px;">
+      <div class="modal-header">
+        <div class="modal-title" id="previewTitle">File Preview</div>
+        <button class="modal-close" id="closePreview">✕</button>
+      </div>
+      <div id="previewBody" style="text-align:center;padding:20px 0;">
+        <div style="font-size:72px;margin-bottom:16px;" id="previewIcon">📄</div>
+        <div style="font-size:15px;font-weight:700;color:var(--text-primary);margin-bottom:6px;" id="previewName"></div>
+        <div style="font-size:12px;color:var(--text-muted);font-family:var(--font-mono);margin-bottom:20px;" id="previewMeta"></div>
+        <div style="display:flex;gap:10px;justify-content:center;">
+          <button class="btn btn-primary">⬇ Download</button>
+          <button class="btn btn-ghost" id="closePreview2">Close</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Toast container -->
+  <div class="toast-container" id="toastContainer"></div>
+
+  
+</body>
+</html>
