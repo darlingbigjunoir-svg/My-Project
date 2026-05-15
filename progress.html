@@ -1,293 +1,524 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8"/>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>StudyPro — Progress</title>
-  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet"/>
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
- <link rel="stylesheet" href="css/progress.css">
+  <link rel="stylesheet" href="css/progress.css" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/tabler-icons.min.css" />
 </head>
 <body>
 
-<!-- ══════════ SIDEBAR ══════════ -->
-<aside class="sidebar">
-  <div class="logo">
-    <div class="logo-icon"><i class="fas fa-graduation-cap"></i></div>
-    <div class="logo-text"><h2>StudyPro</h2><span>Plan • Study • Succeed</span></div>
-  </div>
-  <nav class="nav">
-    <a href="index.html"><i class="fas fa-home"></i> Dashboard</a>
-    <a href="planner.html"><i class="fas fa-calendar-alt"></i> My Planner</a>
-    <a href="tasks.html"><i class="fas fa-check-square"></i> Tasks</a>
-    <a href="subjects.html"><i class="fas fa-book-open"></i> Subjects</a>
-    <a href="calendar.html"><i class="fas fa-calendar"></i> Calendar</a>
-    <a href="progress.html" class="active"><i class="fas fa-chart-line"></i> Progress</a>
-    <a href="notes.html"><i class="fas fa-sticky-note"></i> Notes</a>
-    <a href="reminders.html"><i class="fas fa-bell"></i> Reminders</a>
-    <a href="resources.html"><i class="fas fa-folder"></i> Resources</a>
-    <a href="settings.html"><i class="fas fa-cog"></i> Settings</a>
-  </nav>
-  <div class="sidebar-footer">
-    <div class="rocket">🚀</div>
-    <p>Keep going, John! 🚀</p>
-    <small>Consistency today brings success tomorrow.</small>
-  </div>
-  <div class="user-info">
-    <div class="avatar">JD</div>
-    <div><div class="name">John Doe</div><div class="role">Student</div></div>
-    <i class="fas fa-chevron-down" style="font-size:11px;"></i>
-  </div>
-</aside>
+  <div class="app-layout">
 
-<!-- ══════════ MAIN ══════════ -->
-<div class="main">
-
-  <!-- TOPBAR -->
-  <header class="topbar">
-    <div class="search-box">
-      <i class="fas fa-search"></i>
-      <input type="text" placeholder="Search tasks, subjects, notes..."/>
-    </div>
-    <div class="topbar-actions">
-      <button class="icon-btn"><i class="fas fa-moon"></i></button>
-      <button class="icon-btn">
-        <i class="fas fa-bell"></i><span class="notif-badge">3</span>
-      </button>
-    </div>
-  </header>
-
-  <!-- CONTENT -->
-  <div class="content">
-
-    <!-- PAGE HEADER -->
-    <div class="page-header">
-      <div>
-        <h1>Progress</h1>
-        <p>Track your academic performance and study habits</p>
-      </div>
-      <div class="header-right">
-        <div class="period-tabs">
-          <button class="period-tab" onclick="setPeriod(this,'week')">Week</button>
-          <button class="period-tab active" onclick="setPeriod(this,'month')">Month</button>
-          <button class="period-tab" onclick="setPeriod(this,'term')">Term</button>
-        </div>
-        <button class="btn btn-outline"><i class="fas fa-download"></i> Export</button>
-      </div>
-    </div>
-
-    <!-- STAT CARDS -->
-    <div class="stats-grid">
-      <div class="stat-card purple-card">
-        <div class="stat-icon ic-purple"><i class="fas fa-trophy"></i></div>
-        <div>
-          <div class="stat-label">Overall Score</div>
-          <div class="stat-value">72%</div>
-          <div class="stat-change up"><i class="fas fa-arrow-up" style="font-size:10px;"></i> +4% this week</div>
+    <!-- ══════════ SIDEBAR ══════════ -->
+    <aside class="sidebar">
+      <div class="sidebar-brand">
+        <div class="brand-icon"><i class="ti ti-school"></i></div>
+        <div class="brand-text">
+          <span class="brand-name">StudyTracker</span>
+          <span class="brand-tagline">Plan • Study • Succeed</span>
         </div>
       </div>
-      <div class="stat-card green-card">
-        <div class="stat-icon ic-green"><i class="fas fa-circle-check"></i></div>
-        <div>
-          <div class="stat-label">Tasks Completed</div>
-          <div class="stat-value">18</div>
-          <div class="stat-change up"><i class="fas fa-arrow-up" style="font-size:10px;"></i> 3 more than last week</div>
-        </div>
-      </div>
-      <div class="stat-card orange-card">
-        <div class="stat-icon ic-orange"><i class="fas fa-clock"></i></div>
-        <div>
-          <div class="stat-label">Study Hours</div>
-          <div class="stat-value">24h</div>
-          <div class="stat-change up"><i class="fas fa-arrow-up" style="font-size:10px;"></i> +2h vs last week</div>
-        </div>
-      </div>
-      <div class="stat-card blue-card">
-        <div class="stat-icon ic-blue"><i class="fas fa-fire"></i></div>
-        <div>
-          <div class="stat-label">Study Streak</div>
-          <div class="stat-value">7 days</div>
-          <div class="stat-change neutral"><i class="fas fa-minus" style="font-size:10px;"></i> Personal best!</div>
-        </div>
-      </div>
-    </div>
 
-    <!-- ROW 1: Weekly Chart + Donut -->
-    <div class="row row-2-1">
-      <div class="panel">
-        <div class="panel-header">
+      <nav class="sidebar-nav" aria-label="Main navigation">
+        <a href="index.html"    class="nav-item"><i class="ti ti-layout-dashboard"></i> Dashboard</a>
+        <a href="planner.html"  class="nav-item"><i class="ti ti-calendar"></i> My Planner</a>
+        <a href="tasks.html"    class="nav-item"><i class="ti ti-checkbox"></i> Tasks</a>
+        <a href="subjects.html" class="nav-item"><i class="ti ti-books"></i> Subjects</a>
+        <a href="progress.html" class="nav-item active"><i class="ti ti-chart-bar"></i> Progress</a>
+        <a href="notes.html"    class="nav-item"><i class="ti ti-notes"></i> Notes</a>
+        <a href="reminders.html"class="nav-item"><i class="ti ti-bell"></i> Reminders</a>
+        <a href="resources.html"class="nav-item"><i class="ti ti-folder"></i> Resources</a>
+        <a href="settings.html" class="nav-item"><i class="ti ti-settings"></i> Settings</a>
+      </nav>
+
+      <div class="sidebar-motivation">
+        <div class="motivation-rocket">🚀</div>
+        <div class="motivation-title">Keep going, John!</div>
+        <div class="motivation-text">Consistency today<br>brings success tomorrow.</div>
+      </div>
+
+      <div class="sidebar-user">
+        <div class="user-avatar">JD</div>
+        <div class="user-info">
+          <span class="user-name">John Doe</span>
+          <span class="user-role">Student</span>
+        </div>
+        <button class="user-chevron" aria-label="User menu"><i class="ti ti-chevron-down"></i></button>
+      </div>
+    </aside>
+
+    <!-- ══════════ MAIN ══════════ -->
+    <div class="main-wrapper">
+
+      <!-- Top Nav -->
+      <header class="topnav">
+        <div class="topnav-left">
+          <button class="hamburger" aria-label="Open menu"><i class="ti ti-menu-2"></i></button>
+          <div class="search-bar">
+            <i class="ti ti-search"></i>
+            <input type="text" placeholder="Search tasks, subjects, notes…" aria-label="Search" />
+          </div>
+        </div>
+        <div class="topnav-actions">
+          <button class="icon-btn" aria-label="Toggle dark mode"><i class="ti ti-moon"></i></button>
+          <button class="icon-btn" aria-label="Notifications">
+            <i class="ti ti-bell"></i>
+            <span class="notif-badge">3</span>
+          </button>
+          <div class="user-avatar-sm">JD</div>
+        </div>
+      </header>
+
+      <!-- Page Content -->
+      <div class="content">
+
+        <!-- Page Header -->
+        <div class="page-header">
           <div>
-            <h3>Study Activity</h3>
-            <p>Hours studied per day this month</p>
+            <h1 class="page-title">Progress</h1>
+            <p class="page-sub">Track your learning journey and performance over time.</p>
           </div>
-          <a class="view-link">View full report</a>
-        </div>
-        <div class="panel-body">
-          <div class="chart-wrap" style="height:220px;">
-            <canvas id="activityChart"></canvas>
-          </div>
-        </div>
-      </div>
-      <div class="panel">
-        <div class="panel-header">
-          <div><h3>Tasks Overview</h3><p>This week</p></div>
-        </div>
-        <div class="panel-body">
-          <div class="donut-wrap">
-            <div class="donut-chart-box">
-              <canvas id="donutChart" width="160" height="160"></canvas>
-              <div class="donut-center">
-                <span class="big">72%</span>
-                <span class="small">Overall</span>
-              </div>
+          <div class="header-actions">
+            <div class="period-tabs">
+              <button class="period-tab active" data-period="week">Week</button>
+              <button class="period-tab" data-period="month">Month</button>
+              <button class="period-tab" data-period="term">Term</button>
             </div>
-            <div class="donut-legend">
-              <div class="legend-item">
-                <div class="legend-dot" style="background:var(--green);"></div>
-                <span class="legend-label">Completed</span>
-                <span class="legend-val">18 tasks</span>
-              </div>
-              <div class="legend-item">
-                <div class="legend-dot" style="background:var(--orange);"></div>
-                <span class="legend-label">In Progress</span>
-                <span class="legend-val">6 tasks</span>
-              </div>
-              <div class="legend-item">
-                <div class="legend-dot" style="background:#E5E7EB;"></div>
-                <span class="legend-label">Pending</span>
-                <span class="legend-val">8 tasks</span>
-              </div>
-            </div>
+            <button class="btn-export"><i class="ti ti-download"></i> Export Report</button>
           </div>
         </div>
-      </div>
-    </div>
 
-    <!-- ROW 2: Subject Progress + Goals -->
-    <div class="row row-2-1">
-      <div class="panel">
-        <div class="panel-header">
-          <div><h3>Subject Progress</h3><p>Performance across all subjects</p></div>
-          <a class="view-link">View all</a>
-        </div>
-        <div class="panel-body" id="subjectProgressBody"></div>
-      </div>
-      <div class="panel">
-        <div class="panel-header">
-          <div><h3>Study Goals</h3><p>Weekly targets</p></div>
-        </div>
-        <div class="panel-body">
-          <div class="goal-grid">
-            <div class="goal-card">
-              <div class="goal-card-top">
-                <span class="goal-icon">⏱️</span>
-                <span class="goal-pct" style="color:var(--purple);">80%</span>
-              </div>
-              <div class="goal-title">Study Time</div>
-              <div class="goal-bar-wrap"><div class="goal-bar-fill" style="width:80%;background:var(--purple);"></div></div>
-              <div class="goal-sub">4h / 5h daily goal</div>
+        <!-- ── Stat Cards ── -->
+        <div class="stats-grid">
+
+          <div class="stat-card">
+            <div class="stat-icon purple"><i class="ti ti-checkbox"></i></div>
+            <div class="stat-body">
+              <div class="stat-label">Tasks Completed</div>
+              <div class="stat-value">47</div>
+              <div class="stat-delta positive"><i class="ti ti-trending-up"></i> +12 this week</div>
             </div>
-            <div class="goal-card">
-              <div class="goal-card-top">
-                <span class="goal-icon">✅</span>
-                <span class="goal-pct" style="color:var(--green);">75%</span>
-              </div>
-              <div class="goal-title">Tasks Done</div>
-              <div class="goal-bar-wrap"><div class="goal-bar-fill" style="width:75%;background:var(--green);"></div></div>
-              <div class="goal-sub">18 / 24 this week</div>
-            </div>
-            <div class="goal-card">
-              <div class="goal-card-top">
-                <span class="goal-icon">📖</span>
-                <span class="goal-pct" style="color:var(--blue);">60%</span>
-              </div>
-              <div class="goal-title">Topics Covered</div>
-              <div class="goal-bar-wrap"><div class="goal-bar-fill" style="width:60%;background:var(--blue);"></div></div>
-              <div class="goal-sub">6 / 10 this week</div>
-            </div>
-            <div class="goal-card">
-              <div class="goal-card-top">
-                <span class="goal-icon">🔥</span>
-                <span class="goal-pct" style="color:var(--orange);">100%</span>
-              </div>
-              <div class="goal-title">Daily Streak</div>
-              <div class="goal-bar-wrap"><div class="goal-bar-fill" style="width:100%;background:var(--orange);"></div></div>
-              <div class="goal-sub">7 / 7 days ✨</div>
+            <div class="stat-spark">
+              <svg viewBox="0 0 60 30" fill="none">
+                <polyline points="0,25 10,18 20,22 30,10 40,14 50,6 60,9" stroke="#6C63FF" stroke-width="2" stroke-linejoin="round" fill="none"/>
+              </svg>
             </div>
           </div>
-        </div>
-      </div>
-    </div>
 
-    <!-- ROW 3: Grades + Study Time -->
-    <div class="row row-2-1">
-      <div class="panel">
-        <div class="panel-header">
-          <div><h3>Grade Overview</h3><p>Latest assessment scores per subject</p></div>
-          <a class="view-link">Full report</a>
-        </div>
-        <table class="grade-table">
-          <thead>
-            <tr>
-              <th>Subject</th>
-              <th>Last Score</th>
-              <th>Grade</th>
-              <th>Avg Score</th>
-              <th>Trend</th>
-            </tr>
-          </thead>
-          <tbody id="gradeTableBody"></tbody>
-        </table>
-      </div>
-      <div class="panel">
-        <div class="panel-header">
-          <div><h3>Time by Subject</h3><p>Hours this week</p></div>
-        </div>
-        <div class="panel-body">
-          <div class="chart-wrap" style="height:180px;margin-bottom:20px;">
-            <canvas id="radarChart"></canvas>
-          </div>
-          <div class="time-breakdown" id="timeBreakdown"></div>
-        </div>
-      </div>
-    </div>
-
-    <!-- ROW 4: Activity Heatmap + Achievements -->
-    <div class="row row-1-1">
-      <div class="panel">
-        <div class="panel-header">
-          <div><h3>Study Activity Heatmap</h3><p>Last 5 weeks consistency</p></div>
-        </div>
-        <div class="panel-body">
-          <div id="heatmapDayLabels" class="activity-grid" style="margin-bottom:4px;"></div>
-          <div id="heatmapGrid" class="activity-grid"></div>
-          <div class="activity-legend">
-            <span>Less</span>
-            <div class="activity-legend-cells">
-              <div class="activity-legend-cell l0" style="background:#F3F4F6;"></div>
-              <div class="activity-legend-cell l1" style="background:#DDD6FE;"></div>
-              <div class="activity-legend-cell l2" style="background:#A78BFA;"></div>
-              <div class="activity-legend-cell l3" style="background:#7C3AED;"></div>
-              <div class="activity-legend-cell l4" style="background:#5B21B6;"></div>
+          <div class="stat-card">
+            <div class="stat-icon green"><i class="ti ti-clock"></i></div>
+            <div class="stat-body">
+              <div class="stat-label">Study Hours</div>
+              <div class="stat-value">28<span class="stat-unit">h</span></div>
+              <div class="stat-delta positive"><i class="ti ti-trending-up"></i> +4h vs last week</div>
             </div>
-            <span>More</span>
+            <div class="stat-spark">
+              <svg viewBox="0 0 60 30" fill="none">
+                <polyline points="0,20 10,22 20,15 30,18 40,8 50,12 60,5" stroke="#22C55E" stroke-width="2" stroke-linejoin="round" fill="none"/>
+              </svg>
+            </div>
+          </div>
+
+          <div class="stat-card">
+            <div class="stat-icon orange"><i class="ti ti-chart-line"></i></div>
+            <div class="stat-body">
+              <div class="stat-label">Overall Progress</div>
+              <div class="stat-value">72<span class="stat-unit">%</span></div>
+              <div class="stat-delta positive"><i class="ti ti-trending-up"></i> +8% this term</div>
+            </div>
+            <div class="stat-spark">
+              <svg viewBox="0 0 60 30" fill="none">
+                <polyline points="0,28 10,24 20,20 30,16 40,13 50,10 60,8" stroke="#F59E0B" stroke-width="2" stroke-linejoin="round" fill="none"/>
+              </svg>
+            </div>
+          </div>
+
+          <div class="stat-card">
+            <div class="stat-icon blue"><i class="ti ti-flame"></i></div>
+            <div class="stat-body">
+              <div class="stat-label">Study Streak</div>
+              <div class="stat-value">14<span class="stat-unit">d</span></div>
+              <div class="stat-delta neutral"><i class="ti ti-equal"></i> Personal best!</div>
+            </div>
+            <div class="stat-spark">
+              <svg viewBox="0 0 60 30" fill="none">
+                <polyline points="0,28 10,28 20,24 30,22 40,18 50,14 60,10" stroke="#3B82F6" stroke-width="2" stroke-linejoin="round" fill="none"/>
+              </svg>
+            </div>
+          </div>
+
+        </div>
+
+        <!-- ── Middle Row: Bar Chart + Donut ── -->
+        <div class="mid-row">
+
+          <!-- Weekly Study Hours Bar Chart -->
+          <div class="panel chart-panel">
+            <div class="panel-header">
+              <div>
+                <h2 class="panel-title">Study Hours</h2>
+                <p class="panel-sub">Daily breakdown this week</p>
+              </div>
+              <div class="chart-legend">
+                <span class="legend-dot" style="--c:#6C63FF"></span><span>Target</span>
+                <span class="legend-dot" style="--c:#22C55E"></span><span>Actual</span>
+              </div>
+            </div>
+
+            <div class="bar-chart" aria-label="Study hours bar chart">
+              <div class="bar-y-axis">
+                <span>8h</span><span>6h</span><span>4h</span><span>2h</span><span>0</span>
+              </div>
+              <div class="bar-groups">
+                <!-- Mon -->
+                <div class="bar-group">
+                  <div class="bar-pair">
+                    <div class="bar bar-target"  style="--h:62%"  title="Target: 5h"></div>
+                    <div class="bar bar-actual"   style="--h:75%"  title="Actual: 6h"></div>
+                  </div>
+                  <span class="bar-label">Mon</span>
+                </div>
+                <!-- Tue -->
+                <div class="bar-group">
+                  <div class="bar-pair">
+                    <div class="bar bar-target"  style="--h:62%"  title="Target: 5h"></div>
+                    <div class="bar bar-actual"   style="--h:50%"  title="Actual: 4h"></div>
+                  </div>
+                  <span class="bar-label">Tue</span>
+                </div>
+                <!-- Wed -->
+                <div class="bar-group">
+                  <div class="bar-pair">
+                    <div class="bar bar-target"  style="--h:62%"  title="Target: 5h"></div>
+                    <div class="bar bar-actual"   style="--h:88%"  title="Actual: 7h"></div>
+                  </div>
+                  <span class="bar-label">Wed</span>
+                </div>
+                <!-- Thu -->
+                <div class="bar-group">
+                  <div class="bar-pair">
+                    <div class="bar bar-target"  style="--h:62%"  title="Target: 5h"></div>
+                    <div class="bar bar-actual"   style="--h:38%"  title="Actual: 3h"></div>
+                  </div>
+                  <span class="bar-label">Thu</span>
+                </div>
+                <!-- Fri -->
+                <div class="bar-group">
+                  <div class="bar-pair">
+                    <div class="bar bar-target"  style="--h:62%"  title="Target: 5h"></div>
+                    <div class="bar bar-actual"   style="--h:100%" title="Actual: 8h"></div>
+                  </div>
+                  <span class="bar-label">Fri</span>
+                </div>
+                <!-- Sat -->
+                <div class="bar-group">
+                  <div class="bar-pair">
+                    <div class="bar bar-target"  style="--h:38%"  title="Target: 3h"></div>
+                    <div class="bar bar-actual"   style="--h:25%"  title="Actual: 2h"></div>
+                  </div>
+                  <span class="bar-label">Sat</span>
+                </div>
+                <!-- Sun -->
+                <div class="bar-group">
+                  <div class="bar-pair">
+                    <div class="bar bar-target"  style="--h:38%"  title="Target: 3h"></div>
+                    <div class="bar bar-actual"   style="--h:0%"   title="Actual: 0h (today)"></div>
+                  </div>
+                  <span class="bar-label">Sun</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Overall Donut -->
+          <div class="panel donut-panel">
+            <div class="panel-header">
+              <div>
+                <h2 class="panel-title">This Week</h2>
+                <p class="panel-sub">Task completion overview</p>
+              </div>
+              <a href="#" class="link-btn">View report</a>
+            </div>
+
+            <div class="donut-wrap">
+              <div class="donut-container">
+                <svg class="donut-svg" viewBox="0 0 120 120" aria-hidden="true">
+                  <circle class="donut-track" cx="60" cy="60" r="48"/>
+                  <!-- Completed: 56% → stroke-dasharray 56 44 of circumference 301.6 → 169 132 -->
+                  <circle class="donut-seg seg-completed" cx="60" cy="60" r="48"
+                    stroke-dasharray="169 132" stroke-dashoffset="0"/>
+                  <!-- In Progress: 19% → 57 244 -->
+                  <circle class="donut-seg seg-progress"  cx="60" cy="60" r="48"
+                    stroke-dasharray="57 244"  stroke-dashoffset="-169"/>
+                  <!-- Pending: 25% → 75 226 -->
+                  <circle class="donut-seg seg-pending"   cx="60" cy="60" r="48"
+                    stroke-dasharray="75 226"  stroke-dashoffset="-226"/>
+                  <text class="donut-center-pct" x="60" y="56">72%</text>
+                  <text class="donut-center-lbl" x="60" y="69">Overall</text>
+                </svg>
+              </div>
+
+              <div class="donut-legend">
+                <div class="legend-item">
+                  <span class="legend-pip pip-purple"></span>
+                  <div>
+                    <strong>Completed</strong>
+                    <small>18 tasks</small>
+                  </div>
+                </div>
+                <div class="legend-item">
+                  <span class="legend-pip pip-yellow"></span>
+                  <div>
+                    <strong>In Progress</strong>
+                    <small>6 tasks</small>
+                  </div>
+                </div>
+                <div class="legend-item">
+                  <span class="legend-pip pip-grey"></span>
+                  <div>
+                    <strong>Pending</strong>
+                    <small>8 tasks</small>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+        <!-- ── Bottom Row: Subject Progress + Activity + Streak ── -->
+        <div class="bot-row">
+
+          <!-- Subject Progress -->
+          <div class="panel subject-panel">
+            <div class="panel-header">
+              <div>
+                <h2 class="panel-title">Subject Progress</h2>
+                <p class="panel-sub">Performance across all subjects</p>
+              </div>
+              <a href="#" class="link-btn">View all</a>
+            </div>
+
+            <div class="subject-list">
+
+              <div class="subject-row">
+                <div class="subject-icon icon-purple"><i class="ti ti-calculator"></i></div>
+                <div class="subject-body">
+                  <div class="subject-meta">
+                    <span class="subject-name">Mathematics</span>
+                    <span class="subject-pct">85%</span>
+                  </div>
+                  <div class="progress-track">
+                    <div class="progress-fill" style="width:85%; --bar:#6C63FF"></div>
+                  </div>
+                  <div class="subject-detail">12 tasks done &nbsp;·&nbsp; 2 pending</div>
+                </div>
+                <span class="subject-badge badge-excellent">Excellent</span>
+              </div>
+
+              <div class="subject-row">
+                <div class="subject-icon icon-blue"><i class="ti ti-atom"></i></div>
+                <div class="subject-body">
+                  <div class="subject-meta">
+                    <span class="subject-name">Physics</span>
+                    <span class="subject-pct">70%</span>
+                  </div>
+                  <div class="progress-track">
+                    <div class="progress-fill" style="width:70%; --bar:#3B82F6"></div>
+                  </div>
+                  <div class="subject-detail">9 tasks done &nbsp;·&nbsp; 4 pending</div>
+                </div>
+                <span class="subject-badge badge-good">Good</span>
+              </div>
+
+              <div class="subject-row">
+                <div class="subject-icon icon-green"><i class="ti ti-dna"></i></div>
+                <div class="subject-body">
+                  <div class="subject-meta">
+                    <span class="subject-name">Biology</span>
+                    <span class="subject-pct">78%</span>
+                  </div>
+                  <div class="progress-track">
+                    <div class="progress-fill" style="width:78%; --bar:#22C55E"></div>
+                  </div>
+                  <div class="subject-detail">10 tasks done &nbsp;·&nbsp; 3 pending</div>
+                </div>
+                <span class="subject-badge badge-good">Good</span>
+              </div>
+
+              <div class="subject-row">
+                <div class="subject-icon icon-teal"><i class="ti ti-flask"></i></div>
+                <div class="subject-body">
+                  <div class="subject-meta">
+                    <span class="subject-name">Chemistry</span>
+                    <span class="subject-pct">55%</span>
+                  </div>
+                  <div class="progress-track">
+                    <div class="progress-fill" style="width:55%; --bar:#14B8A6"></div>
+                  </div>
+                  <div class="subject-detail">7 tasks done &nbsp;·&nbsp; 6 pending</div>
+                </div>
+                <span class="subject-badge badge-fair">Fair</span>
+              </div>
+
+              <div class="subject-row">
+                <div class="subject-icon icon-orange"><i class="ti ti-globe"></i></div>
+                <div class="subject-body">
+                  <div class="subject-meta">
+                    <span class="subject-name">History</span>
+                    <span class="subject-pct">62%</span>
+                  </div>
+                  <div class="progress-track">
+                    <div class="progress-fill" style="width:62%; --bar:#F59E0B"></div>
+                  </div>
+                  <div class="subject-detail">8 tasks done &nbsp;·&nbsp; 5 pending</div>
+                </div>
+                <span class="subject-badge badge-good">Good</span>
+              </div>
+
+              <div class="subject-row">
+                <div class="subject-icon icon-red"><i class="ti ti-book"></i></div>
+                <div class="subject-body">
+                  <div class="subject-meta">
+                    <span class="subject-name">English</span>
+                    <span class="subject-pct">90%</span>
+                  </div>
+                  <div class="progress-track">
+                    <div class="progress-fill" style="width:90%; --bar:#EF4444"></div>
+                  </div>
+                  <div class="subject-detail">14 tasks done &nbsp;·&nbsp; 1 pending</div>
+                </div>
+                <span class="subject-badge badge-excellent">Excellent</span>
+              </div>
+
+            </div>
+          </div>
+
+          <!-- Right column -->
+          <div class="right-col">
+
+            <!-- Activity Heatmap -->
+            <div class="panel heatmap-panel">
+              <div class="panel-header">
+                <div>
+                  <h2 class="panel-title">Activity</h2>
+                  <p class="panel-sub">Last 10 weeks</p>
+                </div>
+              </div>
+              <div class="heatmap-grid" aria-label="Activity heatmap">
+                <!-- 10 weeks × 7 days = 70 cells, intensity generated via CSS -->
+                <div class="hm-row">
+                  <span class="hm-day-label">Mon</span>
+                  <div class="hm-cell" data-i="1"></div><div class="hm-cell" data-i="3"></div><div class="hm-cell" data-i="2"></div><div class="hm-cell" data-i="4"></div><div class="hm-cell" data-i="3"></div><div class="hm-cell" data-i="5"></div><div class="hm-cell" data-i="4"></div><div class="hm-cell" data-i="2"></div><div class="hm-cell" data-i="5"></div><div class="hm-cell today-hm" data-i="3"></div>
+                </div>
+                <div class="hm-row">
+                  <span class="hm-day-label">Tue</span>
+                  <div class="hm-cell" data-i="2"></div><div class="hm-cell" data-i="0"></div><div class="hm-cell" data-i="3"></div><div class="hm-cell" data-i="5"></div><div class="hm-cell" data-i="4"></div><div class="hm-cell" data-i="2"></div><div class="hm-cell" data-i="3"></div><div class="hm-cell" data-i="5"></div><div class="hm-cell" data-i="1"></div><div class="hm-cell" data-i="4"></div>
+                </div>
+                <div class="hm-row">
+                  <span class="hm-day-label">Wed</span>
+                  <div class="hm-cell" data-i="4"></div><div class="hm-cell" data-i="3"></div><div class="hm-cell" data-i="5"></div><div class="hm-cell" data-i="2"></div><div class="hm-cell" data-i="1"></div><div class="hm-cell" data-i="4"></div><div class="hm-cell" data-i="5"></div><div class="hm-cell" data-i="3"></div><div class="hm-cell" data-i="4"></div><div class="hm-cell" data-i="2"></div>
+                </div>
+                <div class="hm-row">
+                  <span class="hm-day-label">Thu</span>
+                  <div class="hm-cell" data-i="0"></div><div class="hm-cell" data-i="2"></div><div class="hm-cell" data-i="1"></div><div class="hm-cell" data-i="3"></div><div class="hm-cell" data-i="5"></div><div class="hm-cell" data-i="3"></div><div class="hm-cell" data-i="2"></div><div class="hm-cell" data-i="4"></div><div class="hm-cell" data-i="3"></div><div class="hm-cell" data-i="1"></div>
+                </div>
+                <div class="hm-row">
+                  <span class="hm-day-label">Fri</span>
+                  <div class="hm-cell" data-i="3"></div><div class="hm-cell" data-i="4"></div><div class="hm-cell" data-i="2"></div><div class="hm-cell" data-i="4"></div><div class="hm-cell" data-i="3"></div><div class="hm-cell" data-i="5"></div><div class="hm-cell" data-i="4"></div><div class="hm-cell" data-i="5"></div><div class="hm-cell" data-i="2"></div><div class="hm-cell" data-i="5"></div>
+                </div>
+                <div class="hm-row">
+                  <span class="hm-day-label">Sat</span>
+                  <div class="hm-cell" data-i="1"></div><div class="hm-cell" data-i="0"></div><div class="hm-cell" data-i="2"></div><div class="hm-cell" data-i="1"></div><div class="hm-cell" data-i="0"></div><div class="hm-cell" data-i="2"></div><div class="hm-cell" data-i="1"></div><div class="hm-cell" data-i="3"></div><div class="hm-cell" data-i="0"></div><div class="hm-cell" data-i="2"></div>
+                </div>
+                <div class="hm-row">
+                  <span class="hm-day-label">Sun</span>
+                  <div class="hm-cell" data-i="0"></div><div class="hm-cell" data-i="1"></div><div class="hm-cell" data-i="0"></div><div class="hm-cell" data-i="2"></div><div class="hm-cell" data-i="1"></div><div class="hm-cell" data-i="0"></div><div class="hm-cell" data-i="3"></div><div class="hm-cell" data-i="1"></div><div class="hm-cell" data-i="0"></div><div class="hm-cell" data-i="0"></div>
+                </div>
+              </div>
+              <div class="hm-legend">
+                <span class="hm-legend-label">Less</span>
+                <div class="hm-cell" data-i="0"></div>
+                <div class="hm-cell" data-i="1"></div>
+                <div class="hm-cell" data-i="2"></div>
+                <div class="hm-cell" data-i="3"></div>
+                <div class="hm-cell" data-i="4"></div>
+                <div class="hm-cell" data-i="5"></div>
+                <span class="hm-legend-label">More</span>
+              </div>
+            </div>
+
+            <!-- Streak Card -->
+            <div class="panel streak-panel">
+              <div class="panel-header">
+                <div>
+                  <h2 class="panel-title">Study Streak</h2>
+                  <p class="panel-sub">Keep the momentum!</p>
+                </div>
+                <span class="streak-fire">🔥</span>
+              </div>
+              <div class="streak-body">
+                <div class="streak-number">14</div>
+                <div class="streak-unit">day streak</div>
+                <div class="streak-message">You're on fire! Best streak: <strong>21 days</strong></div>
+              </div>
+              <div class="streak-week">
+                <div class="streak-day done"><i class="ti ti-check"></i><span>M</span></div>
+                <div class="streak-day done"><i class="ti ti-check"></i><span>T</span></div>
+                <div class="streak-day done"><i class="ti ti-check"></i><span>W</span></div>
+                <div class="streak-day done"><i class="ti ti-check"></i><span>T</span></div>
+                <div class="streak-day done"><i class="ti ti-check"></i><span>F</span></div>
+                <div class="streak-day today"><i class="ti ti-star"></i><span>S</span></div>
+                <div class="streak-day upcoming"><span>S</span></div>
+              </div>
+            </div>
+
+            <!-- Recent Achievements -->
+            <div class="panel achieve-panel">
+              <div class="panel-header">
+                <div>
+                  <h2 class="panel-title">Achievements</h2>
+                  <p class="panel-sub">Badges earned this term</p>
+                </div>
+                <a href="#" class="link-btn">View all</a>
+              </div>
+              <div class="achieve-grid">
+                <div class="achieve-badge earned" title="7-Day Streak">
+                  <span class="achieve-icon">🔥</span>
+                  <span class="achieve-name">7-Day Streak</span>
+                </div>
+                <div class="achieve-badge earned" title="First A Grade">
+                  <span class="achieve-icon">⭐</span>
+                  <span class="achieve-name">First A</span>
+                </div>
+                <div class="achieve-badge earned" title="50 Tasks">
+                  <span class="achieve-icon">✅</span>
+                  <span class="achieve-name">50 Tasks</span>
+                </div>
+                <div class="achieve-badge earned" title="Note Master">
+                  <span class="achieve-icon">📝</span>
+                  <span class="achieve-name">Note Master</span>
+                </div>
+                <div class="achieve-badge locked" title="30-Day Streak">
+                  <span class="achieve-icon">🏆</span>
+                  <span class="achieve-name">30-Day Streak</span>
+                </div>
+                <div class="achieve-badge locked" title="100 Tasks">
+                  <span class="achieve-icon">💯</span>
+                  <span class="achieve-name">100 Tasks</span>
+                </div>
+              </div>
+            </div>
+
           </div>
         </div>
-      </div>
-      <div class="panel">
-        <div class="panel-header">
-          <div><h3>Recent Achievements</h3><p>Milestones unlocked</p></div>
-          <a class="view-link">View all</a>
-        </div>
-        <div class="panel-body">
-          <div class="achievement-list" id="achievementList"></div>
-        </div>
-      </div>
-    </div>
 
-  </div>
-</div>
+      </div><!-- /content -->
+    </div><!-- /main-wrapper -->
+  </div><!-- /app-layout -->
 
+  <script src="progress.js"></script>
 </body>
 </html>
